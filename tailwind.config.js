@@ -59,6 +59,9 @@ module.exports = withMT({
         "slate-900": "#0f172a",
         "slate-950": "#020617",
       },
+      boxShadow: {
+        figma: "0 4px 4px 0px rgba(0,0,0,0.25)",
+      },
     },
   },
   plugins: [],
