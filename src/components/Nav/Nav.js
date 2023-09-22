@@ -4,7 +4,7 @@ import Logo from "assets/Logo.png";
 const Nav = ({ userName }) => {
   return (
     <>
-      <div className="w-screen h-[65px] fixed z-30 bg-sky-50 border-b-slate-300 border-[1px] flex flex-row justify-center select-none">
+      <div className="w-screen h-[65px] fixed z-30 bg-sky-50 border-b-slate-300 border-[1px] flex flex-row justify-center select-none top-0">
         <div className="flex w-[1140px] justify-between items-center">
           <div className="flex items-center pl-4">
             <Link to="/">
