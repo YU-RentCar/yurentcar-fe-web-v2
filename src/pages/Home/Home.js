@@ -1,6 +1,6 @@
 import React from "react";
 
-const HomePage = () => {
+const Home = () => {
   return (
     <div className="pt-[65px] flex flex-col items-center h-[3200px]">
       <div className="h-[500px] w-full bg-[url(assets/Camping.jpeg)] bg-fixed bg-cover bg-center">
@@ -54,4 +54,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Home;
