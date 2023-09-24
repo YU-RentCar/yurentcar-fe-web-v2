@@ -60,8 +60,8 @@ const SelectStore = ({ storeObj }) => {
       {/* 팝업 뒤의 어두운 화면 */}
       <div className="fixed top-0 left-0 z-40 flex items-center justify-center w-screen h-screen bg-black bg-opacity-40">
         {/* 팝업 본체 */}
-        <div className="bg-white w-[1133px] h-[742px] rounded-2xl flex justify-center items-center ">
-          <div className="bg-sky-50 w-[1093px] h-[702px] rounded-xl relative flex items-center justify-around">
+        <div className="bg-white w-[1133px] h-[640px] rounded-2xl flex justify-center items-center ">
+          <div className="bg-sky-50 w-[1093px] h-[600px] rounded-xl relative flex items-center justify-around">
             {/* 닫기 버튼 */}
             <button
               className="absolute top-2 left-2"
@@ -72,18 +72,22 @@ const SelectStore = ({ storeObj }) => {
               <MdOutlineClose size={49} color="gray" />
             </button>
 
+            <div className="absolute top-[40px] left-[160px] font-medium text-lg animate-pulse select-none">
+              지도를 클릭해 보세요
+            </div>
+
             {/* 지도 구역 */}
             <div className="w-[435px]">
               <Map ref={mapRef} />
             </div>
 
             {/* 지점 선택 */}
-            <div className="w-[611px] h-[660px] bg-sky-200 rounded-xl flex relative">
+            <div className="w-[611px] h-[572px] bg-sky-200 rounded-xl flex relative">
               {/* 선택한 요소가 위로 튀어나와야하기 때문에 배경만 따로 같은 높이에 생성 */}
-              <div className="w-[237px] h-[521px] bg-sky-100 rounded-xl mt-[14px] ml-[15px]"></div>
+              <div className="w-[237px] h-[481px] bg-sky-100 rounded-xl mt-[14px] ml-[15px]"></div>
               <div
                 ref={provinceRef}
-                className="w-[270px] h-[521px] mt-[14px] ml-[15px] overflow-y-scroll scrollbar-hide fixed"
+                className="w-[270px] h-[481px] mt-[14px] ml-[15px] overflow-y-scroll scrollbar-hide fixed"
               >
                 {Object.keys(storeObj).map((key, idx) => {
                   return (
@@ -107,7 +111,7 @@ const SelectStore = ({ storeObj }) => {
                   );
                 })}
               </div>
-              <div className="w-[329px] h-[629px] bg-sky-50 rounded-xl mt-[14px] ml-[15px] overflow-y-scroll scrollbar-hide">
+              <div className="w-[329px] h-[510px] bg-sky-50 rounded-xl mt-[14px] ml-[15px] overflow-y-scroll scrollbar-hide">
                 {!storeObj[`${selectedProvince}`]
                   ? null
                   : storeObj[`${selectedProvince}`].stores.map((store, idx) => {
