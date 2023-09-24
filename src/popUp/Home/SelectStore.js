@@ -111,7 +111,7 @@ const SelectStore = ({ storeObj }) => {
                   );
                 })}
               </div>
-              <div className="w-[329px] h-[510px] bg-sky-50 rounded-xl mt-[14px] ml-[15px] overflow-y-scroll scrollbar-hide">
+              <div className="w-[329px] h-[540px] bg-sky-50 rounded-xl mt-[14px] ml-[15px] overflow-y-scroll scrollbar-hide">
                 {!storeObj[`${selectedProvince}`]
                   ? null
                   : storeObj[`${selectedProvince}`].stores.map((store, idx) => {
