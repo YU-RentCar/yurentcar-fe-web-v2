@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Input } from "@material-tailwind/react";
 
-const UserInfo = ({ userInfo, setUserInfo }) => {
+const UserInfo = ({ userInfo, setUserInfo, setAlertState }) => {
   let [isChanging, setIsChanging] = useState(true); // 닉네임 변경 상태
   return (
     <>
@@ -25,8 +25,8 @@ const UserInfo = ({ userInfo, setUserInfo }) => {
           <ChangeNickname
             before={userInfo.nickname}
             changeSetter={setIsChanging}
-            userInfo={userInfo}
             setUserInfo={setUserInfo}
+            setAlertState={setAlertState}
           />
         )}
         {/* 사용자 정보 - 전화번호 */}
@@ -64,7 +64,12 @@ const ContentBox = ({ title, content, changeSetter }) => {
 };
 
 /* 닉네임 변경 시 사용할 박스 */
-const ChangeNickname = ({ before, changeSetter, userInfo, setUserInfo }) => {
+const ChangeNickname = ({
+  before,
+  changeSetter,
+  setUserInfo,
+  setAlertState,
+}) => {
   let [tmpNick, setTmpNick] = useState(""); // 새로 입력된 닉네임
   let [newNick, setNewNick] = useState(""); // 최종적으로 변경할 닉네임
   let [isChekced, setIsChecked] = useState(false); // 중복 검사 여부
@@ -88,13 +93,31 @@ const ChangeNickname = ({ before, changeSetter, userInfo, setUserInfo }) => {
             <button
               className="w-40 h-12 mr-2 text-xl font-semibold bg-amber-200 rounded-xl"
               onClick={() => {
-                if (tmpNick === "") console.log("닉네임을 입력해주세요.");
-                else if (tmpNick === before)
-                  console.log("기존과 동일한 닉네임입니다.");
-                else
-                  console.log(
-                    "중복된 닉네임입니다. / 사용가능한 닉네임입니다."
+                if (tmpNick === "") {
+                  setAlertState({ msg: "닉네임을 입력해주세요.", state: true });
+                  setTimeout(
+                    () => setAlertState({ msg: "", state: false }),
+                    2000
                   );
+                } else if (tmpNick === before) {
+                  setAlertState({
+                    msg: "기존과 동일한 닉네임입니다.",
+                    state: true,
+                  });
+                  setTimeout(
+                    () => setAlertState({ msg: "", state: false }),
+                    2000
+                  );
+                } else {
+                  setAlertState({
+                    msg: "중복된 닉네임입니다. / 사용가능한 닉네임입니다.",
+                    state: true,
+                  });
+                  setTimeout(
+                    () => setAlertState({ msg: "", state: false }),
+                    2000
+                  );
+                }
                 setNewNick(tmpNick);
                 setIsChecked(true);
               }}
