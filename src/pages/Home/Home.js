@@ -1,21 +1,12 @@
 import SelectStoreContainer from "popUp/Home/SelectStoreContainer";
 import { useEffect, useState, useRef } from "react";
 import { MdOutlineNorth } from "react-icons/md";
+import { usePopUp } from "utils/popUp/usePopUp";
 
 const Home = () => {
-  const [isStoreSelectClicked, setIsStoreSelectClicked] = useState(false);
-  const [isDateSelectClicked, setIsDateSelectClicked] = useState(false);
+  const popUpInfo = usePopUp("Home/SelectStore");
+
   const [isFinderClicked, setIsFinderClicked] = useState(false);
-
-  // 팝업 스크롤 방지
-  const openPopUp = () => {
-    document.body.style.overflow = "hidden";
-  };
-
-  // 스크롤 정상화
-  const closePopUp = () => {
-    document.body.style.overflow = "unset";
-  };
 
   return (
     <>
@@ -52,8 +43,7 @@ const Home = () => {
             className="ml-[10px] w-[290px] h-[50px] bg-sky-50 rounded-lg border-[1px] border-black hover:border-[3px] hover:border-blue-400 select-none cursor-pointer"
             onClick={() => {
               setIsFinderClicked(true);
-              setIsStoreSelectClicked(true);
-              openPopUp();
+              popUpInfo.toggle();
             }}
           >
             <div className="flex items-center justify-center w-full h-full">
@@ -93,9 +83,7 @@ const Home = () => {
       </div>
 
       {/* 팝업 구역 */}
-      {isStoreSelectClicked ? (
-        <SelectStoreContainer setIsClicked={setIsStoreSelectClicked} />
-      ) : null}
+      {popUpInfo.isClicked ? <SelectStoreContainer /> : null}
     </>
   );
 };

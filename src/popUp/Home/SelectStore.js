@@ -1,12 +1,10 @@
 import { useEffect, useState, useRef } from "react";
 import { MdOutlineClose } from "react-icons/md";
 import { ReactComponent as Map } from "assets/Map.svg";
+import { usePopUp } from "utils/popUp/usePopUp";
 
-const SelectStore = ({ setIsClicked, storeObj }) => {
-  // 스크롤 정상화
-  const closePopUp = () => {
-    document.body.style.overflow = "unset";
-  };
+const SelectStore = ({ storeObj }) => {
+  const popUpInfo = usePopUp("Home/SelectStore");
 
   const [selectedProvince, setSelectedProvince] = useState("");
 
@@ -21,8 +19,7 @@ const SelectStore = ({ setIsClicked, storeObj }) => {
             <button
               className="absolute top-2 left-2"
               onClick={() => {
-                closePopUp();
-                setIsClicked(false);
+                popUpInfo.toggle();
               }}
             >
               <MdOutlineClose size={49} color="gray" />

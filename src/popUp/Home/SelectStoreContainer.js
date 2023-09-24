@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import SelectStore from "./SelectStore";
 
-const SelectStoreContainer = ({ setIsClicked }) => {
+const SelectStoreContainer = () => {
   const storeObj = {
     강원: ["강원점"],
     경기: ["경기점"],
@@ -33,7 +33,7 @@ const SelectStoreContainer = ({ setIsClicked }) => {
     제주: ["..."],
   };
 
-  return <SelectStore setIsClicked={setIsClicked} storeObj={storeObj} />;
+  return <SelectStore storeObj={storeObj} />;
 };
 
 export default SelectStoreContainer;
