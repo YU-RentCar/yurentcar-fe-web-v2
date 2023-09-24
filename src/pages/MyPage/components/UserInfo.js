@@ -127,10 +127,24 @@ const ChangeNickname = ({
             <button
               className="w-40 h-12 ml-2 text-xl font-semibold text-white bg-blue-500 rounded-xl"
               onClick={() => {
-                if (!isChekced || newNick !== tmpNick)
-                  console.log("중복 검사가 되지 않았습니다.");
-                else {
-                  console.log("닉네임이 변경되었습니다.");
+                if (!isChekced || newNick !== tmpNick) {
+                  setAlertState({
+                    msg: "중복 검사가 되지 않았습니다.",
+                    state: true,
+                  });
+                  setTimeout(
+                    () => setAlertState({ msg: "", state: false }),
+                    2000
+                  );
+                } else {
+                  setAlertState({
+                    msg: "닉네임이 변경되었습니다.",
+                    state: true,
+                  });
+                  setTimeout(
+                    () => setAlertState({ msg: "", state: false }),
+                    2000
+                  );
                   setUserInfo(newNick);
                   changeSetter(true);
                 }
