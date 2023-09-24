@@ -93,7 +93,7 @@ const ChangeNickname = ({
             <button
               className="w-40 h-12 mr-2 text-xl font-semibold bg-amber-200 rounded-xl"
               onClick={() => {
-                if (tmpNick === "") {
+                if (tmpNick.trim() === "") {
                   setAlertState({ msg: "닉네임을 입력해주세요.", state: true });
                   setTimeout(
                     () => setAlertState({ msg: "", state: false }),
