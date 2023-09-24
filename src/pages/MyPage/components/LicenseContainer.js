@@ -1,12 +1,12 @@
 import { useRecoilValue } from "recoil";
-import { userLicenseAtom } from "recoil/userLicenseAtom";
+import { userAtom } from "recoil/userAtom";
 import License from "./License";
 
 /**
  * licenseInfo : 사용자 면허 정보
  */
 const LicenseContainer = () => {
-  const licenseInfo = useRecoilValue(userLicenseAtom);
+  const licenseInfo = useRecoilValue(userAtom).license;
   return (
     <div>
       <License licenseInfo={licenseInfo} />
