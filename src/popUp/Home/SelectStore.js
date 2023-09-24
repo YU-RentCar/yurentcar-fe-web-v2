@@ -5,8 +5,13 @@ import { usePopUp } from "utils/popUp/usePopUp";
 
 const SelectStore = ({ storeObj }) => {
   const popUpInfo = usePopUp("Home/SelectStore");
-
   const [selectedProvince, setSelectedProvince] = useState("");
+
+  // 클릭된 지방의 css 속성
+  const clickedProvinceCSS =
+    "my-[10px] mx-[10px] rounded-xl bg-sky-600 w-[248px] h-[60px] text-white select-none";
+  const nonClickedProvinceCSS =
+    "w-[218px] h-[50px] bg-blue-300 my-[10px] mx-[10px] rounded-xl hover:bg-sky-600 hover:w-[248px] hover:h-[60px] hover:text-white transition-all ease-in select-none";
 
   return (
     <>
@@ -38,7 +43,11 @@ const SelectStore = ({ storeObj }) => {
                 {Object.keys(storeObj).map((item, idx) => {
                   return (
                     <div
-                      className="w-[218px] h-[50px] bg-blue-300 my-[10px] mx-[10px] rounded-xl hover:bg-sky-600 hover:w-[248px] hover:h-[60px] hover:text-white transition-all ease-in select-none"
+                      className={
+                        selectedProvince === item
+                          ? clickedProvinceCSS
+                          : nonClickedProvinceCSS
+                      }
                       key={idx}
                       onClick={() => {
                         setSelectedProvince(item);
