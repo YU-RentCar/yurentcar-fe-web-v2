@@ -13,6 +13,12 @@ export const userAtom = atom({
       issuance: "2023-01-01",
       expire: "2033-12-31",
     },
+    prefer: {
+      carSizes: [true, false, true, false],
+      minCount: 3,
+      oilTypes: [false, true, false, true],
+      transmissions: [true, false],
+    },
   },
 });
 
@@ -24,6 +30,19 @@ export const userSelector = selector({
     const tmp = {
       ...userInfo,
       nickname: newValue,
+    };
+    set(userAtom, tmp);
+  },
+});
+
+export const userPreferSelector = selector({
+  key: "userPreferSelector",
+  get: ({ get }) => get(userAtom),
+  set: ({ set, get }, newPreferOption) => {
+    const userInfo = get(userAtom);
+    const tmp = {
+      ...userInfo,
+      prefer: { ...newPreferOption },
     };
     set(userAtom, tmp);
   },
