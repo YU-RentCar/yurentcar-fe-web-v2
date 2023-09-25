@@ -1,29 +1,32 @@
-import ReservationContainer from "./components/ReservationContainer";
-import UserInfoContainer from "./components/UserInfoContainer";
-import LicenseContainer from "./components/LicenseContainer";
-import AlertContainer from "./AlertContainer";
-import AccountContainer from "./components/AccountContainer";
-import PreferOptionContainer from "./components/PreferOptionContainer";
-import { usePopUp } from "utils/popUp/usePopUp";
+import Reservation from "./Reservation";
+import UserInfo from "./UserInfo";
+import PreferOption from "./PreferOption";
+import License from "./License";
+import Account from "./Account";
 import Quit from "./Quit";
+import Alert from "./Alert";
+import { usePopUp } from "utils/usePopUp";
+import { alertAtom } from "recoil/alertAtom";
+import { useRecoilValue } from "recoil";
 
-const MyPage = ({ alertState }) => {
-  const popUpInfo = usePopUp("MyPage/Quit");
+const MyPage = () => {
+  const alertState = useRecoilValue(alertAtom).state; // Alert 제어
+  const popUpInfo = usePopUp("MyPage/Quit"); // 팝업 제어
   return (
     <>
       <div className="w-[1140px] mx-auto mt-[176px]">
         {/* 예약 대기 정보 */}
-        <ReservationContainer />
+        <Reservation />
         {/* 사용자 정보 */}
-        <UserInfoContainer />
+        <UserInfo />
         {/* 사용자 선호 차량 옵션 */}
-        <PreferOptionContainer />
+        <PreferOption />
         {/* 사용자 면허 정보 */}
-        <LicenseContainer />
+        <License />
         {/* 사용자 계정 관리 */}
-        <AccountContainer />
+        <Account />
       </div>
-      {alertState ? <AlertContainer /> : null}
+      {alertState ? <Alert /> : null}
       {popUpInfo.isClicked ? <Quit /> : null}
     </>
   );
