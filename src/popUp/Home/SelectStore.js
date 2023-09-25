@@ -2,14 +2,19 @@ import { useEffect, useState, useRef } from "react";
 import { MdOutlineClose } from "react-icons/md";
 import { ReactComponent as Map } from "assets/Map.svg";
 import { usePopUp } from "utils/usePopUp";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { storeAtom } from "recoil/storeAtom";
+import { finderProvinceSelector, finderStoreSelector } from "recoil/finderAtom";
 
 const SelectStore = () => {
   const popUpInfo = usePopUp("Home/SelectStore");
+
   const [selectedProvince, setSelectedProvince] = useState("");
 
   const [rclStoreInfo, setRclStoreInfo] = useRecoilState(storeAtom);
+
+  const setRclFinderStore = useSetRecoilState(finderStoreSelector);
+  const setRclFinderProvince = useSetRecoilState(finderProvinceSelector);
 
   const mapRef = useRef(null);
   const provinceRef = useRef(null);
@@ -122,6 +127,13 @@ const SelectStore = () => {
                       (store, idx) => {
                         return (
                           <div
+                            onClick={() => {
+                              setRclFinderProvince(
+                                rclStoreInfo[selectedProvince].korName
+                              );
+                              setRclFinderStore(store);
+                              popUpInfo.toggle();
+                            }}
                             key={idx}
                             className="w-[296px] h-[60px] bg-blue-100 rounded-xl my-[10px] mx-[17px] flex justify-center items-center hover:bg-sky-600 transition-all ease-in select-none hover:text-white"
                           >

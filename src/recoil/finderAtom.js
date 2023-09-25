@@ -1,0 +1,42 @@
+import { atom, selector } from "recoil";
+
+export const finderAtom = atom({
+  key: "finderAtom",
+  default: {
+    province: null,
+    store: null,
+    date: null,
+  },
+});
+
+export const finderProvinceSelector = selector({
+  key: "finderProvinceSelector",
+  get: ({ get }) => {
+    return get(finderAtom).province;
+  },
+  set: ({ set, get }, newValue) => {
+    const finderInfo = get(finderAtom);
+    const temp = {
+      ...finderInfo,
+      province: newValue,
+    };
+
+    set(finderAtom, temp);
+  },
+});
+
+export const finderStoreSelector = selector({
+  key: "finderStoreSelector",
+  get: ({ get }) => {
+    return get(finderAtom).store;
+  },
+  set: ({ get, set }, newValue) => {
+    const finderInfo = get(finderAtom);
+    const temp = {
+      ...finderInfo,
+      store: newValue,
+    };
+
+    set(finderAtom, temp);
+  },
+});

@@ -1,12 +1,16 @@
 import SelectStore from "popUp/Home/SelectStore";
 import { useEffect, useState, useRef } from "react";
 import { MdOutlineNorth } from "react-icons/md";
+import { useRecoilState } from "recoil";
+import { finderAtom } from "recoil/finderAtom";
 import { usePopUp } from "utils/usePopUp";
 
 const Home = () => {
   const popUpInfo = usePopUp("Home/SelectStore");
 
   const [isFinderClicked, setIsFinderClicked] = useState(false);
+
+  const [finderInfo, setFinderInfo] = useRecoilState(finderAtom);
 
   return (
     <>
@@ -47,7 +51,11 @@ const Home = () => {
             }}
           >
             <div className="flex items-center justify-center w-full h-full">
-              <p className="text-2xl font-medium">대구 이름이엄청길다는점</p>
+              <p className="text-2xl font-medium">
+                {finderInfo.province === null || finderInfo.store === null
+                  ? "지점을 선택해주세요"
+                  : `${finderInfo.province} ${finderInfo.store}`}
+              </p>
             </div>
           </div>
 
