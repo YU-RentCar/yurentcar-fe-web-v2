@@ -1,4 +1,7 @@
-const Account = ({ popUpInfo }) => {
+import { usePopUp } from "utils/usePopUp";
+
+const Account = () => {
+  const popUpInfo = usePopUp("MyPage/Quit"); // 팝업 제어
   return (
     <div className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl">
       {/* 타이틀 */}
