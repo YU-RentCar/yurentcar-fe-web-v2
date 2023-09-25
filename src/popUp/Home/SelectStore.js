@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { MdOutlineClose } from "react-icons/md";
 import { ReactComponent as Map } from "assets/Map.svg";
 import { usePopUp } from "utils/usePopUp";
-import { useRecoilState, useSetRecoilState } from "recoil";
+import { useRecoilState } from "recoil";
 import { storeAtom } from "recoil/storeAtom";
 import { finderProvinceSelector, finderStoreSelector } from "recoil/finderAtom";
 
@@ -13,8 +13,12 @@ const SelectStore = () => {
 
   const [rclStoreInfo, setRclStoreInfo] = useRecoilState(storeAtom);
 
-  const setRclFinderStore = useSetRecoilState(finderStoreSelector);
-  const setRclFinderProvince = useSetRecoilState(finderProvinceSelector);
+  const [rclFinderStore, setRclFinderStore] =
+    useRecoilState(finderStoreSelector);
+
+  const [rclFinderProvince, setRclFinderProvince] = useRecoilState(
+    finderProvinceSelector
+  );
 
   const mapRef = useRef(null);
   const provinceRef = useRef(null);
@@ -24,6 +28,38 @@ const SelectStore = () => {
     "my-[10px] mx-[10px] rounded-xl bg-sky-600 w-[248px] h-[60px] text-white select-none";
   const nonClickedProvinceCSS =
     "w-[218px] h-[50px] bg-blue-300 my-[10px] mx-[10px] rounded-xl hover:bg-sky-600 hover:w-[248px] hover:h-[60px] hover:text-white transition-all ease-in select-none";
+
+  // 팝업이 실행될 때, finder에 지점이 등록되어 있으면 등록된 지점을 표시함
+  useEffect(() => {
+    // finder에 등록되어 있는 지방 표시
+    if (rclFinderStore !== null || rclFinderProvince !== null) {
+      const provinceEngName = Object.keys(rclStoreInfo).filter((key, idx) => {
+        if (rclStoreInfo[key].korName === rclFinderProvince) {
+          return rclStoreInfo[key].engName;
+        }
+      })[0];
+      setSelectedProvince(provinceEngName);
+
+      // finder에 등록되어 있는 지방 버튼 표시
+      const provinces = mapRef.current.childNodes;
+      const storeKeys = Object.keys(rclStoreInfo);
+
+      // 등록된 지방까지 스크롤을 자동으로 내려줌
+      provinces.forEach((province) => {
+        if (province.id === "") {
+          return;
+        }
+
+        if (province.id === provinceEngName) {
+          provinceRef.current.scrollTo({
+            top: 60 * storeKeys.indexOf(province.id),
+            left: 0,
+            behavior: "smooth",
+          });
+        }
+      });
+    }
+  }, []);
 
   // 팝업이 실행될 때 단 한번 실행되며, 지도에 이벤트를 추가함.
   useEffect(() => {
