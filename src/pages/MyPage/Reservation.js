@@ -11,22 +11,18 @@ import {
   MdOutlinePerson,
 } from "react-icons/md";
 
-/**
- * userInfo : 사용자 정보
- * resvInfo : 예약 정보
- * titles : 제목
- * iconList : 아이콘
- */
 const Reservation = () => {
-  const userInfo = useRecoilValue(userAtom);
-  const resvInfo = useRecoilValue(resvAtom);
+  const userInfo = useRecoilValue(userAtom); // 사용자 정보
+  const resvInfo = useRecoilValue(resvAtom); // 예약 정보
   const [titles, setTitles] = useState({
+    // 제목
     "예약 기간": "period",
     "예약 지점": "store",
     차량: "car",
     "차 번호": "number",
   });
   const [iconList, setIconList] = useState([
+    // 아이콘
     <MdOutlineTimer className="ml-4 text-[26px] text-blue-600" />,
     <MdOutlinePlace className="ml-4 text-[26px] text-blue-600" />,
     <MdOutlineDirectionsCarFilled className="ml-4 text-[26px] text-blue-600" />,
@@ -49,7 +45,10 @@ const Reservation = () => {
             {/* 예약 기간, 예약 지점, 차량, 차 번호 */}
             {Object.keys(titles).map((v, i) => {
               return (
-                <div className="w-[600px] h-[50px] bg-sky-200 flex items-center rounded-2xl mt-2">
+                <div
+                  className="w-[600px] h-[50px] bg-sky-200 flex items-center rounded-2xl mt-2"
+                  key={i}
+                >
                   {iconList[i]}
                   <span className="ml-5 text-xl font-semibold ">
                     {v + " : " + resvInfo[titles[v]]}
@@ -60,7 +59,10 @@ const Reservation = () => {
             {/* 운전자 */}
             {resvInfo.drivers.map((driver, index) => {
               return (
-                <div className="w-[600px] h-[50px] bg-sky-200 flex items-center rounded-2xl mt-2">
+                <div
+                  className="w-[600px] h-[50px] bg-sky-200 flex items-center rounded-2xl mt-2"
+                  key={index}
+                >
                   <MdOutlinePerson className="ml-4 text-[26px] text-blue-600" />
                   <span className="ml-5 text-xl font-semibold ">
                     {`제 ${index + 1} 운전자 : ${driver[index + 1]}`}
