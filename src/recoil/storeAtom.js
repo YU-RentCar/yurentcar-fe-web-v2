@@ -1,8 +1,8 @@
-import { useEffect, useState, useRef } from "react";
-import SelectStore from "./SelectStore";
+import { atom } from "recoil";
 
-const SelectStoreContainer = () => {
-  const storeObj = {
+export const storeAtom = atom({
+  key: "storeAtom",
+  default: {
     gangwon: {
       engName: "gangwon",
       korName: "강원",
@@ -99,9 +99,5 @@ const SelectStoreContainer = () => {
       korName: "제주",
       stores: ["..."],
     },
-  };
-
-  return <SelectStore storeObj={storeObj} />;
-};
-
-export default SelectStoreContainer;
+  },
+});

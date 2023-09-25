@@ -1,7 +1,7 @@
-import SelectStoreContainer from "popUp/Home/SelectStoreContainer";
+import SelectStore from "popUp/Home/SelectStore";
 import { useEffect, useState, useRef } from "react";
 import { MdOutlineNorth } from "react-icons/md";
-import { usePopUp } from "utils/popUp/usePopUp";
+import { usePopUp } from "utils/usePopUp";
 
 const Home = () => {
   const popUpInfo = usePopUp("Home/SelectStore");
@@ -83,7 +83,7 @@ const Home = () => {
       </div>
 
       {/* 팝업 구역 */}
-      {popUpInfo.isClicked ? <SelectStoreContainer /> : null}
+      {popUpInfo.isClicked ? <SelectStore /> : undefined}
     </>
   );
 };

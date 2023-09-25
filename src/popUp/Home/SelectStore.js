@@ -1,11 +1,15 @@
 import { useEffect, useState, useRef } from "react";
 import { MdOutlineClose } from "react-icons/md";
 import { ReactComponent as Map } from "assets/Map.svg";
-import { usePopUp } from "utils/popUp/usePopUp";
+import { usePopUp } from "utils/usePopUp";
+import { useRecoilState } from "recoil";
+import { storeAtom } from "recoil/storeAtom";
 
-const SelectStore = ({ storeObj }) => {
+const SelectStore = () => {
   const popUpInfo = usePopUp("Home/SelectStore");
   const [selectedProvince, setSelectedProvince] = useState("");
+
+  const [rclStoreInfo, setRclStoreInfo] = useRecoilState(storeAtom);
 
   const mapRef = useRef(null);
   const provinceRef = useRef(null);
@@ -19,7 +23,7 @@ const SelectStore = ({ storeObj }) => {
   // 팝업이 실행될 때 단 한번 실행되며, 지도에 이벤트를 추가함.
   useEffect(() => {
     const provinces = mapRef.current.childNodes;
-    const storeKeys = Object.keys(storeObj);
+    const storeKeys = Object.keys(rclStoreInfo);
 
     provinces.forEach((province) => {
       if (province.id === "") {
@@ -27,7 +31,7 @@ const SelectStore = ({ storeObj }) => {
       }
 
       province.addEventListener("click", () => {
-        setSelectedProvince(storeObj[province.id].engName);
+        setSelectedProvince(rclStoreInfo[province.id].engName);
         provinceRef.current.scrollTo({
           top: 60 * storeKeys.indexOf(province.id),
           left: 0,
@@ -42,18 +46,18 @@ const SelectStore = ({ storeObj }) => {
     const provinces = mapRef.current.childNodes;
 
     for (const province of provinces) {
-      if (storeObj[selectedProvince] === undefined) {
+      if (rclStoreInfo[selectedProvince] === undefined) {
         continue;
       }
 
       // 지방을 선택하면 표시해주는 기능
-      if (province.id === storeObj[selectedProvince].engName) {
+      if (province.id === rclStoreInfo[selectedProvince].engName) {
         province.classList.add("selected");
       } else {
         province.classList.remove("selected");
       }
     }
-  }, [selectedProvince, storeObj]);
+  }, [selectedProvince, rclStoreInfo]);
 
   return (
     <>
@@ -89,22 +93,22 @@ const SelectStore = ({ storeObj }) => {
                 ref={provinceRef}
                 className="w-[270px] h-[481px] mt-[14px] ml-[15px] overflow-y-scroll scrollbar-hide fixed"
               >
-                {Object.keys(storeObj).map((key, idx) => {
+                {Object.keys(rclStoreInfo).map((key, idx) => {
                   return (
                     <div
                       className={
-                        selectedProvince === storeObj[key].engName
+                        selectedProvince === rclStoreInfo[key].engName
                           ? clickedProvinceCSS
                           : nonClickedProvinceCSS
                       }
                       key={idx}
                       onClick={() => {
-                        setSelectedProvince(storeObj[key].engName);
+                        setSelectedProvince(rclStoreInfo[key].engName);
                       }}
                     >
                       <div className="flex items-center justify-center w-full h-full">
                         <div className="text-2xl font-semibold">
-                          {storeObj[key].korName}
+                          {rclStoreInfo[key].korName}
                         </div>
                       </div>
                     </div>
@@ -112,18 +116,20 @@ const SelectStore = ({ storeObj }) => {
                 })}
               </div>
               <div className="w-[329px] h-[540px] bg-sky-50 rounded-xl mt-[14px] ml-[15px] overflow-y-scroll scrollbar-hide">
-                {!storeObj[`${selectedProvince}`]
+                {!rclStoreInfo[`${selectedProvince}`]
                   ? null
-                  : storeObj[`${selectedProvince}`].stores.map((store, idx) => {
-                      return (
-                        <div
-                          key={idx}
-                          className="w-[296px] h-[60px] bg-blue-100 rounded-xl my-[10px] mx-[17px] flex justify-center items-center hover:bg-sky-600 transition-all ease-in select-none hover:text-white"
-                        >
-                          <div className="font-bold text-[24px]">{store}</div>
-                        </div>
-                      );
-                    })}
+                  : rclStoreInfo[`${selectedProvince}`].stores.map(
+                      (store, idx) => {
+                        return (
+                          <div
+                            key={idx}
+                            className="w-[296px] h-[60px] bg-blue-100 rounded-xl my-[10px] mx-[17px] flex justify-center items-center hover:bg-sky-600 transition-all ease-in select-none hover:text-white"
+                          >
+                            <div className="font-bold text-[24px]">{store}</div>
+                          </div>
+                        );
+                      }
+                    )}
               </div>
             </div>
           </div>
