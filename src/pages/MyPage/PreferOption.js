@@ -55,6 +55,7 @@ const PreferOption = () => {
             title={titles[i]}
             content={preferOption[v]}
             userPrefer={userInfo.prefer[v]}
+            key={i}
           />
         );
       })}
