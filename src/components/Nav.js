@@ -1,7 +1,10 @@
+import { useRecoilValue } from "recoil";
+import { userAtom } from "recoil/userAtom";
 import { Link } from "react-router-dom";
 import Logo from "assets/Logo.png";
 
-const Nav = ({ userName }) => {
+const Nav = () => {
+  const userName = useRecoilValue(userAtom).name;
   return (
     <>
       <div className="w-screen h-[65px] fixed z-30 bg-sky-50 border-b-slate-300 border-[1px] flex flex-row justify-center select-none top-0">
