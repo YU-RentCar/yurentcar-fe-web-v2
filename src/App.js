@@ -1,4 +1,4 @@
-import NavContainer from "components/Nav/NavContainer";
+import Nav from "components/Nav";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import HomeContainer from "pages/Home/HomeContainer";
@@ -7,7 +7,7 @@ import MyPageContainer from "pages/MyPage/MyPageContainer";
 function App() {
   return (
     <>
-      <NavContainer></NavContainer>
+      <Nav />
       <Routes>
         <Route path="/" element={<HomeContainer />}></Route>
         <Route path="/mypage" element={<MyPageContainer />}></Route>
