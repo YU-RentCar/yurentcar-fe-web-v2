@@ -40,8 +40,8 @@ const Record = () => {
           <div className="flex flex-wrap items-center justify-between w-full px-8 pb-8 mt-4 bg-blue-100 rounded-2xl">
             {Array(6)
               .fill(0)
-              .map(() => {
-                return <CarCard />;
+              .map((v, i) => {
+                return <CarCard key={i} />;
               })}
           </div>
         </div>

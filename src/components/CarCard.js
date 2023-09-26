@@ -6,7 +6,7 @@ import { Chip } from "@material-tailwind/react";
 const CarCard = () => {
   const carInfo = useRecoilValue(carAtom); // 차량 정보
   return (
-    <div className="w-[270px] h-[376px] rounded-2xl bg-white mt-8">
+    <div className="w-[270px] h-[376px] rounded-2xl bg-white mt-8 hover:shadow-figma">
       {/* 차량 사진 */}
       <img
         src={Car}
@@ -17,23 +17,23 @@ const CarCard = () => {
       <div className="flex flex-wrap items-center justify-center mt-2">
         <Chip
           value={`# ${carInfo.car}`}
-          className="text-[13px] font-semibold text-white bg-blue-500 w-[88px] h-[22px] flex justify-center items-center rounded-[5px] m-1"
+          className="text-[13px] font-semibold w-[88px] h-[22px] flex justify-center items-center rounded-[5px] m-1 bg-blue-500"
         />
         <Chip
           value={`# ${carInfo.number}`}
-          className="text-[13px] font-semibold text-white bg-blue-400 w-[88px] h-[22px] flex justify-center items-center rounded-[5px] m-1"
+          className="text-[13px] font-semibold w-[88px] h-[22px] flex justify-center items-center rounded-[5px] m-1 bg-blue-400"
         />
         <Chip
           value={`# ${carInfo.odo}km`}
-          className="text-[13px] font-semibold text-blue-900 bg-blue-300 w-[88px] h-[22px] flex justify-center items-center rounded-[5px] m-1"
+          className="text-[13px] font-semibold w-[88px] h-[22px] flex justify-center items-center rounded-[5px] m-1 bg-blue-300 text-blue-900"
         />
         <Chip
           value={`# ${carInfo.price / 10000}만원대`}
-          className="text-[13px] font-semibold text-blue-900 bg-blue-100 w-[88px] h-[22px] flex justify-center items-center rounded-[5px] m-1"
+          className="text-[13px] font-semibold w-[88px] h-[22px] flex justify-center items-center rounded-[5px] m-1 bg-blue-200 text-blue-900"
         />
       </div>
       {/* 차량 이름 */}
-      <div className="pl-4 mt-4 text-2xl font-extrabold">GRANDEUR HG</div>
+      <div className="pl-4 mt-4 text-2xl font-extrabold">{carInfo.car}</div>
       {/* 차량 가격 */}
       <div className="pl-4 mt-4 text-xl font-bold">
         <span className="line-through text-slate-500">{`₩${
