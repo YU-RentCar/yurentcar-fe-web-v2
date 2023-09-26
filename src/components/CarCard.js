@@ -6,7 +6,7 @@ import { Chip } from "@material-tailwind/react";
 const CarCard = () => {
   const carInfo = useRecoilValue(carAtom); // 차량 정보
   return (
-    <div className="w-[270px] h-[376px] rounded-2xl bg-white mt-8 hover:shadow-figma">
+    <div className="w-[270px] h-[376px] rounded-2xl bg-white mt-8 hover:shadow-figma mx-auto">
       {/* 차량 사진 */}
       <img
         src={Car}

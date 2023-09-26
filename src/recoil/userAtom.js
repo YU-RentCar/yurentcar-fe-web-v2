@@ -40,6 +40,32 @@ export const userAtom = atom({
         ammount: 500,
       },
     ],
+    resvRecord: [
+      {
+        car: "그랜저 HG",
+        number: "12삼4567",
+        odo: 50000,
+        period: "05.08(월) 08:00 ~ 05.15(월) 22:00",
+        store: "달성군지점",
+        price: 200000,
+      },
+      {
+        car: "그랜저 HG",
+        number: "12삼4567",
+        odo: 50000,
+        period: "05.08(월) 08:00 ~ 05.15(월) 22:00",
+        store: "달성군지점",
+        price: "200000",
+      },
+      {
+        car: "그랜저 HG",
+        number: "12삼4567",
+        odo: 50000,
+        period: "05.08(월) 08:00 ~ 05.15(월) 22:00",
+        store: "달성군지점",
+        price: "200000",
+      },
+    ],
   },
 });
 
