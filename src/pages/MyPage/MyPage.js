@@ -1,6 +1,7 @@
 import Reservation from "./Reservation";
 import UserInfo from "./UserInfo";
 import PreferOption from "./PreferOption";
+import Record from "./Record";
 import License from "./License";
 import Account from "./Account";
 import Alert from "popUp/Alert";
@@ -21,6 +22,8 @@ const MyPage = () => {
         <UserInfo />
         {/* 사용자 선호 차량 옵션 */}
         <PreferOption />
+        {/* 사용자 사용 내역 */}
+        <Record />
         {/* 사용자 면허 정보 */}
         <License />
         {/* 사용자 계정 관리 */}
