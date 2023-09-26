@@ -1,9 +1,11 @@
 import CarCard from "components/CarCard";
 import { useRecoilValue } from "recoil";
 import { userAtom } from "recoil/userAtom";
+import { usePopUp } from "utils/usePopUp";
 
 const Record = () => {
   const userInfo = useRecoilValue(userAtom); // 사용자 정보
+  const popUpPoint = usePopUp("MyPage/Point"); // Point 팝업 제어
   return (
     <div className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl">
       {/* 타이틀 */}
@@ -20,7 +22,10 @@ const Record = () => {
             현재 포인트 : {userInfo.point}
           </div>
         </div>
-        <button className="w-56 h-16 text-2xl font-bold bg-sky-200 rounded-2xl">
+        <button
+          className="w-56 h-16 text-2xl font-bold bg-sky-200 rounded-2xl"
+          onClick={() => popUpPoint.toggle()}
+        >
           사용 내역 확인
         </button>
       </div>

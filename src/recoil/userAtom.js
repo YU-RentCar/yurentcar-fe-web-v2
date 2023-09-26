@@ -20,6 +20,26 @@ export const userAtom = atom({
       transmissions: [true, false],
     },
     point: 10000,
+    pointRecord: [
+      {
+        date: "2023.05.03",
+        reason: "사유1",
+        type: 0,
+        ammount: 500,
+      },
+      {
+        date: "2023.05.04",
+        reason: "사유2",
+        type: 1,
+        ammount: 500,
+      },
+      {
+        date: "2023.05.05",
+        reason: "사유3",
+        type: 0,
+        ammount: 500,
+      },
+    ],
   },
 });
 
