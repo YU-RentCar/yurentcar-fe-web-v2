@@ -19,6 +19,7 @@ export const userAtom = atom({
       oilTypes: [false, true, false, true],
       transmissions: [true, false],
     },
+    point: 10000,
   },
 });
 
