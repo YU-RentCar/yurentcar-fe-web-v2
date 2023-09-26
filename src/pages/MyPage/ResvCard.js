@@ -4,7 +4,10 @@ import { MdOutlineTimer, MdOutlinePlace, MdOutlineMoney } from "react-icons/md";
 
 const ResvCard = ({ resvInfo }) => {
   return (
-    <div className="w-[350px] h-[373px] rounded-2xl bg-white mx-auto hover:shadow-figma">
+    <div
+      className="w-[350px] h-[373px] rounded-2xl bg-white mx-auto hover:shadow-figma"
+      name="resvCard"
+    >
       {/* 차량 사진 */}
       <img
         src={Car}
