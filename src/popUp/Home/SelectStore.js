@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, React } from "react";
 import { MdOutlineClose } from "react-icons/md";
 import { ReactComponent as Map } from "assets/Map.svg";
 import { usePopUp } from "utils/usePopUp";
