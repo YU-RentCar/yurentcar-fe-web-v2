@@ -1,3 +1,4 @@
+import SelectDateTime from "popUp/Home/SelectDateTime";
 import SelectStore from "popUp/Home/SelectStore";
 import { useEffect, useState, useRef } from "react";
 import { MdOutlineNorth } from "react-icons/md";
@@ -6,7 +7,8 @@ import { finderAtom } from "recoil/finderAtom";
 import { usePopUp } from "utils/usePopUp";
 
 const Home = () => {
-  const popUpInfo = usePopUp("Home/SelectStore");
+  const storePopUp = usePopUp("Home/SelectStore");
+  const dateTimePopUp = usePopUp("Home/SelectDateTime");
 
   const [isFinderClicked, setIsFinderClicked] = useState(false);
 
@@ -47,7 +49,7 @@ const Home = () => {
             className="ml-[10px] w-[290px] h-[50px] bg-sky-50 rounded-lg border-[1px] border-black hover:border-[3px] hover:border-blue-400 select-none cursor-pointer"
             onClick={() => {
               setIsFinderClicked(true);
-              popUpInfo.toggle();
+              storePopUp.toggle();
             }}
           >
             <div className="flex items-center justify-center w-full h-full">
@@ -63,6 +65,7 @@ const Home = () => {
             className="w-[400px] h-[50px] bg-sky-50 rounded-lg border-[1px] border-black hover:border-[3px] hover:border-blue-400 select-none cursor-pointer"
             onClick={() => {
               setIsFinderClicked(true);
+              dateTimePopUp.toggle();
             }}
           >
             <div className="flex items-center justify-center w-full h-full">
@@ -91,7 +94,8 @@ const Home = () => {
       </div>
 
       {/* 팝업 구역 */}
-      {popUpInfo.isClicked ? <SelectStore /> : undefined}
+      {storePopUp.isClicked ? <SelectStore /> : undefined}
+      {dateTimePopUp.isClicked ? <SelectDateTime /> : undefined}
     </>
   );
 };
