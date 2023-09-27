@@ -32,7 +32,7 @@ const SelectDateTime = () => {
       {/* 팝업 뒤의 어두운 화면 */}
       <div className="fixed top-0 left-0 z-40 flex items-center justify-center w-screen h-screen bg-black bg-opacity-40">
         {/* 팝업 본체 */}
-        <div className="bg-white w-[1000px] h-[640px] rounded-2xl flex justify-center items-center ">
+        <div className="bg-white w-[1000px] h-[640px] rounded-2xl flex justify-center items-center select-none">
           <div className="bg-sky-50 w-[960px] h-[600px] rounded-xl relative flex items-center justify-around">
             {/* 닫기 버튼 */}
             <button
@@ -66,6 +66,7 @@ const SelectDateTime = () => {
                     <div className="flex flex-col items-center">
                       <h1 className="mb-2 text-2xl font-medium">출발시간</h1>
                       <Timeit
+                        hourExclude={[0, 1, 2, 3, 4, 5, 6, 7, 8, 21, 22, 23]}
                         minuteExclude={[
                           1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
                           17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
@@ -73,12 +74,15 @@ const SelectDateTime = () => {
                           44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56,
                           57, 58, 59,
                         ]}
-                        onChange={(value) => setStartTime(value)}
+                        onChange={(value) => {
+                          setStartTime(value);
+                        }}
                       />
                     </div>
                     <div className="flex flex-col items-center">
                       <h1 className="mb-2 text-2xl font-medium">도착시간</h1>
                       <Timeit
+                        hourExclude={[0, 1, 2, 3, 4, 5, 6, 7, 8, 21, 22, 23]}
                         minuteExclude={[
                           1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
                           17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
@@ -92,57 +96,93 @@ const SelectDateTime = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col w-[400px] h-[200px] justify-center items-center">
+              <div className="flex flex-col w-[400px] h-[200px] justify-center items-end">
                 {/* 날짜 시간 리마인더 */}
                 <div className="">
                   <div className="mb-5">
-                    <h1>출발</h1>
-                    <div className="text-2xl">
-                      <span>
-                        {isNaN(dayjs(startDate).year())
-                          ? ""
-                          : dayjs(startDate).year()}
-                      </span>
-                      <span> 년 </span>
-                      <span>
-                        {isNaN(dayjs(startDate).month() + 1)
-                          ? ""
-                          : dayjs(startDate).month() + 1}
-                      </span>
-                      <span> 월 </span>
-                      <span>
-                        {isNaN(dayjs(startDate).date())
-                          ? ""
-                          : dayjs(startDate).date()}
-                      </span>
-                      <span> 일 </span>
+                    <h1 className="text-lg">출발</h1>
+                    <div className="flex justify-between w-[300px] text-2xl">
+                      {/* 시작 시간 날짜  */}
+                      <div>
+                        <span>
+                          {isNaN(dayjs(startDate).year())
+                            ? "출발일자 선택"
+                            : dayjs(startDate).year()}
+                        </span>
+                        <span>
+                          {isNaN(dayjs(startDate).year()) ? "" : "년 "}
+                        </span>
+                        <span>
+                          {isNaN(dayjs(startDate).month() + 1)
+                            ? ""
+                            : dayjs(startDate).month() + 1}
+                        </span>
+                        <span>
+                          {isNaN(dayjs(startDate).year()) ? "" : "월 "}
+                        </span>
+                        <span>
+                          {isNaN(dayjs(startDate).date())
+                            ? ""
+                            : dayjs(startDate).date()}
+                        </span>
+                        <span>
+                          {isNaN(dayjs(startDate).year()) ? "" : "일 "}
+                        </span>
+                      </div>
+                      <div>
+                        <span>
+                          {startTime !== undefined
+                            ? startTime.split(":")[0]
+                            : null}
+                        </span>
+                        <span>시</span>
+                        <span>
+                          {startTime !== undefined
+                            ? startTime.split(":")[1]
+                            : null}
+                        </span>
+                        <span>분</span>
+                      </div>
                     </div>
                   </div>
                   <div>
-                    <h1>도착</h1>
-                    <div className="text-2xl">
-                      <span>
-                        {isNaN(dayjs(endDate).year())
-                          ? ""
-                          : dayjs(endDate).year()}
-                      </span>
-                      <span> 년 </span>
-                      <span>
-                        {isNaN(dayjs(endDate).month() + 1)
-                          ? ""
-                          : dayjs(endDate).month() + 1}
-                      </span>
-                      <span> 월 </span>
-                      <span>
-                        {isNaN(dayjs(endDate).date())
-                          ? ""
-                          : dayjs(endDate).date()}
-                      </span>
-                      <span> 일 </span>
+                    <h1 className="text-lg">도착</h1>
+                    <div className="flex justify-between w-[300px] text-2xl">
+                      <div>
+                        <span>
+                          {isNaN(dayjs(endDate).year())
+                            ? "도착일자 선택"
+                            : dayjs(endDate).year()}
+                        </span>
+                        <span>{isNaN(dayjs(endDate).year()) ? "" : "년 "}</span>
+                        <span>
+                          {isNaN(dayjs(endDate).month() + 1)
+                            ? ""
+                            : dayjs(endDate).month() + 1}
+                        </span>
+                        <span>
+                          {isNaN(dayjs(endDate).month()) ? "" : "월 "}
+                        </span>
+                        <span>
+                          {isNaN(dayjs(endDate).date())
+                            ? ""
+                            : dayjs(endDate).date()}
+                        </span>
+                        <span>{isNaN(dayjs(endDate).date()) ? "" : "일 "}</span>
+                      </div>
+                      <div>
+                        <span>
+                          {endTime !== undefined ? endTime.split(":")[0] : null}
+                        </span>
+                        <span>시</span>
+                        <span>
+                          {endTime !== undefined ? endTime.split(":")[1] : null}
+                        </span>
+                        <span>분</span>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <button>helllo</button>
               </div>
             </div>
           </div>
