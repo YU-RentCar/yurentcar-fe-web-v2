@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import SelectDateTime from "popUp/Home/SelectDateTime";
 import SelectStore from "popUp/Home/SelectStore";
 import { useEffect, useState, useRef } from "react";
@@ -13,6 +14,35 @@ const Home = () => {
   const [isFinderClicked, setIsFinderClicked] = useState(false);
 
   const [finderInfo, setFinderInfo] = useRecoilState(finderAtom);
+
+  const [finderDateInfoString, setFinderDateInfoString] = useState("");
+
+  useEffect(() => {
+    const startDate = dayjs(finderInfo.startDate);
+    const startTime = finderInfo.startTime;
+    const endDate = dayjs(finderInfo.endDate);
+    const endTime = finderInfo.endTime;
+
+    const days = {
+      0: "일",
+      1: "월",
+      2: "화",
+      3: "수",
+      4: "목",
+      5: "금",
+      6: "토",
+    };
+
+    const startString = `${startDate.format("M/DD")}(${
+      days[startDate.day()]
+    }) ${startTime}`;
+
+    const endString = `${endDate.format("M/DD")}(${
+      days[endDate.day()]
+    }) ${endTime}`;
+
+    setFinderDateInfoString(`${startString} ~ ${endString}`);
+  }, [finderInfo]);
 
   return (
     <>
@@ -70,7 +100,9 @@ const Home = () => {
           >
             <div className="flex items-center justify-center w-full h-full">
               <p className="text-2xl font-medium">
-                9/9(토) 10:00 ~ 9/10(일) 11:10
+                {finderInfo.startDate === null || finderInfo.endDate === null
+                  ? "날짜와 시간을 선택해주세요"
+                  : finderDateInfoString}
               </p>
             </div>
           </div>
