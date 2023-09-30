@@ -44,38 +44,25 @@ export const finderStoreSelector = selector({
   },
 });
 
-export const finderStartSelector = selector({
-  key: "finderStartSelector",
+export const finderDateTimeSelector = selector({
+  key: "finderDateTimeSelector",
   get: ({ get }) => {
     const finderInfo = get(finderAtom);
-    return [finderInfo.startDate, finderInfo.startTime];
-  },
-  set: ({ get, set }, newValue) => {
-    const finderInfo = get(finderAtom);
-    const [startDate, startTime] = newValue;
-    const temp = {
-      ...finderInfo,
-      startDate: startDate,
-      startTime: startTime,
+    return {
+      startDate: finderInfo.startDate,
+      startTime: finderInfo.startTime,
+      endDate: finderInfo.endDate,
+      endTime: finderInfo.endTime,
     };
-
-    set(finderAtom, temp);
-  },
-});
-
-export const finderEndSelector = selector({
-  key: "finderEndSelector",
-  get: ({ get }) => {
-    const finderInfo = get(finderAtom);
-    return [finderInfo.endDate, finderInfo.endTime];
   },
   set: ({ get, set }, newValue) => {
     const finderInfo = get(finderAtom);
-    const [endDate, endTime] = newValue;
     const temp = {
       ...finderInfo,
-      endDate: endDate,
-      endTime: endTime,
+      startDate: newValue.startDate,
+      startTime: newValue.startTime,
+      endDate: newValue.endDate,
+      endTime: newValue.endTime,
     };
 
     set(finderAtom, temp);

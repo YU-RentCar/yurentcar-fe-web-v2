@@ -8,6 +8,20 @@ import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import dayjs from "dayjs";
 
+import { MdInfoOutline } from "react-icons/md";
+import { useRecoilState } from "recoil";
+import { finderDateTimeSelector } from "recoil/finderAtom";
+
+function validationTime(time = "00:00") {
+  const numberTime = +time.split(":").join("");
+
+  if (numberTime < 900 || numberTime > 2100) {
+    return false;
+  }
+
+  return true;
+}
+
 const SelectDateTime = () => {
   const popUpInfo = usePopUp("Home/SelectDateTime");
 
@@ -17,8 +31,14 @@ const SelectDateTime = () => {
   const [startTime, setStartTime] = useState();
   const [endTime, setEndTime] = useState();
 
+  const [rclFinderDateTime, setRclFinderDateTime] = useRecoilState(
+    finderDateTimeSelector
+  );
+
   useEffect(() => {
     console.log(startDate, endDate, startTime, endTime);
+
+    console.log(rclFinderDateTime);
 
     console.log(
       dayjs(startDate).year(),
@@ -43,7 +63,6 @@ const SelectDateTime = () => {
             >
               <MdOutlineClose size={49} color="gray" />
             </button>
-
             <div className="flex items-center justify-around ">
               {/* 날짜 시간 선택 메뉴 */}
               <div className="bg-sky-200 w-[400px] h-[400px] rounded-2xl flex flex-col justify-center items-center">
@@ -54,6 +73,7 @@ const SelectDateTime = () => {
                       className="w-[300px] border-2 border-slate-300 p-4 mb-6"
                       dateFormat={"yyyy/MM/dd"}
                       selectsRange={true}
+                      minDate={new Date()}
                       startDate={startDate}
                       endDate={endDate}
                       onChange={(update) => {
@@ -96,7 +116,7 @@ const SelectDateTime = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col w-[400px] h-[200px] justify-center items-end">
+              <div className="flex flex-col w-[400px] h-[200px] justify-start items-end">
                 {/* 날짜 시간 리마인더 */}
                 <div className="">
                   <div className="mb-5">
@@ -145,7 +165,7 @@ const SelectDateTime = () => {
                       </div>
                     </div>
                   </div>
-                  <div>
+                  <div className="mb-5">
                     <h1 className="text-lg">도착</h1>
                     <div className="flex justify-between w-[300px] text-2xl">
                       <div>
@@ -183,6 +203,37 @@ const SelectDateTime = () => {
                     </div>
                   </div>
                 </div>
+
+                {/* 사용자가 잘못된 시간을 선택했을 경우 확인 버튼 비활성 */}
+                {validationTime(startTime) && validationTime(endTime) ? (
+                  <>
+                    {/* 확인 버튼 */}
+                    <button
+                      className="flex items-center justify-center px-12 py-2 mt-5 text-xl transition-all ease-in bg-blue-200 rounded-lg hover:bg-amber-400"
+                      onClick={() => {
+                        const temp = {
+                          ...rclFinderDateTime,
+                          startDate: startDate,
+                          startTime: startTime,
+                          endDate: endDate,
+                          endTime: endTime,
+                        };
+
+                        setRclFinderDateTime(temp);
+                        popUpInfo.toggle();
+                      }}
+                    >
+                      확인
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex items-center text-red-700">
+                      <MdInfoOutline className="mr-2" />
+                      <span>예약 가능 시간은 09:00 부터 20:30 까지입니다.</span>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </div>
