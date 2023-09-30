@@ -84,7 +84,7 @@ const SelectDateTime = () => {
                       <h1 className="mb-2 text-2xl font-medium">출발시간</h1>
                       <Timeit
                         defualtValue={rclFinderDateTime.startTime || "09:00"}
-                        hourExclude={[0, 1, 2, 3, 4, 5, 6, 7, 8, 21, 22, 23]}
+                        hourExclude={[0, 1, 2, 3, 4, 5, 6, 7, 8, 22, 23]}
                         minuteExclude={[
                           1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
                           17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
@@ -101,7 +101,7 @@ const SelectDateTime = () => {
                       <h1 className="mb-2 text-2xl font-medium">도착시간</h1>
                       <Timeit
                         defualtValue={rclFinderDateTime.endTime || "09:00"}
-                        hourExclude={[0, 1, 2, 3, 4, 5, 6, 7, 8, 21, 22, 23]}
+                        hourExclude={[0, 1, 2, 3, 4, 5, 6, 7, 8, 22, 23]}
                         minuteExclude={[
                           1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
                           17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29,
@@ -225,7 +225,7 @@ const SelectDateTime = () => {
                   <>
                     <div className="flex items-center text-red-700">
                       <MdInfoOutline className="mr-2" />
-                      <span>예약 가능 시간은 09:00 부터 20:30 까지입니다.</span>
+                      <span>예약 가능 시간은 09:00 부터 21:00 까지입니다.</span>
                     </div>
                   </>
                 )}
