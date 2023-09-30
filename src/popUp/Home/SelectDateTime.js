@@ -12,7 +12,11 @@ import { MdInfoOutline } from "react-icons/md";
 import { useRecoilState } from "recoil";
 import { finderDateTimeSelector } from "recoil/finderAtom";
 
-function validationTime(time = "00:00") {
+// 영업시간 체크 함수
+function validationTime(time) {
+  if (time === null) {
+    time = "09:00";
+  }
   const numberTime = +time.split(":").join("");
 
   if (numberTime < 900 || numberTime > 2100) {
@@ -25,27 +29,20 @@ function validationTime(time = "00:00") {
 const SelectDateTime = () => {
   const popUpInfo = usePopUp("Home/SelectDateTime");
 
-  const [dateRange, setDateRange] = useState([null, null]);
-  const [startDate, endDate] = dateRange;
-
-  const [startTime, setStartTime] = useState();
-  const [endTime, setEndTime] = useState();
-
   const [rclFinderDateTime, setRclFinderDateTime] = useRecoilState(
     finderDateTimeSelector
   );
 
-  useEffect(() => {
-    console.log(startDate, endDate, startTime, endTime);
+  const [dateRange, setDateRange] = useState([
+    rclFinderDateTime.startDate || null,
+    rclFinderDateTime.endDate || null,
+  ]);
+  const [startDate, endDate] = dateRange;
 
-    console.log(rclFinderDateTime);
-
-    console.log(
-      dayjs(startDate).year(),
-      dayjs(startDate).month() + 1,
-      dayjs(startDate).date()
-    );
-  }, [endDate, endTime, startDate, startTime]);
+  const [startTime, setStartTime] = useState(
+    rclFinderDateTime.startTime || null
+  );
+  const [endTime, setEndTime] = useState(rclFinderDateTime.endTime || null);
 
   return (
     <>
@@ -86,6 +83,7 @@ const SelectDateTime = () => {
                     <div className="flex flex-col items-center">
                       <h1 className="mb-2 text-2xl font-medium">출발시간</h1>
                       <Timeit
+                        defualtValue={rclFinderDateTime.startTime || "09:00"}
                         hourExclude={[0, 1, 2, 3, 4, 5, 6, 7, 8, 21, 22, 23]}
                         minuteExclude={[
                           1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
@@ -102,6 +100,7 @@ const SelectDateTime = () => {
                     <div className="flex flex-col items-center">
                       <h1 className="mb-2 text-2xl font-medium">도착시간</h1>
                       <Timeit
+                        defualtValue={rclFinderDateTime.endTime || "09:00"}
                         hourExclude={[0, 1, 2, 3, 4, 5, 6, 7, 8, 21, 22, 23]}
                         minuteExclude={[
                           1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
@@ -151,15 +150,11 @@ const SelectDateTime = () => {
                       </div>
                       <div>
                         <span>
-                          {startTime !== undefined
-                            ? startTime.split(":")[0]
-                            : null}
+                          {startTime !== null ? startTime.split(":")[0] : null}
                         </span>
                         <span>시</span>
                         <span>
-                          {startTime !== undefined
-                            ? startTime.split(":")[1]
-                            : null}
+                          {startTime !== null ? startTime.split(":")[1] : null}
                         </span>
                         <span>분</span>
                       </div>
@@ -192,11 +187,11 @@ const SelectDateTime = () => {
                       </div>
                       <div>
                         <span>
-                          {endTime !== undefined ? endTime.split(":")[0] : null}
+                          {endTime !== null ? endTime.split(":")[0] : null}
                         </span>
                         <span>시</span>
                         <span>
-                          {endTime !== undefined ? endTime.split(":")[1] : null}
+                          {endTime !== null ? endTime.split(":")[1] : null}
                         </span>
                         <span>분</span>
                       </div>
