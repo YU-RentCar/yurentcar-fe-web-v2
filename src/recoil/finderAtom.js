@@ -5,7 +5,10 @@ export const finderAtom = atom({
   default: {
     province: null,
     store: null,
-    date: null,
+    startDate: null,
+    startTime: null,
+    endDate: null,
+    endTime: null,
   },
 });
 
@@ -35,6 +38,31 @@ export const finderStoreSelector = selector({
     const temp = {
       ...finderInfo,
       store: newValue,
+    };
+
+    set(finderAtom, temp);
+  },
+});
+
+export const finderDateTimeSelector = selector({
+  key: "finderDateTimeSelector",
+  get: ({ get }) => {
+    const finderInfo = get(finderAtom);
+    return {
+      startDate: finderInfo.startDate,
+      startTime: finderInfo.startTime,
+      endDate: finderInfo.endDate,
+      endTime: finderInfo.endTime,
+    };
+  },
+  set: ({ get, set }, newValue) => {
+    const finderInfo = get(finderAtom);
+    const temp = {
+      ...finderInfo,
+      startDate: newValue.startDate,
+      startTime: newValue.startTime,
+      endDate: newValue.endDate,
+      endTime: newValue.endTime,
     };
 
     set(finderAtom, temp);

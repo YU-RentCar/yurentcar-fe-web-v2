@@ -1,3 +1,5 @@
+import dayjs from "dayjs";
+import SelectDateTime from "popUp/Home/SelectDateTime";
 import SelectStore from "popUp/Home/SelectStore";
 import { useEffect, useState, useRef } from "react";
 import { MdOutlineNorth } from "react-icons/md";
@@ -6,11 +8,41 @@ import { finderAtom } from "recoil/finderAtom";
 import { usePopUp } from "utils/usePopUp";
 
 const Home = () => {
-  const popUpInfo = usePopUp("Home/SelectStore");
+  const storePopUp = usePopUp("Home/SelectStore");
+  const dateTimePopUp = usePopUp("Home/SelectDateTime");
 
   const [isFinderClicked, setIsFinderClicked] = useState(false);
 
   const [finderInfo, setFinderInfo] = useRecoilState(finderAtom);
+
+  const [finderDateInfoString, setFinderDateInfoString] = useState("");
+
+  useEffect(() => {
+    const startDate = dayjs(finderInfo.startDate);
+    const startTime = finderInfo.startTime;
+    const endDate = dayjs(finderInfo.endDate);
+    const endTime = finderInfo.endTime;
+
+    const days = {
+      0: "일",
+      1: "월",
+      2: "화",
+      3: "수",
+      4: "목",
+      5: "금",
+      6: "토",
+    };
+
+    const startString = `${startDate.format("M/DD")}(${
+      days[startDate.day()]
+    }) ${startTime}`;
+
+    const endString = `${endDate.format("M/DD")}(${
+      days[endDate.day()]
+    }) ${endTime}`;
+
+    setFinderDateInfoString(`${startString} ~ ${endString}`);
+  }, [finderInfo]);
 
   return (
     <>
@@ -47,7 +79,7 @@ const Home = () => {
             className="ml-[10px] w-[290px] h-[50px] bg-sky-50 rounded-lg border-[1px] border-black hover:border-[3px] hover:border-blue-400 select-none cursor-pointer"
             onClick={() => {
               setIsFinderClicked(true);
-              popUpInfo.toggle();
+              storePopUp.toggle();
             }}
           >
             <div className="flex items-center justify-center w-full h-full">
@@ -63,11 +95,14 @@ const Home = () => {
             className="w-[400px] h-[50px] bg-sky-50 rounded-lg border-[1px] border-black hover:border-[3px] hover:border-blue-400 select-none cursor-pointer"
             onClick={() => {
               setIsFinderClicked(true);
+              dateTimePopUp.toggle();
             }}
           >
             <div className="flex items-center justify-center w-full h-full">
               <p className="text-2xl font-medium">
-                9/9(토) 10:00 ~ 9/10(일) 11:10
+                {finderInfo.startDate === null || finderInfo.endDate === null
+                  ? "날짜와 시간을 선택해주세요"
+                  : finderDateInfoString}
               </p>
             </div>
           </div>
@@ -91,7 +126,8 @@ const Home = () => {
       </div>
 
       {/* 팝업 구역 */}
-      {popUpInfo.isClicked ? <SelectStore /> : undefined}
+      {storePopUp.isClicked ? <SelectStore /> : undefined}
+      {dateTimePopUp.isClicked ? <SelectDateTime /> : undefined}
     </>
   );
 };
