@@ -21,28 +21,26 @@ const Repair = () => {
       <div className="w-[1100px] h-[500px] rounded-2xl bg-blue-200 mt-4 pt-4">
         {carInfo.repair.map((v, i) => {
           return (
-            <>
-              {/* 몇번째 아코디언인지 지정 */}
-              <Accordion
-                open={open === i + 1}
-                className="w-[1040px] bg-white rounded-2xl border-2 border-blue-600 mx-auto mt-2"
+            <Accordion
+              key={i}
+              open={open === i + 1}
+              className="w-[1040px] bg-white rounded-2xl border-2 border-blue-600 mx-auto mt-2"
+            >
+              {/* 타이틀, 위에서 지정한 아코디언에 제어 기능 부여 */}
+              <AccordionHeader
+                onClick={() => handleOpen(i + 1)}
+                className={`px-8 text-2xl font-bold ${
+                  open === i + 1 ? "!text-red-500" : ""
+                }`}
               >
-                {/* 타이틀, 위에서 지정한 아코디언에 제어 기능 부여 */}
-                <AccordionHeader
-                  onClick={() => handleOpen(i + 1)}
-                  className={`px-8 text-2xl font-bold ${
-                    open === i + 1 ? "!text-red-500" : ""
-                  }`}
-                >
-                  {v["date"]}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                  {v["title"]}
-                </AccordionHeader>
-                {/* 컨텐츠 */}
-                <AccordionBody className="px-8 text-xl font-bold text-slate-700">
-                  {v["content"]}
-                </AccordionBody>
-              </Accordion>
-            </>
+                {v["date"]}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {v["title"]}
+              </AccordionHeader>
+              {/* 컨텐츠 */}
+              <AccordionBody className="px-8 text-xl font-bold text-slate-700">
+                {v["content"]}
+              </AccordionBody>
+            </Accordion>
           );
         })}
       </div>
