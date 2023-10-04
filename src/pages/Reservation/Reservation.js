@@ -2,6 +2,8 @@ import DefaultInfo from "./DefaultInfo";
 import DetailInfo from "./DetailInfo";
 import Repair from "./Repair";
 import Accident from "./Accident";
+import Map from "./Map";
+import Insurance from "./Insurance";
 
 const Reservation = () => {
   return (
@@ -15,6 +17,10 @@ const Reservation = () => {
         <Repair />
         {/* 차량 사고 내역 */}
         <Accident />
+        {/* 지점 지도 */}
+        <Map />
+        {/* 차량 종합 보험 */}
+        <Insurance />
       </div>
     </>
   );
