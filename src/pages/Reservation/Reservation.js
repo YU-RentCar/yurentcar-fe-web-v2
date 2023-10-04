@@ -4,6 +4,7 @@ import Repair from "./Repair";
 import Accident from "./Accident";
 import Map from "./Map";
 import Insurance from "./Insurance";
+import Drivers from "./Drivers";
 import Point from "./Point";
 import Final from "./Final";
 
@@ -23,6 +24,8 @@ const Reservation = () => {
         <Map />
         {/* 차량 종합 보험 */}
         <Insurance />
+        {/* 운전자 등록 */}
+        <Drivers />
         {/* 포인트 사용 */}
         <Point />
         {/* 최종 결제 */}
