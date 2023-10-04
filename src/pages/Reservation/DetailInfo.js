@@ -43,7 +43,10 @@ const DetailInfo = () => {
       <div className="w-[1100px] h-[510px] mx-auto bg-blue-200 rounded-2xl mt-4 flex flex-wrap justify-center items-center">
         {Object.keys(titles).map((v, i) => {
           return (
-            <div className="w-[200px] h-[200px] bg-sky-50 flex flex-col justify-around rounded-2xl mx-8 pl-4 py-4">
+            <div
+              className="w-[200px] h-[200px] bg-sky-50 flex flex-col justify-around rounded-2xl mx-8 pl-4 py-4"
+              key={i}
+            >
               {iconList[i]}
               <span className="text-2xl font-semibold">{titles[v]}</span>
               <span className="text-4xl font-bold text-blue-900">
