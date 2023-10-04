@@ -4,6 +4,7 @@ import Repair from "./Repair";
 import Accident from "./Accident";
 import Map from "./Map";
 import Insurance from "./Insurance";
+import Point from "./Point";
 
 const Reservation = () => {
   return (
@@ -21,6 +22,8 @@ const Reservation = () => {
         <Map />
         {/* 차량 종합 보험 */}
         <Insurance />
+        {/* 포인트 사용 */}
+        <Point />
       </div>
     </>
   );
