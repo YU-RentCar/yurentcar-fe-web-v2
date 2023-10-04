@@ -1,0 +1,38 @@
+const Final = () => {
+  return (
+    <div className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma">
+      {/* 타이틀 */}
+      <div className="w-[1010px] h-[70px] flex justify-between items-center text-blue-800 text-[45px] font-bold">
+        최종 결제
+      </div>
+      <div className="w-[1040px] h-[330px] flex justify-between items-center mt-4">
+        {/* 금액 결산 */}
+        <div className="w-[500px] h-full rounded-2xl bg-white flex flex-col justify-between items-center py-8">
+          <div className="w-[400px] h-[50px] flex justify-between items-center">
+            <span className="text-3xl font-bold">정가</span>
+            <span className="text-3xl font-bold">200000원</span>
+          </div>
+          <div className="w-[400px] h-[50px] flex justify-between items-center">
+            <span className="text-3xl font-bold">보험료</span>
+            <span className="text-3xl font-bold text-blue-600">+15000원</span>
+          </div>
+          <div className="w-[400px] h-[50px] flex justify-between items-center">
+            <span className="text-3xl font-bold">포인트</span>
+            <span className="text-3xl font-bold text-red-500">-200P</span>
+          </div>
+          <hr className="border-2 border-black w-[400px]" />
+          <div className="w-[400px] h-[50px] flex justify-between items-center">
+            <span className="text-3xl font-bold">결제금액</span>
+            <span className="text-3xl font-bold text-blue-600">214800원</span>
+          </div>
+        </div>
+        {/* 최종 결제 버튼 */}
+        <button className="w-[400px] h-[100px] rounded-2xl bg-amber-400 text-4xl font-bold flex justify-center items-center shadow-figma">
+          결제하기
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default Final;
