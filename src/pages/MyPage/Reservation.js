@@ -30,7 +30,7 @@ const Reservation = () => {
   ]);
   return (
     <>
-      <div className="flex flex-col items-center w-full py-4 bg-sky-50 rounded-2xl ">
+      <div className="flex flex-col items-center w-full py-4 bg-sky-50 rounded-2xl shadow-figma">
         {/* 멘트 */}
         <span className="text-black text-[30px] font-bold">
           <span className="text-amber-400 ">{userInfo.name}</span>님이 예약하신
