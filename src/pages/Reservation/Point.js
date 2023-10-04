@@ -1,7 +1,10 @@
 import { useRecoilValue } from "recoil";
 import { userAtom } from "recoil/userAtom";
+import { useRecoilState } from "recoil";
+import { rentPointSelector } from "recoil/rentAtom";
 
 const Point = () => {
+  const [rentPoint, setRentPoint] = useRecoilState(rentPointSelector); // 포인트 사용 양 저장
   const userPoint = useRecoilValue(userAtom).point; // 사용자 보유 포인트
   return (
     <div className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma">
@@ -28,11 +31,16 @@ const Point = () => {
             onChange={(e) => {
               // 입력된 값에 따른 멘트 변화
               let ment = document.getElementById("ment");
-              if (e.target.value === "" || Number(e.target.value) < 0)
+              if (e.target.value === "" || Number(e.target.value) < 0) {
                 ment.textContent = "0 이상의 숫자를 입력해주세요";
-              else if (Number(e.target.value) > userPoint)
+                setRentPoint(0);
+              } else if (Number(e.target.value) > userPoint) {
                 ment.textContent = "보유 포인트를 초과할 수 없습니다";
-              else ment.textContent = "";
+                setRentPoint(0);
+              } else {
+                ment.textContent = "";
+                setRentPoint(Number(e.target.value));
+              }
             }}
           ></input>
         </div>

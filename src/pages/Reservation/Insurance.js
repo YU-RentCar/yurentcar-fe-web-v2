@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
+import { useRecoilState } from "recoil";
+import { rentInsuranceSelector } from "recoil/rentAtom";
 
 const Insurance = () => {
+  const [rentIns, setRentIns] = useRecoilState(rentInsuranceSelector); // 보험 금액 저장
   const [contents, setContents] = useState({
     무보험: ["전액부담", "+0원"],
     "일반 자차": ["30만원 부담", "+15,000원"],
@@ -28,12 +31,15 @@ const Insurance = () => {
     // 각 보험들에 click 이벤트 추가
     insurances.forEach((v, i) => {
       v.addEventListener("click", () => {
-        if (ins === -1) choice(insurances[i]);
+        if (ins === -1) choice(v);
         else if (i !== ins) {
           cancle(insurances[ins]); // 기존 보험 선택 취소
-          choice(insurances[i]); // 새로운 보험 선택
+          choice(v); // 새로운 보험 선택
         }
         setIns(i);
+        setRentIns(
+          Number(contents[Object.keys(contents)[i]][1].replace(/[원+,]/g, ""))
+        );
       });
     });
   }, [ins]);
