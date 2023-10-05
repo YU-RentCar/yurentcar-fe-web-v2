@@ -1,3 +1,5 @@
+import { MdOutlineClose } from "react-icons/md";
+
 const Close = ({ index, name, cardStatus, setCardStatus, subDriver }) => {
   return (
     <div className="w-[1100px] h-20 flex justify-between items-center rounded-2xl bg-sky-200 px-14 mt-4">
@@ -16,14 +18,11 @@ const Close = ({ index, name, cardStatus, setCardStatus, subDriver }) => {
           카드 펴기
         </button>
         {/* 카드 삭제 버튼 */}
-        <button
-          className="w-7 h-7 bg-slate-500"
-          onClick={() => {
-            subDriver(index);
-          }}
-        >
-          삭제
-        </button>
+        <MdOutlineClose
+          size={35}
+          color="gray"
+          onClick={() => subDriver(index)}
+        />
       </div>
     </div>
   );
