@@ -1,7 +1,8 @@
+import Finder from "components/Finder";
 import dayjs from "dayjs";
 import SelectDateTime from "popUp/SelectDateTime";
 import SelectStore from "popUp/SelectStore";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { MdOutlineNorth } from "react-icons/md";
 import { useRecoilState } from "recoil";
 import { finderAtom } from "recoil/finderAtom";
@@ -10,8 +11,6 @@ import { usePopUp } from "utils/usePopUp";
 const Home = () => {
   const storePopUp = usePopUp("Home/SelectStore");
   const dateTimePopUp = usePopUp("Home/SelectDateTime");
-
-  const [isFinderClicked, setIsFinderClicked] = useState(false);
 
   const [finderInfo, setFinderInfo] = useRecoilState(finderAtom);
 
@@ -73,56 +72,18 @@ const Home = () => {
           </div>
         </div>
 
-        {/* 선택 메뉴 */}
         <div className="w-[860px] h-[70px] rounded-2xl shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] mt-[-30px] bg-white flex items-center justify-between z-10">
-          <div
-            className="ml-[10px] w-[290px] h-[50px] bg-sky-50 rounded-lg border-[1px] border-black hover:border-[3px] hover:border-blue-400 select-none cursor-pointer"
-            onClick={() => {
-              setIsFinderClicked(true);
-              storePopUp.toggle();
-            }}
-          >
-            <div className="flex items-center justify-center w-full h-full">
-              <p className="text-2xl font-medium">
-                {finderInfo.province === null || finderInfo.store === null
-                  ? "지점을 선택해주세요"
-                  : `${finderInfo.province} ${finderInfo.store}`}
-              </p>
-            </div>
-          </div>
-
-          <div
-            className="w-[400px] h-[50px] bg-sky-50 rounded-lg border-[1px] border-black hover:border-[3px] hover:border-blue-400 select-none cursor-pointer"
-            onClick={() => {
-              setIsFinderClicked(true);
-              dateTimePopUp.toggle();
-            }}
-          >
-            <div className="flex items-center justify-center w-full h-full">
-              <p className="text-2xl font-medium">
-                {finderInfo.startDate === null || finderInfo.endDate === null
-                  ? "날짜와 시간을 선택해주세요"
-                  : finderDateInfoString}
-              </p>
-            </div>
-          </div>
-
-          <div className="mr-[10px] w-[130px] h-[50px] bg-blue-300 hover:bg-amber-400 rounded-lg border-[1px] select-none cursor-pointer transition-all">
-            <div className="flex items-center justify-center w-full h-full">
-              <p className="text-2xl font-medium">검색</p>
-            </div>
-          </div>
+          <Finder />
         </div>
 
         {/* 도움말 */}
-        {!isFinderClicked ? (
-          <div className="flex flex-col items-center justify-center mt-6 animate-bounce-slow">
-            <MdOutlineNorth size={"24px"}></MdOutlineNorth>
-            <div className="text-xl">
-              항목을 클릭하여 원하는 차량을 찾아보세요!
-            </div>
+
+        <div className="flex flex-col items-center justify-center mt-6 select-none animate-bounce-slow">
+          <MdOutlineNorth size={"24px"}></MdOutlineNorth>
+          <div className="text-xl">
+            항목을 클릭하여 원하는 차량을 찾아보세요!
           </div>
-        ) : null}
+        </div>
       </div>
 
       {/* 팝업 구역 */}
