@@ -4,6 +4,7 @@ import { usePopUp } from "utils/usePopUp";
 import SelectStore from "popUp/SelectStore";
 import SelectDateTime from "popUp/SelectDateTime";
 import NoticeCarousel from "./NoticeCarousel";
+import CarCard from "components/CarCard";
 
 const CarSearch = () => {
   const storePopUp = usePopUp("CarSearch/SelectStore");
@@ -16,18 +17,19 @@ const CarSearch = () => {
           <Finder storePopUp={storePopUp} dateTimePopUp={dateTimePopUp} />
         </div>
 
-        <div className="w-[1140px] h-[1281px] bg-sky-200 mt-[20px]">
-          <div className="w-[264px] bg-blue-300">
+        <div className="w-[1140px] h-[1281px] mt-[50px] flex justify-around select-none">
+          <div className="w-[264px]">
             {/* 사용자 선호 설정 */}
             <div className="w-full h-[414px] bg-blue-800"></div>
             {/* 공지사항 */}
-            <div className="w-full bg-sky-100">
+            <div className="w-full">
               {/* 어떤 지점 공지사항 */}
-              <div className="flex flex-col items-center justify-center">
+              <div className="flex flex-col items-center justify-center my-3">
                 <span>
-                  <span>대구 수성구</span>점<br />
+                  <span className="font-bold text-blue-600">대구 수성구</span>점
+                  <br />
                 </span>
-                <span>공지사항</span>
+                <span className="text-xl font-semibold">공지사항</span>
               </div>
 
               {/* 공지사항 슬라이더 */}
@@ -38,7 +40,25 @@ const CarSearch = () => {
           </div>
 
           {/* 차량 리스트 */}
-          <div></div>
+          <div className="w-[860px] h-[1000px] pb-5 grid grid-cols-3 overflow-y-scroll">
+            <CarCard></CarCard>
+            <CarCard></CarCard>
+            <CarCard></CarCard>
+            <CarCard></CarCard>
+            <CarCard></CarCard>
+            <CarCard></CarCard>
+            <CarCard></CarCard>
+            <CarCard></CarCard>
+            <CarCard></CarCard>
+            <CarCard></CarCard>
+            <CarCard></CarCard>
+            <CarCard></CarCard>
+            <CarCard></CarCard>
+            <CarCard></CarCard>
+            <CarCard></CarCard>
+            <CarCard></CarCard>
+            <CarCard></CarCard>
+          </div>
         </div>
       </div>
 
