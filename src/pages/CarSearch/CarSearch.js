@@ -1,5 +1,4 @@
 import Finder from "components/Finder";
-import { React, useState } from "react";
 import { usePopUp } from "utils/usePopUp";
 import SelectStore from "popUp/SelectStore";
 import SelectDateTime from "popUp/SelectDateTime";
@@ -10,10 +9,14 @@ import { userPreferSelector } from "recoil/userAtom";
 import { preferOptionAtom } from "recoil/preferOptionAtom";
 import CarCard from "components/CarCard";
 import PreferOption from "./PreferOption";
+import CarDetail from "popUp/CarSearch/CarDetail";
+import { useEffect, useState, useRef } from "react";
+import { finderAtom } from "recoil/finderAtom";
 
 const CarSearch = () => {
   const storePopUp = usePopUp("CarSearch/SelectStore");
   const dateTimePopUp = usePopUp("CarSearch/SelectDateTime");
+  const carDetailPopUp = usePopUp("CarSearch/CarDetail");
 
   const preferOption = useRecoilValue(preferOptionAtom); // 선호 옵션 데이터
   const [userPreferInfo, setUserPreferInfo] =
@@ -21,6 +24,9 @@ const CarSearch = () => {
   const [preferTitles, _] = useState(["차량 크기", "유종", "구동기"]); // 옵션 타이틀
 
   const alert = useAlert(); // Alert 제어
+
+  const [currentStore, setCurrentStore] = useState(null);
+  const finderInfo = useRecoilValue(finderAtom);
 
   /* 변경 정보 수집 함수 */
   const gatherInfo = () => {
@@ -38,6 +44,10 @@ const CarSearch = () => {
     newPrefer.minCount = document.getElementById("minCount").value;
     return newPrefer;
   };
+
+  useEffect(() => {
+    setCurrentStore(finderInfo);
+  }, []);
 
   return (
     <>
@@ -117,23 +127,17 @@ const CarSearch = () => {
 
           {/* 차량 리스트 */}
           <div className="w-[860px] h-[1000px] pb-5 grid grid-cols-3 overflow-y-scroll">
-            <CarCard></CarCard>
-            <CarCard></CarCard>
-            <CarCard></CarCard>
-            <CarCard></CarCard>
-            <CarCard></CarCard>
-            <CarCard></CarCard>
-            <CarCard></CarCard>
-            <CarCard></CarCard>
-            <CarCard></CarCard>
-            <CarCard></CarCard>
-            <CarCard></CarCard>
-            <CarCard></CarCard>
-            <CarCard></CarCard>
-            <CarCard></CarCard>
-            <CarCard></CarCard>
-            <CarCard></CarCard>
-            <CarCard></CarCard>
+            {[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0].map((v, i) => {
+              return (
+                <div
+                  onClick={() => {
+                    carDetailPopUp.toggle();
+                  }}
+                >
+                  <CarCard></CarCard>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -144,6 +148,9 @@ const CarSearch = () => {
       ) : undefined}
       {dateTimePopUp.isClicked ? (
         <SelectDateTime popUpInfo={dateTimePopUp} />
+      ) : undefined}
+      {carDetailPopUp.isClicked ? (
+        <CarDetail popUpInfo={carDetailPopUp} />
       ) : undefined}
     </>
   );
