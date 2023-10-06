@@ -73,7 +73,7 @@ const Home = () => {
         </div>
 
         <div className="w-[860px] h-[70px] rounded-2xl shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] mt-[-30px] bg-white flex items-center justify-between z-10">
-          <Finder />
+          <Finder storePopUp={storePopUp} dateTimePopUp={dateTimePopUp} />
         </div>
 
         {/* 도움말 */}
@@ -87,8 +87,12 @@ const Home = () => {
       </div>
 
       {/* 팝업 구역 */}
-      {storePopUp.isClicked ? <SelectStore /> : undefined}
-      {dateTimePopUp.isClicked ? <SelectDateTime /> : undefined}
+      {storePopUp.isClicked ? (
+        <SelectStore popUpInfo={storePopUp} />
+      ) : undefined}
+      {dateTimePopUp.isClicked ? (
+        <SelectDateTime popUpInfo={dateTimePopUp} />
+      ) : undefined}
     </>
   );
 };

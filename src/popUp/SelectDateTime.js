@@ -26,9 +26,7 @@ function validationTime(time) {
   return true;
 }
 
-const SelectDateTime = () => {
-  const popUpInfo = usePopUp("Home/SelectDateTime");
-
+const SelectDateTime = ({ popUpInfo }) => {
   const [rclFinderDateTime, setRclFinderDateTime] = useRecoilState(
     finderDateTimeSelector
   );

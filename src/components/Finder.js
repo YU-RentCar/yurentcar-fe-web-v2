@@ -3,11 +3,11 @@ import React from "react";
 import { useEffect, useState, useRef } from "react";
 import { useRecoilState } from "recoil";
 import { finderAtom } from "recoil/finderAtom";
-import { usePopUp } from "utils/usePopUp";
+import { Link } from "react-router-dom";
 
-const Finder = () => {
-  const storePopUp = usePopUp("Home/SelectStore");
-  const dateTimePopUp = usePopUp("Home/SelectDateTime");
+const Finder = ({ storePopUp, dateTimePopUp }) => {
+  // const storePopUp = usePopUp("Home/SelectStore");
+  // const dateTimePopUp = usePopUp("Home/SelectDateTime");
 
   const [finderInfo, setFinderInfo] = useRecoilState(finderAtom);
 
@@ -76,9 +76,11 @@ const Finder = () => {
       </div>
 
       <div className="mr-[10px] w-[130px] h-[50px] bg-blue-300 hover:bg-amber-400 rounded-lg border-[1px] select-none cursor-pointer transition-all">
-        <div className="flex items-center justify-center w-full h-full">
-          <p className="text-2xl font-medium">검색</p>
-        </div>
+        <Link to={"/carsearch"}>
+          <div className="flex items-center justify-center w-full h-full">
+            <p className="text-2xl font-medium">검색</p>
+          </div>
+        </Link>
       </div>
     </>
   );
