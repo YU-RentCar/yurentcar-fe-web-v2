@@ -8,8 +8,8 @@ import { useRecoilValue } from "recoil";
 import { finderAtom } from "recoil/finderAtom";
 
 const Notice = () => {
-  const storePopUp = usePopUp("Home/SelectStore"); // 지점 선택 팝업
-  const dateTimePopUp = usePopUp("Home/SelectDateTime"); // 날짜, 시간 선택 팝업
+  const storePopUp = usePopUp("Notice/SelectStore"); // 지점 선택 팝업
+  const dateTimePopUp = usePopUp("Notice/SelectDateTime"); // 날짜, 시간 선택 팝업
   const notices = useRecoilValue(noticeAtom); // 공지사항 정보
   const finderInfo = useRecoilValue(finderAtom); // 지점, 날짜, 시간 정보
   return (

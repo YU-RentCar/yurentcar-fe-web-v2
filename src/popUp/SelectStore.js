@@ -6,9 +6,7 @@ import { useRecoilState } from "recoil";
 import { storeAtom } from "recoil/storeAtom";
 import { finderProvinceSelector, finderStoreSelector } from "recoil/finderAtom";
 
-const SelectStore = () => {
-  const popUpInfo = usePopUp("Home/SelectStore");
-
+const SelectStore = ({ popUpInfo }) => {
   const [selectedProvince, setSelectedProvince] = useState("");
 
   const [rclStoreInfo, setRclStoreInfo] = useRecoilState(storeAtom);

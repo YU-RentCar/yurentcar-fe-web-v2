@@ -5,9 +5,9 @@ import { useRecoilState } from "recoil";
 import { finderAtom } from "recoil/finderAtom";
 import { usePopUp } from "utils/usePopUp";
 
-const Finder = () => {
-  const storePopUp = usePopUp("Home/SelectStore");
-  const dateTimePopUp = usePopUp("Home/SelectDateTime");
+const Finder = ({ storePopUp, dateTimePopUp }) => {
+  // const storePopUp = usePopUp("Home/SelectStore");
+  // const dateTimePopUp = usePopUp("Home/SelectDateTime");
 
   const [finderInfo, setFinderInfo] = useRecoilState(finderAtom);
 
