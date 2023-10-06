@@ -8,7 +8,7 @@ import Reservation from "pages/Reservation/Reservation";
 import CarSearch from "pages/CarSearch/CarSearch";
 import Auth from "pages/Auth/Auth";
 import Notice from "pages/Notice/Notice";
-
+import NoticeDetail from "pages/NoticeDetail/NoticeDetail";
 
 function App() {
   /* 
@@ -27,6 +27,7 @@ function App() {
         <Route path="/carsearch" element={<CarSearch />}></Route>
         <Route path="/auth" element={<Auth />}></Route>
         <Route path="/notice" element={<Notice />}></Route>
+        <Route path="/noticedetail" element={<NoticeDetail />}></Route>
       </Routes>
     </>
   );
