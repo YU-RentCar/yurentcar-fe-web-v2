@@ -16,8 +16,9 @@ const CarSearch = () => {
   const dateTimePopUp = usePopUp("CarSearch/SelectDateTime");
 
   const preferOption = useRecoilValue(preferOptionAtom); // 선호 옵션 데이터
-  const [userInfo, setUserInfo] = useRecoilState(userPreferSelector); // 사용자의 선호 옵션 정보
-  const [titles, setTitles] = useState(["차량 크기", "유종", "구동기"]); // 옵션 타이틀
+  const [userPreferInfo, setUserPreferInfo] =
+    useRecoilState(userPreferSelector); // 사용자의 선호 옵션 정보
+  const [preferTitles, _] = useState(["차량 크기", "유종", "구동기"]); // 옵션 타이틀
 
   const alert = useAlert(); // Alert 제어
 
@@ -48,22 +49,24 @@ const CarSearch = () => {
         <div className="w-[1140px] h-[1281px] mt-[50px] flex justify-around select-none">
           <div className="w-[264px]">
             {/* 사용자 선호 설정 */}
-            <div className="w-full h-[480px] bg-blue-200 rounded-xl flex flex-col items-center justify-start">
-              <div className="mt-5">
+            <div className="w-full h-[530px] bg-blue-200 rounded-xl flex flex-col items-center justify-start">
+              <div className="mt-3">
+                <div className="mt-2 mb-5 text-xl font-bold text-blue-800">
+                  선호 차량 검색
+                </div>
                 {/* 차량 크기, 유종, 구동기 */}
                 {Object.keys(preferOption).map((v, i) => {
                   return (
                     <PreferOption
-                      title={titles[i]}
+                      title={preferTitles[i]}
                       content={preferOption[v]}
-                      userPrefer={userInfo.prefer[v]}
+                      userPrefer={userPreferInfo.prefer[v]}
                       key={i}
                     />
                   );
                 })}
                 {/* 최소 인원 */}
-                <PreferOption title="최소 인원" userInfo={userInfo} />
-
+                <PreferOption title="최소 인원" userInfo={userPreferInfo} />
                 <div className="flex justify-around mt-9">
                   {/* 불러오기 버튼 */}
                   <button className="text-[20px] font-semibold w-[135px] h-[44px] rounded-xl bg-blue-500 text-white">
@@ -77,11 +80,15 @@ const CarSearch = () => {
                         document.getElementById("minCount").value.trim() === ""
                       ) {
                         // 최소 인원 수가 입력되지않은 경우
+                        // 왠진 모르겠는데 작동안함
                         alert.onAndOff("최소 인원 수를 입력해주세요.");
                       } else {
                         alert.onAndOff("옵션을 변경하였습니다.");
                         // 해당부분을 검색으로 변경해야 함.
-                        setUserInfo(gatherInfo());
+                        // 알람 작동 안함
+
+                        console.log(gatherInfo());
+                        setUserPreferInfo(gatherInfo());
                       }
                     }}
                   >

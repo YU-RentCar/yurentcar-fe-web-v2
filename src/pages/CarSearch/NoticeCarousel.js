@@ -33,7 +33,7 @@ export default function CarouselWithContent() {
     >
       {dummy.map((v, i) => {
         return (
-          <div className="relative w-full h-full">
+          <div className="relative w-full h-full" key={i}>
             <div className="absolute inset-0 grid w-full h-full bg-blue-100 place-items-center">
               <div className="flex flex-col items-center justify-start w-full h-full">
                 <img
