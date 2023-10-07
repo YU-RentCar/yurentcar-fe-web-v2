@@ -21,13 +21,13 @@ function App() {
     <>
       {navState ? <Nav /> : null}
       <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/mypage" element={<MyPage />}></Route>
-        <Route path="/reservation" element={<Reservation />}></Route>
-        <Route path="/carsearch" element={<CarSearch />}></Route>
-        <Route path="/auth" element={<Auth />}></Route>
-        <Route path="/notice" element={<Notice />}></Route>
-        <Route path="/noticedetail" element={<NoticeDetail />}></Route>
+        <Route path="/react" element={<Home />}></Route>
+        <Route path="/react/mypage" element={<MyPage />}></Route>
+        <Route path="/react/reservation" element={<Reservation />}></Route>
+        <Route path="/react/carsearch" element={<CarSearch />}></Route>
+        <Route path="/react/auth" element={<Auth />}></Route>
+        <Route path="/react/notice" element={<Notice />}></Route>
+        <Route path="/react/noticedetail" element={<NoticeDetail />}></Route>
       </Routes>
     </>
   );
