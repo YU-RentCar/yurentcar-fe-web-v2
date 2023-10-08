@@ -10,6 +10,11 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@master
 
+      - name: Setting .env
+        run: |
+          echo "REACT_APP_SERVER=${{ secrets.REACT_APP_SERVER }}" >> .env
+          cat .env
+
       - name: Cache node modules
         uses: actions/cache@v1
         with:
