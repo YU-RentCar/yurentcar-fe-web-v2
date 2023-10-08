@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: Feat/#73-naver-social-login
+    branches: develop
 
 jobs:
   deploy:
