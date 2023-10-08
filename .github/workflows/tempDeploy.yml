@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: develop
+    branches: Chore/#74-env-var
 
 jobs:
   deploy:
@@ -9,6 +9,11 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@master
+
+      - name: Setting .env
+        run: |
+          echo "REACT_APP_SERVER=${{ secrets.REACT_APP_SERVER }}" >> .env
+          cat .env
 
       - name: Cache node modules
         uses: actions/cache@v1
