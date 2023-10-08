@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: Chore/#74-env-var
+    branches: develop
 
 jobs:
   deploy:
