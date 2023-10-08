@@ -9,6 +9,7 @@ import {
   MdSettings,
   MdTag,
   MdOutlineFlag,
+  MdPhotoSizeSelectSmall,
 } from "react-icons/md";
 
 const DetailInfo = () => {
@@ -22,6 +23,7 @@ const DetailInfo = () => {
     transmission: "구동기",
     brand: "브랜드",
     domestic: "국산/외제",
+    size: "크기",
   });
   const [iconList, setIconList] = useState([
     // 아이콘
@@ -32,6 +34,7 @@ const DetailInfo = () => {
     <MdSettings className="text-[60px]" />,
     <MdTag className="text-[60px]" />,
     <MdOutlineFlag className="text-[60px]" />,
+    <MdPhotoSizeSelectSmall className="text-[60px]" />,
   ]);
   return (
     <div className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma">

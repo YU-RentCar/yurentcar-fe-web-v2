@@ -14,6 +14,7 @@ export const carAtom = atom({
     transmission: "자동",
     brand: "현대",
     domestic: "국산",
+    size: "중형",
     repair: [
       {
         date: "2022.05.07",
