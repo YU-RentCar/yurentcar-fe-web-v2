@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: Chore/#78-new-server-setting
+    branches: develop
 
 jobs:
   deploy:
