@@ -20,13 +20,11 @@ function App() {
   const [navState, setNavState] = useState(false);
   let nav = useNavigate(); // 경로 이동
   let location = useLocation(); // 현재 경로 확인용
-  const url = process.env.REACT_APP_SERVER;
-  console.log(url);
   useEffect(() => {
     (async () => {
       await axios
         .post(
-          url + "/api/v1/auth/user-info",
+          "http://be.yurentcar.kro.kr:1234/api/v1/auth/user-info",
           {},
           {
             headers: {
