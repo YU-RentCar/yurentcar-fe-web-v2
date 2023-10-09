@@ -7,17 +7,20 @@ import reportWebVitals from "./reportWebVitals";
 import { ThemeProvider } from "@material-tailwind/react";
 import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
+import { CookiesProvider } from "react-cookie";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <RecoilRoot>
-    <BrowserRouter>
-      <ThemeProvider>
-        <App />
-      </ThemeProvider>
-    </BrowserRouter>
-  </RecoilRoot>
+  <CookiesProvider>
+    <RecoilRoot>
+      <BrowserRouter>
+        <ThemeProvider>
+          <App />
+        </ThemeProvider>
+      </BrowserRouter>
+    </RecoilRoot>
+  </CookiesProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
