@@ -11,6 +11,7 @@ import Notice from "pages/Notice/Notice";
 import NoticeDetail from "pages/NoticeDetail/NoticeDetail";
 import axios from "axios";
 import { useCookies } from "react-cookie";
+import api from "api/interceptors";
 
 function App() {
   /* 
@@ -27,14 +28,18 @@ function App() {
     console.log(cookies);
     (async () => {
       await axios
-        .post("http://be.yurentcar.kro.kr:1234/api/v1/auth/user-info", {
-          headers: {
-            "Content-Type": "application/json",
-            accessToken: cookies,
-            helloEveryOne: "hello?",
-          },
-          withCredentials: true,
-        })
+        .post(
+          "http://be.yurentcar.kro.kr:1234/api/v1/auth/user-info",
+          {},
+          {
+            headers: {
+              "Content-Type": "application/json",
+              accessToken: cookies,
+              "for-test": "please",
+            },
+            withCredentials: true,
+          }
+        )
         .then((response) => {
           console.log(response);
           if (response.status === 200) {
@@ -53,7 +58,7 @@ function App() {
           }
         });
     })();
-  });
+  }, []);
   return (
     <>
       {navState ? <Nav /> : null}
