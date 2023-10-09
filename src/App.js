@@ -23,16 +23,12 @@ function App() {
   useEffect(() => {
     (async () => {
       await axios
-        .post(
-          "http://be.yurentcar.kro.kr:1234/api/v1/auth/user-info",
-          {},
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-            withCredentials: true,
-          }
-        )
+        .post("http://be.yurentcar.kro.kr:1234/api/v1/auth/user-info", {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        })
         .then((response) => {
           console.log(response);
           if (response.status === 200) {
