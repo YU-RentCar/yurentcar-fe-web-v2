@@ -10,6 +10,7 @@ import Auth from "pages/Auth/Auth";
 import Notice from "pages/Notice/Notice";
 import NoticeDetail from "pages/NoticeDetail/NoticeDetail";
 import axios from "axios";
+import getCookie from "react-cookie";
 
 function App() {
   /* 
@@ -20,13 +21,14 @@ function App() {
   const [navState, setNavState] = useState(false);
   let nav = useNavigate(); // 경로 이동
   let location = useLocation(); // 현재 경로 확인용
+  console.log("plz", getCookie("accessToken"));
   useEffect(() => {
     (async () => {
       await axios
         .post("http://be.yurentcar.kro.kr:1234/api/v1/auth/user-info", {
           headers: {
             "Content-Type": "application/json",
-            withCredentials: true,
+            accessToken: getCookie("accessToken"),
           },
         })
         .then((response) => {
