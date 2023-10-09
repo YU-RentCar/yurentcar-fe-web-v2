@@ -34,7 +34,6 @@ function App() {
           {
             headers: {
               "Content-Type": "application/json",
-              accessToken: cookies,
               "for-test": "please",
             },
             withCredentials: true,
