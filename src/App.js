@@ -20,11 +20,12 @@ function App() {
   const [navState, setNavState] = useState(false);
   let nav = useNavigate(); // 경로 이동
   let location = useLocation(); // 현재 경로 확인용
+
   useEffect(() => {
     (async () => {
       await axios
         .post(
-          process.env.REACT_APP_SERVER + "/api/v1/auth/user-info",
+          "http://be.yurentcar.kro.kr:1234/api/v1/auth/user-info",
           {},
           {
             headers: {
@@ -38,8 +39,8 @@ function App() {
           if (response.status === 200) {
             // 로그인 성공 -> 네비게이션바on, 기존에 있던 경로 or home 으로 이동
             setNavState(true);
-            if (location.pathname.split("/")[1] === "") nav("/react/home");
-            else nav("/react/" + location.pathname.split("/")[1]);
+            if (location.pathname.split("/")[2] === "") nav("/react");
+            else nav("/react/" + location.pathname.split("/")[2]);
           }
         })
         .catch((error) => {
