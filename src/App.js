@@ -26,8 +26,8 @@ function App() {
         .post("http://be.yurentcar.kro.kr:1234/api/v1/auth/user-info", {
           headers: {
             "Content-Type": "application/json",
+            withCredentials: true,
           },
-          withCredentials: true,
         })
         .then((response) => {
           console.log(response);
