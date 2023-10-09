@@ -33,6 +33,7 @@ function App() {
             accessToken: cookies,
             helloEveryOne: "hello?",
           },
+          withCredentials: true,
         })
         .then((response) => {
           console.log(response);
@@ -52,7 +53,7 @@ function App() {
           }
         });
     })();
-  }, []);
+  });
   return (
     <>
       {navState ? <Nav /> : null}
