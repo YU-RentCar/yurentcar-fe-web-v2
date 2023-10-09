@@ -10,8 +10,6 @@ import Auth from "pages/Auth/Auth";
 import Notice from "pages/Notice/Notice";
 import NoticeDetail from "pages/NoticeDetail/NoticeDetail";
 import axios from "axios";
-import { useCookies } from "react-cookie";
-import api from "api/interceptors";
 
 function App() {
   /* 
@@ -22,10 +20,8 @@ function App() {
   const [navState, setNavState] = useState(false);
   let nav = useNavigate(); // 경로 이동
   let location = useLocation(); // 현재 경로 확인용
-  const [cookies, setCookies, removeCookie] = useCookies(["accessToken"]);
 
   useEffect(() => {
-    console.log(cookies);
     (async () => {
       await axios
         .post(
@@ -34,7 +30,6 @@ function App() {
           {
             headers: {
               "Content-Type": "application/json",
-              "for-test": "please",
             },
             withCredentials: true,
           }
