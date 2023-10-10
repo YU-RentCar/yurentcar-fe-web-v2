@@ -25,6 +25,9 @@ jobs:
       - name: Run Build
         run: CI='false' npm run build
 
+      - name: Change Directory
+        run: cd ./build
+
       - name: Deploy
         uses: appleboy/scp-action@v0.1.4
         with:
@@ -32,5 +35,5 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
-          source: "build/*"
-          target: "/Users/samsung/develop/yurentcar-fe-web-v2"
+          source: "*"
+          target: ${{ secrets.SERVER_DIRECTORY }}
