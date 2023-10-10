@@ -31,7 +31,7 @@ const Reservation = ({ setResvState }) => {
           getUserInfo() // 사용자 이름을 위한 api
             .then((response) => {
               console.log("마이페이지 / 사용자기본정보1 : ", response.data);
-              setUserName(response.data.username);
+              setUserName(response.data.nickname);
             })
             .catch((error) =>
               console.log("마이페이지 / 사용자기본정보1에러 : ", error.response)
