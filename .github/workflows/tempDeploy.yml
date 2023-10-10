@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: Chore/#83-redirect-404-setting
+    branches: develop
 
 jobs:
   deploy:
