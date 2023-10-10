@@ -35,21 +35,21 @@ let changeNick = (newNick) => {
 };
 
 /* 사용자 선호 차량 옵션 조회 */
-// let getUserPrefer = () => {
-//   return api({
-//     url: "/users/prefer-filter",
-//     method: "get",
-//   });
-// };
+let getPreferOption = () => {
+  return api({
+    url: "/users/prefer-filter",
+    method: "get",
+  });
+};
 
 /* 사용자 선호 차량 옵션 변경 적용 */
-// let changeUserPref = (tmpPrefer) => {
-//   return api({
-//     url: "/users/prefer-filter",
-//     method: "patch",
-//     data: tmpPrefer,
-//   });
-// };
+let changePreferOption = (newPrefer) => {
+  return api({
+    url: "/users/prefer-filter",
+    method: "patch",
+    data: newPrefer,
+  });
+};
 
 /* 사용자 포인트 내역 */
 // let getPointRecord = () => {
@@ -86,4 +86,11 @@ let changeNick = (newNick) => {
 //   });
 // };
 
-export { getWaitingResvInfo, getUserInfo, checkNickname, changeNick };
+export {
+  getWaitingResvInfo,
+  getUserInfo,
+  checkNickname,
+  changeNick,
+  getPreferOption,
+  changePreferOption,
+};

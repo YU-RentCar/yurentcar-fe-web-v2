@@ -1,18 +1,18 @@
-import { useRecoilValue, useRecoilState } from "recoil";
-import { userPreferSelector } from "recoil/userAtom";
+import { useRecoilValue } from "recoil";
 import { preferOptionAtom } from "recoil/preferOptionAtom";
 import { useAlert } from "utils/useAlert";
+import { useEffect, useState } from "react";
+import { changePreferOption, getPreferOption } from "api/myPageAxios";
 import PreferContent from "./PreferContent";
-import { useState } from "react";
 
 const PreferOption = () => {
   const preferOption = useRecoilValue(preferOptionAtom); // 선호 옵션 데이터
-  const [userInfo, setUserInfo] = useRecoilState(userPreferSelector); // 사용자의 선호 옵션 정보
+  const [userPrefer, setUserPrefer] = useState({}); // 사용자의 선호 옵션 정보
   const [titles, setTitles] = useState(["차량 크기", "유종", "구동기"]); // 옵션 타이틀
   const alert = useAlert(); // Alert 제어
   /* 변경 정보 수집 함수 */
   const gatherInfo = () => {
-    let newPrefer = {
+    const newPrefer = {
       carSizes: [],
       oilTypes: [],
       transmissions: [],
@@ -26,6 +26,16 @@ const PreferOption = () => {
     newPrefer.minCount = document.getElementById("minCount").value;
     return newPrefer;
   };
+  useEffect(() => {
+    getPreferOption() // 사용자 선호 옵션 api
+      .then((response) => {
+        console.log("마이페이지 / 선호옵션 : ", response.data);
+        setUserPrefer(response.data);
+      })
+      .catch((error) =>
+        console.log("마이페이지 / 선호옵션에러 : ", error.response)
+      );
+  }, []);
   return (
     <div className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma">
       {/* 타이틀 */}
@@ -35,13 +45,27 @@ const PreferOption = () => {
         </span>
         <button
           className="text-xl font-semibold w-44 h-14 rounded-2xl bg-amber-400"
-          onClick={() => {
-            if (document.getElementById("minCount").value.trim() === "") {
-              // 최소 인원 수가 입력되지않은 경우
-              alert.onAndOff("최소 인원 수를 입력해주세요.");
+          onClick={async () => {
+            const minCount = document.getElementById("minCount").value;
+            if (minCount.trim() === "") {
+              alert.onAndOff("최소 인원 수를 입력해주세요");
+            } else if (Number(minCount) <= 0) {
+              alert.onAndOff("1명 이상 입력해주세요");
             } else {
-              alert.onAndOff("옵션을 변경하였습니다.");
-              setUserInfo(gatherInfo());
+              const newPrefer = gatherInfo();
+              // 사용자 선호 옵션 변경 api
+              await changePreferOption(newPrefer)
+                .then((response) => {
+                  console.log("마이페이지 / 선호옵션변경 : ", response.data);
+                  alert.onAndOff("옵션을 변경하였습니다");
+                  setUserPrefer(newPrefer);
+                })
+                .catch((error) =>
+                  console.log(
+                    "마이페이지 / 선호옵션변경에러 : ",
+                    error.response
+                  )
+                );
             }
           }}
         >
@@ -54,13 +78,13 @@ const PreferOption = () => {
           <PreferContent
             title={titles[i]}
             content={preferOption[v]}
-            userPrefer={userInfo.prefer[v]}
+            userPrefer={userPrefer[v]}
             key={i}
           />
         );
       })}
       {/* 최소 인원 */}
-      <PreferContent title="최소 인원" userInfo={userInfo} />
+      <PreferContent title="최소 인원" minCount={userPrefer.minCount} />
     </div>
   );
 };
