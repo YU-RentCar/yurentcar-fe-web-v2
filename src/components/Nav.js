@@ -1,10 +1,22 @@
-import { useRecoilValue } from "recoil";
-import { userAtom } from "recoil/userAtom";
 import { Link } from "react-router-dom";
 import Logo from "assets/Logo.png";
+import { useEffect, useState, useRef } from "react";
+import { getUserInfo } from "api/myPageAxios";
 
 const Nav = () => {
-  const userName = useRecoilValue(userAtom).name;
+  const [userName, setUserName] = useState(null);
+
+  useEffect(() => {
+    getUserInfo()
+      .then((response) => {
+        console.log("Nav / 사용자기본정보 : ", response.data);
+        setUserName(response.data.nickname);
+      })
+      .catch((error) => {
+        console.log("Nav / 사용자기본정보 에러", error.response);
+      });
+  }, []);
+
   return (
     <>
       <div className="w-screen h-[65px] fixed z-30 bg-sky-50 border-b-slate-300 border-[1px] flex flex-row justify-center select-none top-0">
