@@ -33,4 +33,4 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
           source: "build/*"
-          target: "/Users/samsung/develop/yurentcar-fe-web-v2"
+          target: ${{ secrets.SERVER_DIRECTORY }}
