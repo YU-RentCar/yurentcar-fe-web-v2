@@ -1,5 +1,3 @@
-import { useRecoilValue } from "recoil";
-import { userAtom } from "recoil/userAtom";
 import { useEffect, useState } from "react";
 import Car from "assets/Car.png";
 import {
@@ -9,11 +7,11 @@ import {
   MdOutlineConfirmationNumber,
   MdOutlinePerson,
 } from "react-icons/md";
-import { getWaitingResvInfo } from "api/myPageAxios";
+import { getWaitingResvInfo, getUserInfo } from "api/myPageAxios";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
 
-const Reservation = () => {
+const Reservation = ({ setResvState }) => {
   dayjs.locale("ko"); // dayjs 에 한국어 적용
   const [iconList, setIconList] = useState([
     // 아이콘
@@ -22,26 +20,36 @@ const Reservation = () => {
     <MdOutlineDirectionsCarFilled className="ml-4 text-[26px] text-blue-600" />,
     <MdOutlineConfirmationNumber className="ml-4 text-[26px] text-blue-600" />,
   ]);
-  const [userInfo, setUserName] = useState("홍길동"); // 사용자 이름
+  const [userInfo, setUserName] = useState(""); // 사용자 이름
   const [resvInfo, setResvInfo] = useState({}); // 예약 정보
   useEffect(() => {
     getWaitingResvInfo()
       .then((response) => {
-        setTimeout(() => {
+        // 객체가 없다면 대기 중인 예약이 없으니 해당 컴포넌트 off
+        if (Object.keys(response.data).length === 0) setResvState(false);
+        else {
+          getUserInfo() // 사용자 이름을 위한 api
+            .then((response) => {
+              console.log("마이페이지 / 사용자기본정보1 : ", response.data);
+              setUserName(response.data.username);
+            })
+            .catch((error) =>
+              console.log("마이페이지 / 사용자기본정보1에러 : ", error.response)
+            );
+          console.log("마이페이지 / 렌트대기예약정보 : ", response.data);
           const tmp = {};
-          console.log("렌트 대기 예약 정보 응답 : ", response.data);
           // 데이터 가공
-          tmp["렌트 기간"] = ` : ${dayjs(response.data.startDate).format(
+          tmp["렌트 기간"] = ` :   ${dayjs(response.data.startDate).format(
             "MM.DD.(ddd) HH:mm"
           )} ~ ${dayjs(response.data.endDate).format("MM.DD.(ddd) HH:mm")}`;
-          tmp["렌트 지점"] = ` : ${response.data.branchName}`;
-          tmp["차량"] = ` : ${response.data.carName}`;
-          tmp["차 번호"] = ` : ${response.data.carNumber}`;
+          tmp["렌트 지점"] = ` :   ${response.data.branchName}`;
+          tmp["차량"] = ` :   ${response.data.carName}`;
+          tmp["차 번호"] = ` :   ${response.data.carNumber}`;
           setResvInfo(tmp);
-        }, 5000);
+        }
       })
       .catch((error) =>
-        console.log("렌트 대기 예약 정보 에러 : ", error.reponse)
+        console.log("마이페이지 / 렌트대기예약정보에러 : ", error.reponse)
       );
   }, []);
   return (
@@ -49,7 +57,7 @@ const Reservation = () => {
       <div className="flex flex-col items-center w-full py-4 bg-sky-50 rounded-2xl shadow-figma">
         {/* 멘트 */}
         <span className="text-black text-[30px] font-bold">
-          <span className="text-amber-400 ">{userInfo.name}</span>님이 예약하신
+          <span className="text-amber-400 ">{userInfo}</span>님이 예약하신
           차량이 준비 중이에요
         </span>
         {/* 차량 정보 */}

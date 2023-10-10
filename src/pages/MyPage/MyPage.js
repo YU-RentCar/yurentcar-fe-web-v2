@@ -11,17 +11,20 @@ import Quit from "popUp/MyPage/Quit";
 import { usePopUp } from "utils/usePopUp";
 import { alertAtom } from "recoil/alertAtom";
 import { useRecoilValue } from "recoil";
+import { useState } from "react";
 
 const MyPage = () => {
   const alertState = useRecoilValue(alertAtom).state; // Alert 제어
   const popUpQuit = usePopUp("MyPage/Quit"); // Quit 팝업 제어
   const popUpPoint = usePopUp("MyPage/Point"); // Point 팝업 제어
   const popUpResv = usePopUp("MyPage/Resv"); // Resv 팝업 제어
+  const [resvState, setResvState] = useState(true); // 예약 대기 중인 정보의 유무
   return (
     <>
       <div className="w-[1140px] mx-auto mt-[176px]">
         {/* 예약 대기 정보 */}
-        <Reservation />
+        {/* 대기 중인 예약이 없을 경우 보이지 않음 */}
+        {resvState ? <Reservation setResvState={setResvState} /> : null}
         {/* 사용자 정보 */}
         <UserInfo />
         {/* 사용자 선호 차량 옵션 */}

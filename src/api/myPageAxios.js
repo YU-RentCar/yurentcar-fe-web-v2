@@ -8,13 +8,13 @@ let getWaitingResvInfo = () => {
   });
 };
 
-/* 사용자 기본 정보 ㄴ*/
-// let getUserInfo = () => {
-//   return api({
-//     url: "/users/profiles",
-//     method: "get",
-//   });
-// };
+/* 사용자 기본 정보 */
+let getUserInfo = () => {
+  return api({
+    url: "/users/profiles",
+    method: "get",
+  });
+};
 
 /* 닉네임 중복 조회 */
 // let checkNickname = (tmpNick) => {
@@ -86,4 +86,4 @@ let getWaitingResvInfo = () => {
 //   });
 // };
 
-export { getWaitingResvInfo };
+export { getWaitingResvInfo, getUserInfo };
