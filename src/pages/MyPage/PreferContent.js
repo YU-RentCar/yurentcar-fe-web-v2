@@ -24,7 +24,9 @@ const PreferContent = ({
                     ripple={true}
                     labelProps={{ className: "font-semibold text-black" }}
                     checked={userPrefer[i]}
-                    onChange={setUserPrefer(gatherInfo())}
+                    onChange={() => {
+                      setUserPrefer(gatherInfo());
+                    }}
                   />
                 </div>
               );
@@ -40,7 +42,9 @@ const PreferContent = ({
               value={minCount}
               label="숫자만 입력가능"
               labelProps={{ className: "border-black text-lg" }}
-              onChange={setUserPrefer(gatherInfo())}
+              onChange={() => {
+                setUserPrefer(gatherInfo());
+              }}
             />
           </div>
         )}
