@@ -22,22 +22,23 @@ const Reservation = () => {
     <MdOutlineDirectionsCarFilled className="ml-4 text-[26px] text-blue-600" />,
     <MdOutlineConfirmationNumber className="ml-4 text-[26px] text-blue-600" />,
   ]);
-  const userInfo = useRecoilValue(userAtom).name; // 사용자 이름
+  const [userInfo, setUserName] = useState("홍길동"); // 사용자 이름
   const [resvInfo, setResvInfo] = useState({}); // 예약 정보
   useEffect(() => {
-    // 서버로부터 정보 요청
     getWaitingResvInfo()
       .then((response) => {
-        const tmp = {};
-        console.log("렌트 대기 예약 정보 응답 : ", response.data);
-        // 데이터 가공
-        tmp["렌트 기간"] = ` : ${dayjs(response.data.startDate).format(
-          "MM.DD.(ddd) HH:mm"
-        )} ~ ${dayjs(response.data.endDate).format("MM.DD.(ddd) HH:mm")}`;
-        tmp["렌트 지점"] = ` : ${response.data.branchName}`;
-        tmp["차량"] = ` : ${response.data.carName}`;
-        tmp["차 번호"] = ` : ${response.data.carNumber}`;
-        setResvInfo(tmp);
+        setTimeout(() => {
+          const tmp = {};
+          console.log("렌트 대기 예약 정보 응답 : ", response.data);
+          // 데이터 가공
+          tmp["렌트 기간"] = ` : ${dayjs(response.data.startDate).format(
+            "MM.DD.(ddd) HH:mm"
+          )} ~ ${dayjs(response.data.endDate).format("MM.DD.(ddd) HH:mm")}`;
+          tmp["렌트 지점"] = ` : ${response.data.branchName}`;
+          tmp["차량"] = ` : ${response.data.carName}`;
+          tmp["차 번호"] = ` : ${response.data.carNumber}`;
+          setResvInfo(tmp);
+        }, 5000);
       })
       .catch((error) =>
         console.log("렌트 대기 예약 정보 에러 : ", error.reponse)
