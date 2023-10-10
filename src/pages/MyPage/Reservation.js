@@ -11,8 +11,10 @@ import {
 } from "react-icons/md";
 import { getWaitingResvInfo } from "api/myPageAxios";
 import dayjs from "dayjs";
+import "dayjs/locale/ko";
 
 const Reservation = () => {
+  dayjs.locale("ko"); // dayjs 에 한국어 적용
   const [iconList, setIconList] = useState([
     // 아이콘
     <MdOutlineTimer className="ml-4 text-[26px] text-blue-600" />,
