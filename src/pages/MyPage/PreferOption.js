@@ -85,12 +85,19 @@ const PreferOption = () => {
             title={titles[i]}
             content={preferOption[v]}
             userPrefer={userPrefer[v]}
+            setUserPrefer={setUserPrefer}
+            gatherInfo={gatherInfo}
             key={i}
           />
         );
       })}
       {/* 최소 인원 */}
-      <PreferContent title="최소 인원" minCount={userPrefer.minCount} />
+      <PreferContent
+        title="최소 인원"
+        minCount={userPrefer.minCount}
+        setUserPrefer={setUserPrefer}
+        gatherInfo={gatherInfo}
+      />
     </div>
   );
 };
