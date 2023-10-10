@@ -1,7 +1,6 @@
 import { useRecoilValue } from "recoil";
 import { userAtom } from "recoil/userAtom";
-import { resvAtom } from "recoil/resvAtom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Car from "assets/Car.png";
 import {
   MdOutlineTimer,
@@ -10,17 +9,10 @@ import {
   MdOutlineConfirmationNumber,
   MdOutlinePerson,
 } from "react-icons/md";
+import { getWaitingResvInfo } from "api/myPageAxios";
+import dayjs from "dayjs";
 
 const Reservation = () => {
-  const userInfo = useRecoilValue(userAtom); // 사용자 정보
-  const resvInfo = useRecoilValue(resvAtom); // 예약 정보
-  const [titles, setTitles] = useState({
-    // 제목
-    "예약 기간": "period",
-    "예약 지점": "store",
-    차량: "car",
-    "차 번호": "number",
-  });
   const [iconList, setIconList] = useState([
     // 아이콘
     <MdOutlineTimer className="ml-4 text-[26px] text-blue-600" />,
@@ -28,6 +20,27 @@ const Reservation = () => {
     <MdOutlineDirectionsCarFilled className="ml-4 text-[26px] text-blue-600" />,
     <MdOutlineConfirmationNumber className="ml-4 text-[26px] text-blue-600" />,
   ]);
+  const userInfo = useRecoilValue(userAtom).name; // 사용자 이름
+  const [resvInfo, setResvInfo] = useState({}); // 예약 정보
+  useEffect(() => {
+    // 서버로부터 정보 요청
+    getWaitingResvInfo()
+      .then((response) => {
+        const tmp = {};
+        console.log("렌트 대기 예약 정보 응답 : ", response.data);
+        // 데이터 가공
+        tmp["렌트 기간"] = ` : ${dayjs(response.data.startDate).format(
+          "MM.DD.(ddd) HH:mm"
+        )} ~ ${dayjs(response.data.endDate).format("MM.DD.(ddd) HH:mm")}`;
+        tmp["렌트 지점"] = ` : ${response.data.branchName}`;
+        tmp["차량"] = ` : ${response.data.carName}`;
+        tmp["차 번호"] = ` : ${response.data.carNumber}`;
+        setResvInfo(tmp);
+      })
+      .catch((error) =>
+        console.log("렌트 대기 예약 정보 에러 : ", error.reponse)
+      );
+  }, []);
   return (
     <>
       <div className="flex flex-col items-center w-full py-4 bg-sky-50 rounded-2xl shadow-figma">
@@ -43,7 +56,7 @@ const Reservation = () => {
           {/* 렌트 정보 */}
           <div className="w-[660px] flex flex-col justify-around items-center bg-blue-100 rounded-2xl py-4">
             {/* 예약 기간, 예약 지점, 차량, 차 번호 */}
-            {Object.keys(titles).map((v, i) => {
+            {Object.keys(resvInfo).map((v, i) => {
               return (
                 <div
                   className="w-[600px] h-[50px] bg-sky-200 flex items-center rounded-2xl mt-2"
@@ -51,13 +64,13 @@ const Reservation = () => {
                 >
                   {iconList[i]}
                   <span className="ml-5 text-xl font-semibold ">
-                    {v + " : " + resvInfo[titles[v]]}
+                    {v + resvInfo[resvInfo[v]]}
                   </span>
                 </div>
               );
             })}
-            {/* 운전자 */}
-            {resvInfo.drivers.map((driver, index) => {
+            {/* 운전자 */} {/* 서버에서 구현된 후에 추가될 예정 */}
+            {/*resvInfo.drivers.map((driver, index) => {
               return (
                 <div
                   className="w-[600px] h-[50px] bg-sky-200 flex items-center rounded-2xl mt-2"
@@ -69,7 +82,7 @@ const Reservation = () => {
                   </span>
                 </div>
               );
-            })}
+            })*/}
           </div>
         </div>
       </div>
