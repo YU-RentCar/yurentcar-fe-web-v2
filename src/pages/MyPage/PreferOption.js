@@ -7,7 +7,13 @@ import PreferContent from "./PreferContent";
 
 const PreferOption = () => {
   const preferOption = useRecoilValue(preferOptionAtom); // 선호 옵션 데이터
-  const [userPrefer, setUserPrefer] = useState(null); // 사용자의 선호 옵션 정보
+  const [userPrefer, setUserPrefer] = useState({
+    // 초기 정보
+    carSizes: [false, false, false, false],
+    oilTypes: [false, false, false, false],
+    transmissions: [false, false],
+    minCount: 0,
+  }); // 사용자의 선호 옵션 정보
   const [titles, setTitles] = useState(["차량 크기", "유종", "구동기"]); // 옵션 타이틀
   const alert = useAlert(); // Alert 제어
   /* 변경 정보 수집 함수 */
