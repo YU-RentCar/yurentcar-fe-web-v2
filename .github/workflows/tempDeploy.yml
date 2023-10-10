@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: Feat/#85-mypage-rent-defaultinfo-preferoption-api
+    branches: develop
 
 jobs:
   deploy:
