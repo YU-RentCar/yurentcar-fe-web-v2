@@ -16,7 +16,7 @@ const PreferContent = ({ title, content, userPrefer, minCount }) => {
                     label={v}
                     ripple={true}
                     labelProps={{ className: "font-semibold text-black" }}
-                    defaultChecked={userPrefer[i]}
+                    checked={userPrefer[i]}
                   />
                 </div>
               );
