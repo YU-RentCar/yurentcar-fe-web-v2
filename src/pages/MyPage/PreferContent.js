@@ -29,7 +29,7 @@ const PreferContent = ({ title, content, userPrefer, minCount }) => {
               id="minCount"
               type="number"
               className="!text-3xl !font-bold !text-black !h-[65px]"
-              defaultValue={minCount}
+              value={minCount}
               label="숫자만 입력가능"
               labelProps={{ className: "border-black text-lg" }}
             />
