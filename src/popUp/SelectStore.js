@@ -5,6 +5,7 @@ import { usePopUp } from "utils/usePopUp";
 import { useRecoilState } from "recoil";
 import { storeAtom } from "recoil/storeAtom";
 import { finderProvinceSelector, finderStoreSelector } from "recoil/finderAtom";
+import { getStoreList } from "api/homeAxios";
 
 const SelectStore = ({ popUpInfo }) => {
   const [selectedProvince, setSelectedProvince] = useState("");
@@ -143,6 +144,24 @@ const SelectStore = ({ popUpInfo }) => {
                       key={idx}
                       onClick={() => {
                         setSelectedProvince(rclStoreInfo[key].engName);
+
+                        getStoreList(rclStoreInfo[key].engName)
+                          .then((response) => {
+                            const temp = JSON.parse(
+                              JSON.stringify(rclStoreInfo)
+                            );
+                            temp[key].stores = response.data;
+                            console.log("Map / 지점 정보 : ", response.data);
+                            setRclStoreInfo(temp);
+                          })
+                          .catch((error) =>
+                            console.error(
+                              "Map / 지점 정보 에러 : ",
+                              error.response
+                            )
+                          );
+
+                        // 비동기로 불러오면 됨.
                       }}
                     >
                       <div className="flex items-center justify-center w-full h-full">
