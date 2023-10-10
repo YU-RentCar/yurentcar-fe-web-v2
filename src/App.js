@@ -39,8 +39,8 @@ function App() {
           if (response.status === 200) {
             // 로그인 성공 -> 네비게이션바on, 기존에 있던 경로 or home 으로 이동
             setNavState(true);
-            if (location.pathname.split("/")[2] === "") nav("/react");
-            else nav("/react/" + location.pathname.split("/")[2]);
+            if (location.pathname.split("/")[1] === "") nav("/");
+            else nav("/" + location.pathname.split("/")[1]);
           }
         })
         .catch((error) => {
@@ -48,7 +48,7 @@ function App() {
           if (error.response.status === 401) {
             // 로그인 실패 -> 로그인화면으로
             setNavState(false);
-            nav("/react/auth");
+            nav("/auth");
           }
         });
     })();
@@ -57,13 +57,13 @@ function App() {
     <>
       {navState ? <Nav /> : null}
       <Routes>
-        <Route path="/react" element={<Home />}></Route>
-        <Route path="/react/mypage" element={<MyPage />}></Route>
-        <Route path="/react/reservation" element={<Reservation />}></Route>
-        <Route path="/react/carsearch" element={<CarSearch />}></Route>
-        <Route path="/react/auth" element={<Auth />}></Route>
-        <Route path="/react/notice" element={<Notice />}></Route>
-        <Route path="/react/noticedetail" element={<NoticeDetail />}></Route>
+        <Route path="/" element={<Home />}></Route>
+        <Route path="/mypage" element={<MyPage />}></Route>
+        <Route path="/reservation" element={<Reservation />}></Route>
+        <Route path="/carsearch" element={<CarSearch />}></Route>
+        <Route path="/auth" element={<Auth />}></Route>
+        <Route path="/notice" element={<Notice />}></Route>
+        <Route path="/noticedetail" element={<NoticeDetail />}></Route>
       </Routes>
     </>
   );
