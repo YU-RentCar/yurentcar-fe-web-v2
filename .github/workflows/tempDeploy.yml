@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: Feat/#86-nav-user-api
+    branches: develop
 
 jobs:
   deploy:
