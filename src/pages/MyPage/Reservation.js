@@ -64,7 +64,7 @@ const Reservation = () => {
                 >
                   {iconList[i]}
                   <span className="ml-5 text-xl font-semibold ">
-                    {v + resvInfo[resvInfo[v]]}
+                    {v + resvInfo[v]}
                   </span>
                 </div>
               );
