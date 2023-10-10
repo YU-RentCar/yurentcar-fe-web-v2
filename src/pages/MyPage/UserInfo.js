@@ -1,12 +1,21 @@
-import { useState } from "react";
-import { useRecoilState } from "recoil";
-import { userSelector } from "recoil/userAtom";
+import { useState, useEffect } from "react";
+import { getUserInfo } from "api/myPageAxios";
 import UserContent from "./UserContent";
 import UserNickChange from "./UserNickChange";
 
 const UserInfo = () => {
-  const [userInfo, setUserInfo] = useRecoilState(userSelector); // 사용자 정보
-  let [isChanging, setIsChanging] = useState(true); // 닉네임 변경 상태
+  const [userInfo, setUserInfo] = useState({}); // 사용자 정보
+  const [isChanging, setIsChanging] = useState(true); // 닉네임 변경 상태
+  useEffect(() => {
+    getUserInfo() // 사용자 기본 정보 api
+      .then((response) => {
+        console.log("마이페이지 / 사용자기본정보2 : ", response.data);
+        setUserInfo(response.data);
+      })
+      .catch((error) =>
+        console.log("마이페이지 / 사용자기본정보2에러 : ", error.response)
+      );
+  }, []);
   return (
     <>
       <div className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma">
@@ -29,13 +38,14 @@ const UserInfo = () => {
           <UserNickChange
             before={userInfo.nickname}
             changeSetter={setIsChanging}
+            userInfo={userInfo}
             setUserInfo={setUserInfo}
           />
         )}
         {/* 사용자 정보 - 전화번호 */}
-        <UserContent title="전화번호" content={userInfo.phone} />
+        <UserContent title="전화번호" content={userInfo.phoneNumber} />
         {/* 사용자 정보 - 이메일 */}
-        <UserContent title="이메일" content={userInfo.email} />
+        <UserContent title="이메일" content={userInfo.username} />
       </div>
     </>
   );

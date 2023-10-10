@@ -17,22 +17,22 @@ let getUserInfo = () => {
 };
 
 /* 닉네임 중복 조회 */
-// let checkNickname = (tmpNick) => {
-//   return api({
-//     url: "/users/nicknames/exists",
-//     method: "get",
-//     params: { nickname: tmpNick },
-//   });
-// };
+let checkNickname = (tmpNick) => {
+  return api({
+    url: "/users/nicknames/exists",
+    method: "get",
+    params: { nickname: tmpNick },
+  });
+};
 
 /* 닉네임 변경 적용 */
-// let changeNick = (newNick) => {
-//   return api({
-//     url: "/users/nicknames",
-//     method: "patch",
-//     data: { nickname: newNick },
-//   });
-// };
+let changeNick = (newNick) => {
+  return api({
+    url: "/users/nicknames",
+    method: "patch",
+    data: { nickname: newNick },
+  });
+};
 
 /* 사용자 선호 차량 옵션 조회 */
 // let getUserPrefer = () => {
@@ -86,4 +86,4 @@ let getUserInfo = () => {
 //   });
 // };
 
-export { getWaitingResvInfo, getUserInfo };
+export { getWaitingResvInfo, getUserInfo, checkNickname, changeNick };
