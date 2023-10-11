@@ -50,9 +50,10 @@ const Reservation = ({ setResvState }) => {
           setDriversInfo([...response.data.drivers]);
         }
       })
-      .catch((error) =>
-        console.log("마이페이지 / 렌트대기예약정보에러 : ", error.reponse)
-      );
+      .catch((error) => {
+        console.log("마이페이지 / 렌트대기예약정보에러 : ", error.reponse);
+        setResvState(false);
+      });
   }, []);
   return (
     <>
