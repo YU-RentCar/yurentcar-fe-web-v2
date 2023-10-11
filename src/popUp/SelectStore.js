@@ -5,6 +5,7 @@ import { usePopUp } from "utils/usePopUp";
 import { useRecoilState } from "recoil";
 import { storeAtom } from "recoil/storeAtom";
 import { finderProvinceSelector, finderStoreSelector } from "recoil/finderAtom";
+import { getStoreList } from "api/homeAxios";
 
 const SelectStore = ({ popUpInfo }) => {
   const [selectedProvince, setSelectedProvince] = useState("");
@@ -92,11 +93,23 @@ const SelectStore = ({ popUpInfo }) => {
       // 지방을 선택하면 표시해주는 기능
       if (province.id === rclStoreInfo[selectedProvince].engName) {
         province.classList.add("selected");
+        getStoreList(
+          rclStoreInfo[rclStoreInfo[selectedProvince].engName].korName
+        )
+          .then((response) => {
+            const temp = JSON.parse(JSON.stringify(rclStoreInfo));
+            temp[rclStoreInfo[selectedProvince].engName].stores = response.data;
+            console.log("Map / 지점 정보 : ", response.data);
+            setRclStoreInfo(temp);
+          })
+          .catch((error) =>
+            console.error("Map / 지점 정보 에러 : ", error.response)
+          );
       } else {
         province.classList.remove("selected");
       }
     }
-  }, [selectedProvince, rclStoreInfo]);
+  }, [selectedProvince]);
 
   return (
     <>
