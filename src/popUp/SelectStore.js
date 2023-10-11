@@ -93,6 +93,18 @@ const SelectStore = ({ popUpInfo }) => {
       // 지방을 선택하면 표시해주는 기능
       if (province.id === rclStoreInfo[selectedProvince].engName) {
         province.classList.add("selected");
+        getStoreList(
+          rclStoreInfo[rclStoreInfo[selectedProvince].engName].korName
+        )
+          .then((response) => {
+            const temp = JSON.parse(JSON.stringify(rclStoreInfo));
+            temp[rclStoreInfo[selectedProvince].engName].stores = response.data;
+            console.log("Map / 지점 정보 : ", response.data);
+            setRclStoreInfo(temp);
+          })
+          .catch((error) =>
+            console.error("Map / 지점 정보 에러 : ", error.response)
+          );
       } else {
         province.classList.remove("selected");
       }
@@ -144,24 +156,6 @@ const SelectStore = ({ popUpInfo }) => {
                       key={idx}
                       onClick={() => {
                         setSelectedProvince(rclStoreInfo[key].engName);
-
-                        getStoreList(rclStoreInfo[key].korName)
-                          .then((response) => {
-                            const temp = JSON.parse(
-                              JSON.stringify(rclStoreInfo)
-                            );
-                            temp[key].stores = response.data;
-                            console.log("Map / 지점 정보 : ", response.data);
-                            setRclStoreInfo(temp);
-                          })
-                          .catch((error) =>
-                            console.error(
-                              "Map / 지점 정보 에러 : ",
-                              error.response
-                            )
-                          );
-
-                        // 비동기로 불러오면 됨.
                       }}
                     >
                       <div className="flex items-center justify-center w-full h-full">
