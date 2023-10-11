@@ -1,6 +1,14 @@
 import api from "./interceptors";
 
-/* 사용자 기본 정보 ㄴ*/
+/* 렌트 대기 예약 정보 */
+let getWaitingResvInfo = () => {
+  return api({
+    url: "/users/reservations/details",
+    method: "get",
+  });
+};
+
+/* 사용자 기본 정보 */
 let getUserInfo = () => {
   return api({
     url: "/users/profiles",
@@ -27,7 +35,7 @@ let changeNick = (newNick) => {
 };
 
 /* 사용자 선호 차량 옵션 조회 */
-let getUserPrefer = () => {
+let getPreferOption = () => {
   return api({
     url: "/users/prefer-filter",
     method: "get",
@@ -35,66 +43,54 @@ let getUserPrefer = () => {
 };
 
 /* 사용자 선호 차량 옵션 변경 적용 */
-let changeUserPref = (tmpPrefer) => {
+let changePreferOption = (newPrefer) => {
   return api({
     url: "/users/prefer-filter",
     method: "patch",
-    data: tmpPrefer,
+    data: newPrefer,
   });
 };
 
 /* 사용자 포인트 내역 */
-let getPointRecord = () => {
-  return api({
-    url: "/points",
-    method: "get",
-  });
-};
+// let getPointRecord = () => {
+//   return api({
+//     url: "/points",
+//     method: "get",
+//   });
+// };
 
 /* 사용자 예약 내역 */
-let getResvRecord = () => {
-  return api({
-    url: "/users/reservations",
-    method: "get",
-  });
-};
+// let getResvRecord = () => {
+//   return api({
+//     url: "/users/reservations",
+//     method: "get",
+//   });
+// };
 
 /* 최근 본 차량 조회 */
-let getRecentRecord = () => {
-  let params = new URLSearchParams();
-  params.append("carNumbers", ["11가1111", "12삼4567"]);
-  return api({
-    url: "/branches/cars/views",
-    method: "get",
-    params: params,
-  });
-};
+// let getRecentRecord = () => {
+//   let params = new URLSearchParams();
+//   params.append("carNumbers", ["11가1111", "12삼4567"]);
+//   return api({
+//     url: "/branches/cars/views",
+//     method: "get",
+//     params: params,
+//   });
+// };
 
 /* 로그아웃 */
-let logout = () => {
-  return api({
-    url: "/logout",
-    method: "post",
-  });
-};
-
-/* 예약 간단 정보 */
-let getBaseInfo = () => {
-  return api({
-    url: "/users/reservations/details",
-    method: "get",
-  });
-};
+// let logout = () => {
+//   return api({
+//     url: "/logout",
+//     method: "post",
+//   });
+// };
 
 export {
+  getWaitingResvInfo,
   getUserInfo,
   checkNickname,
   changeNick,
-  getUserPrefer,
-  changeUserPref,
-  getPointRecord,
-  getResvRecord,
-  getRecentRecord,
-  logout,
-  getBaseInfo,
+  getPreferOption,
+  changePreferOption,
 };
