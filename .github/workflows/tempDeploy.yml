@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: Feat/#88-add-api-map-popup
+    branches: develop
 
 jobs:
   deploy:
