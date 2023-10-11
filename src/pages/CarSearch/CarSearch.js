@@ -4,7 +4,6 @@ import SelectStore from "popUp/SelectStore";
 import SelectDateTime from "popUp/SelectDateTime";
 import NoticeCarousel from "./NoticeCarousel";
 import { useRecoilValue, useRecoilState } from "recoil";
-import { useAlert } from "utils/useAlert";
 import { userPreferSelector } from "recoil/userAtom";
 import { preferOptionAtom } from "recoil/preferOptionAtom";
 import CarCard from "components/CarCard";
@@ -22,8 +21,6 @@ const CarSearch = () => {
   const [userPreferInfo, setUserPreferInfo] =
     useRecoilState(userPreferSelector); // 사용자의 선호 옵션 정보
   const [preferTitles, _] = useState(["차량 크기", "유종", "구동기"]); // 옵션 타이틀
-
-  const alert = useAlert(); // Alert 제어
 
   const [currentStore, setCurrentStore] = useState(null);
   const finderInfo = useRecoilValue(finderAtom);
