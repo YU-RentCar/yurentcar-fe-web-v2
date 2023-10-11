@@ -145,7 +145,7 @@ const SelectStore = ({ popUpInfo }) => {
                       onClick={() => {
                         setSelectedProvince(rclStoreInfo[key].engName);
 
-                        getStoreList(rclStoreInfo[key].engName)
+                        getStoreList(rclStoreInfo[key].korName)
                           .then((response) => {
                             const temp = JSON.parse(
                               JSON.stringify(rclStoreInfo)
