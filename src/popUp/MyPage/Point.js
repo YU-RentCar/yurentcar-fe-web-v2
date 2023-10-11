@@ -29,7 +29,7 @@ const Point = () => {
         item.textContent = `+${pointRecord[i].price}P`;
       } else {
         item.classList.add("bg-amber-300"); // 차감인 경우의 디자인
-        item.textContent = `-${pointRecord[i].price}P`;
+        item.textContent = `${pointRecord[i].price}P`;
       }
     }
   }, [pointRecord]);
