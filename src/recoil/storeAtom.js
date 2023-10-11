@@ -85,7 +85,7 @@ export const storeAtom = atom({
     },
     jeju: {
       engName: "jeju",
-      korName: "제주",
+      korName: "제주도",
       stores: [],
     },
   },
