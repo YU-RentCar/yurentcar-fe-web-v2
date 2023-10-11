@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: develop
+    branches: Feat/#92-mypage-record-license-auth-api
 
 jobs:
   deploy:
