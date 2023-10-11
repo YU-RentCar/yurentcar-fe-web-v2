@@ -4,7 +4,6 @@ import SelectStore from "popUp/SelectStore";
 import SelectDateTime from "popUp/SelectDateTime";
 import NoticeCarousel from "./NoticeCarousel";
 import { useRecoilValue, useRecoilState } from "recoil";
-import { useAlert } from "utils/useAlert";
 import { userPreferSelector } from "recoil/userAtom";
 import { preferOptionAtom } from "recoil/preferOptionAtom";
 import CarCard from "components/CarCard";
@@ -12,8 +11,6 @@ import PreferOption from "./PreferOption";
 import CarDetail from "popUp/CarSearch/CarDetail";
 import { useEffect, useState, useRef } from "react";
 import { finderAtom } from "recoil/finderAtom";
-import Alert from "popUp/Alert";
-import { alertAtom } from "recoil/alertAtom";
 
 const CarSearch = () => {
   const storePopUp = usePopUp("CarSearch/SelectStore");
@@ -24,8 +21,6 @@ const CarSearch = () => {
   const [userPreferInfo, setUserPreferInfo] =
     useRecoilState(userPreferSelector); // 사용자의 선호 옵션 정보
   const [preferTitles, _] = useState(["차량 크기", "유종", "구동기"]); // 옵션 타이틀
-
-  const alertState = useRecoilValue(alertAtom).state;
 
   const [currentStore, setCurrentStore] = useState(null);
   const finderInfo = useRecoilValue(finderAtom);
@@ -154,7 +149,6 @@ const CarSearch = () => {
       {carDetailPopUp.isClicked ? (
         <CarDetail popUpInfo={carDetailPopUp} />
       ) : undefined}
-      {alertState ? <Alert /> : null}
     </>
   );
 };

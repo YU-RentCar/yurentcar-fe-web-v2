@@ -5,14 +5,11 @@ import SelectDateTime from "popUp/SelectDateTime";
 import SelectStore from "popUp/SelectStore";
 import { useEffect, useState } from "react";
 import { MdOutlineNorth } from "react-icons/md";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { alertAtom } from "recoil/alertAtom";
+import { useRecoilState } from "recoil";
 import { finderAtom } from "recoil/finderAtom";
 import { usePopUp } from "utils/usePopUp";
 
 const Home = () => {
-  const alertState = useRecoilValue(alertAtom).state; // Alert 제어
-
   const storePopUp = usePopUp("Home/SelectStore");
   const dateTimePopUp = usePopUp("Home/SelectDateTime");
 
@@ -97,7 +94,6 @@ const Home = () => {
       {dateTimePopUp.isClicked ? (
         <SelectDateTime popUpInfo={dateTimePopUp} />
       ) : undefined}
-      {alertState ? <Alert /> : null}
     </>
   );
 };
