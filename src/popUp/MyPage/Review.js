@@ -17,21 +17,22 @@ const Review = () => {
     const btn = document.getElementById("writeBtn");
     const reviewTitle = document.getElementById("reviewTitle");
     const reviewContent = document.getElementById("reviewContent");
-    if (reviewTarget.reviewType === "POSSIBLE_POINT") {
+    if (reviewTarget.reviewType === 1) {
       btn.classList.add("bg-amber-300");
       btn.textContent = "작성 완료\n+500P";
-    } else if (reviewTarget.reviewType === "POSSIBLE_NO_POINT") {
+    } else if (reviewTarget.reviewType === 2) {
       btn.classList.add("bg-amber-300");
       btn.textContent = "작성 완료\n+0P";
-    } else if (reviewTarget.reviewType === "IMPOSSIBLE") {
+    } else if (reviewTarget.reviewType === 3) {
       btn.classList.add("bg-slate-300");
       btn.textContent = "작성 불가능";
       btn.disabled = true;
       reviewTitle.disabled = true;
       reviewContent.disabled = true;
-    } else if (reviewTarget.reviewType === "WRITTEN") {
+    } else if (reviewTarget.reviewType === 4) {
       btn.classList.add("bg-amber-300");
       btn.textContent = "작성 완료";
+      btn.disabled = true;
       reviewTitle.disabled = true;
       reviewContent.disabled = true;
     }
