@@ -3,15 +3,14 @@ import React from "react";
 import { useEffect, useState, useRef } from "react";
 import { useRecoilState } from "recoil";
 import { finderAtom } from "recoil/finderAtom";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useAlert } from "utils/useAlert";
 
 const Finder = ({ storePopUp, dateTimePopUp }) => {
-  // const storePopUp = usePopUp("Home/SelectStore");
-  // const dateTimePopUp = usePopUp("Home/SelectDateTime");
-
   const [finderInfo, setFinderInfo] = useRecoilState(finderAtom);
-
   const [finderDateInfoString, setFinderDateInfoString] = useState("");
+  const navigate = useNavigate();
+  const alert = useAlert();
 
   useEffect(() => {
     const startDate = dayjs(finderInfo.startDate);
@@ -76,11 +75,20 @@ const Finder = ({ storePopUp, dateTimePopUp }) => {
       </div>
 
       <div className="mr-[10px] w-[130px] h-[50px] bg-blue-300 hover:bg-amber-400 rounded-lg border-[1px] select-none cursor-pointer transition-all">
-        <Link to={"/carsearch"}>
-          <div className="flex items-center justify-center w-full h-full">
-            <p className="text-2xl font-medium">검색</p>
-          </div>
-        </Link>
+        <div
+          className="flex items-center justify-center w-full h-full"
+          onClick={() => {
+            for (const i of Object.values(finderInfo)) {
+              if (i === null) {
+                alert.onAndOff("항목을 모두 입력해 주세요");
+                return;
+              }
+            }
+            navigate("/carsearch");
+          }}
+        >
+          <p className="text-2xl font-medium">검색</p>
+        </div>
       </div>
     </>
   );
