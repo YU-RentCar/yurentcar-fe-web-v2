@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: develop
+    branches: Feat/#94-add-car-list-api
 
 jobs:
   deploy:
