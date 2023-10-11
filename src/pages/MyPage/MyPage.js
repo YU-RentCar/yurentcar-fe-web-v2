@@ -1,3 +1,5 @@
+import { usePopUp } from "utils/usePopUp";
+import { useState } from "react";
 import Reservation from "./Reservation";
 import UserInfo from "./UserInfo";
 import PreferOption from "./PreferOption";
@@ -6,14 +8,14 @@ import License from "./License";
 import Account from "./Account";
 import Point from "popUp/MyPage/Point";
 import Resv from "popUp/MyPage/Resv";
+import Review from "popUp/MyPage/Review";
 import Quit from "popUp/MyPage/Quit";
-import { usePopUp } from "utils/usePopUp";
-import { useState } from "react";
 
 const MyPage = () => {
   const popUpQuit = usePopUp("MyPage/Quit"); // Quit 팝업 제어
   const popUpPoint = usePopUp("MyPage/Point"); // Point 팝업 제어
   const popUpResv = usePopUp("MyPage/Resv"); // Resv 팝업 제어
+  const popUpReview = usePopUp("MyPage/Review"); // Review 팝업 제어
   const [resvState, setResvState] = useState(true); // 예약 대기 중인 정보의 유무
   return (
     <>
@@ -35,6 +37,7 @@ const MyPage = () => {
       {popUpQuit.isClicked ? <Quit /> : null}
       {popUpPoint.isClicked ? <Point /> : null}
       {popUpResv.isClicked ? <Resv /> : null}
+      {popUpReview.isClicked ? <Review /> : null}
     </>
   );
 };
