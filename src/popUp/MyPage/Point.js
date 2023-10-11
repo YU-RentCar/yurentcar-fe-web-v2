@@ -1,25 +1,38 @@
-import { useEffect } from "react";
+import { getPointRecord } from "api/myPageAxios";
+import { useState, useEffect } from "react";
 import { MdOutlineClose } from "react-icons/md";
-import { useRecoilValue } from "recoil";
-import { userAtom } from "recoil/userAtom";
 import { usePopUp } from "utils/usePopUp";
+import dayjs from "dayjs";
 
 const Point = () => {
   const popUpPoint = usePopUp("MyPage/Point"); // Point 팝업 제어
-  const pointRecord = useRecoilValue(userAtom).pointRecord; // 사용자 포인트 내역
+  const [pointRecord, setPointRecord] = useState([]); // 사용자 포인트 내역
   useEffect(() => {
-    // 적립이냐 차가밍
+    getPointRecord() // 포인트 내역 조회
+      .then((response) => {
+        if (response.data.length === 0) popUpPoint.toggle();
+        else {
+          console.log("마이페이지 / 포인트내역 : ", response.data);
+          setPointRecord(response.data);
+        }
+      })
+      .catch((error) =>
+        console.log("마이페이지 / 포인트내역에러 : ", error.response)
+      );
+  }, []);
+  useEffect(() => {
+    // 적립이냐 차감이냐
     for (let i = 0; i < pointRecord.length; i++) {
       let item = document.getElementById(i);
-      if (!pointRecord[i].type) {
+      if (pointRecord[i].price > 0) {
         item.classList.add("bg-blue-300"); // 적립인 경우의 디자인
-        item.textContent = `+${pointRecord[i].ammount}P`;
+        item.textContent = `+${pointRecord[i].price}P`;
       } else {
         item.classList.add("bg-amber-300"); // 차감인 경우의 디자인
-        item.textContent = `-${pointRecord[i].ammount}P`;
+        item.textContent = `-${pointRecord[i].price}P`;
       }
     }
-  }, []);
+  }, [pointRecord]);
   return (
     <div className="fixed top-0 left-0 z-40 flex items-center justify-center w-screen h-screen bg-black bg-opacity-40">
       <div className="w-[1000px] h-[680px] rounded-2xl bg-white flex justify-center items-center">
@@ -46,7 +59,7 @@ const Point = () => {
                 >
                   {/* 날짜 + 사유 */}
                   <div className="w-[540px] h-full rounded-2xl bg-blue-100 font-bold text-xl flex justify-center items-center">
-                    {`${v.date} ${v.reason}`}
+                    {`${dayjs(v.createdTime).format("YY.MM.DD")}  ${v.reason}`}
                   </div>
                   {/* 적립 / 차감 포인트 */}
                   <div

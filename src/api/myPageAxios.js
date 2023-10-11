@@ -51,6 +51,22 @@ let changePreferOption = (newPrefer) => {
   });
 };
 
+/* 사용자 보유 포인트 조회 */
+let getUserPoint = () => {
+  return api({
+    url: "/users/points",
+    method: "get",
+  });
+};
+
+/* 사용자 포인트 내역 */
+let getPointRecord = () => {
+  return api({
+    url: "/points",
+    method: "get",
+  });
+};
+
 /* 로그아웃 */
 let logout = () => {
   return api({
@@ -58,14 +74,6 @@ let logout = () => {
     method: "post",
   });
 };
-
-/* 사용자 포인트 내역 */
-// let getPointRecord = () => {
-//   return api({
-//     url: "/points",
-//     method: "get",
-//   });
-// };
 
 /* 사용자 예약 내역 */
 // let getResvRecord = () => {
@@ -93,5 +101,7 @@ export {
   changeNick,
   getPreferOption,
   changePreferOption,
+  getUserPoint,
+  getPointRecord,
   logout,
 };

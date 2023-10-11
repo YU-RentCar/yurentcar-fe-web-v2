@@ -1,12 +1,22 @@
-import CarCard from "components/CarCard";
-import { useRecoilValue } from "recoil";
-import { userAtom } from "recoil/userAtom";
+import { useState, useEffect } from "react";
 import { usePopUp } from "utils/usePopUp";
+import { getUserPoint } from "api/myPageAxios";
+import CarCard from "components/CarCard";
 
 const Record = () => {
-  const userInfo = useRecoilValue(userAtom); // 사용자 정보
   const popUpPoint = usePopUp("MyPage/Point"); // Point 팝업 제어
   const popUpResv = usePopUp("MyPage/Resv"); // Resv 팝업 제어
+  const [userPoint, setUserPoint] = useState(0); // 사용자 포인트
+  useEffect(() => {
+    getUserPoint() // 사용자 포인트 조회
+      .then((response) => {
+        console.log("마이페이지 / 포인트조회 : ", response.data);
+        setUserPoint(response.data);
+      })
+      .catch((error) => {
+        console.log("마이페이지 / 포인트조회에러 : ", error.response);
+      });
+  });
   return (
     <div className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma">
       {/* 타이틀 */}
@@ -20,7 +30,7 @@ const Record = () => {
         <div className="flex flex-col justify-between h-24 text-2xl font-bold w-fit">
           <div className="text-slate-400">포인트 사용 내역</div>
           <div className="flex items-center justify-between w-full text-2xl font-bold">
-            현재 포인트 : {userInfo.point}
+            현재 포인트 : {userPoint}
           </div>
         </div>
         <button
