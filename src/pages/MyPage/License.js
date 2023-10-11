@@ -18,7 +18,7 @@ const License = () => {
         </span>
         <button
           className="w-40 h-12 text-xl font-semibold rounded-2xl bg-sky-200"
-          onClick={alert.onAndOff("추후 개발될 예정입니다")}
+          onClick={() => alert.onAndOff("추후 개발될 예정입니다")}
         >
           면허 인증
         </button>
