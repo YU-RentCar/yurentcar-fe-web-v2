@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: Feat/#90-validation-finder
+    branches: develop
 
 jobs:
   deploy:
