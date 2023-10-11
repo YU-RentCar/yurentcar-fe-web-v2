@@ -67,6 +67,27 @@ let getPointRecord = () => {
   });
 };
 
+/* 사용자 예약 내역 */
+let getResvRecord = () => {
+  return api({
+    url: "/users/reservations",
+    method: "get",
+  });
+};
+
+/* 후기 작성 */
+let writeReview = (newReview) => {
+  return api({
+    url: "/reservations/reviews",
+    method: "post",
+    data: {
+      reservationId: newReview.reservationId,
+      title: newReview.title,
+      description: newReview.description,
+    },
+  });
+};
+
 /* 로그아웃 */
 let logout = () => {
   return api({
@@ -74,14 +95,6 @@ let logout = () => {
     method: "post",
   });
 };
-
-/* 사용자 예약 내역 */
-// let getResvRecord = () => {
-//   return api({
-//     url: "/users/reservations",
-//     method: "get",
-//   });
-// };
 
 /* 최근 본 차량 조회 */
 // let getRecentRecord = () => {
@@ -103,5 +116,7 @@ export {
   changePreferOption,
   getUserPoint,
   getPointRecord,
+  getResvRecord,
+  writeReview,
   logout,
 };
