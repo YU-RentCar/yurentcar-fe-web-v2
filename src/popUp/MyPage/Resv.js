@@ -1,24 +1,21 @@
 import { usePopUp } from "utils/usePopUp";
 import { MdOutlineClose } from "react-icons/md";
-import ResvCard from "pages/MyPage/ResvCard";
-import { userAtom } from "recoil/userAtom";
-import { useRecoilValue } from "recoil";
-import Review from "popUp/MyPage/Review";
 import { useState, useEffect } from "react";
+import { getResvRecord } from "api/myPageAxios";
+import ResvCard from "pages/MyPage/ResvCard";
 
 const Resv = () => {
+  const [resvRecord, setResvRecord] = useState([]); // 예약 내역
   const popUpResv = usePopUp("MyPage/Resv"); // Resv 팝업 제어
-  const resvRecord = useRecoilValue(userAtom).resvRecord; // 예약 내역
-  const popUpReview = usePopUp("MyPage/Review"); // Review 팝업 제어
-  let [idx, setIdx] = useState(0); // 후기 작성을 원할 때 몇번째 내역인지 저장
   useEffect(() => {
-    // 각 resvCard 들에 click 이벤트 추가 + 클릭시 몇번째 내역인지 set
-    document.getElementsByName("resvCard").forEach((v, i) => {
-      v.addEventListener("click", () => {
-        popUpReview.toggle();
-        setIdx(i);
+    getResvRecord() // 예약 내역 조회
+      .then((response) => {
+        console.log("마이페이지 / 예약내역 : ", response.data);
+        setResvRecord([...response.data]);
+      })
+      .catch((error) => {
+        console.log("마이페이지 / 예약내역에러 : ", error.response);
       });
-    });
   }, []);
   return (
     <>
@@ -36,14 +33,13 @@ const Resv = () => {
               onClick={() => popUpResv.toggle()}
             />
           </div>
-          <div className="w-[950px] h-[850px] rounded-2xl bg-blue-100 mx-auto mt-4 grid grid-cols-2 pt-8">
+          <div className="w-[950px] h-[850px] rounded-2xl bg-blue-100 mx-auto mt-4 grid grid-cols-2 pt-8 overflow-y-scroll">
             {resvRecord.map((v, i) => {
-              return <ResvCard resvInfo={v} key={i} />;
+              return <ResvCard resvInfo={v} idx={i} type="" key={i} />;
             })}
           </div>
         </div>
       </div>
-      {popUpReview.isClicked ? <Review idx={idx} /> : null}
     </>
   );
 };
