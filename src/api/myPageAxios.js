@@ -51,6 +51,14 @@ let changePreferOption = (newPrefer) => {
   });
 };
 
+/* 로그아웃 */
+let logout = () => {
+  return api({
+    url: "/logout",
+    method: "post",
+  });
+};
+
 /* 사용자 포인트 내역 */
 // let getPointRecord = () => {
 //   return api({
@@ -78,14 +86,6 @@ let changePreferOption = (newPrefer) => {
 //   });
 // };
 
-/* 로그아웃 */
-// let logout = () => {
-//   return api({
-//     url: "/logout",
-//     method: "post",
-//   });
-// };
-
 export {
   getWaitingResvInfo,
   getUserInfo,
@@ -93,4 +93,5 @@ export {
   changeNick,
   getPreferOption,
   changePreferOption,
+  logout,
 };

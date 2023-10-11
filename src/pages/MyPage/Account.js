@@ -1,7 +1,10 @@
+import { logout } from "api/myPageAxios";
+import { useNavigate } from "react-router-dom";
 import { usePopUp } from "utils/usePopUp";
 
 const Account = () => {
   const popUpInfo = usePopUp("MyPage/Quit"); // 팝업 제어
+  const nav = useNavigate(); // 경로 이동
   return (
     <div className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma">
       {/* 타이틀 */}
@@ -28,7 +31,16 @@ const Account = () => {
           <div>로그아웃</div>
           <button
             className="w-56 h-16 text-2xl font-bold text-red-500 bg-sky-200 rounded-2xl"
-            onClick={() => console.log("로그아웃")}
+            onClick={async () => {
+              await logout()
+                .then((response) => {
+                  console.log("마이페이지 / 로그아웃 : ", response.data);
+                  nav("/auth");
+                })
+                .catch((error) =>
+                  console.log("마이페이지 / 로그아웃에러 : ", error.response)
+                );
+            }}
           >
             로그아웃
           </button>
