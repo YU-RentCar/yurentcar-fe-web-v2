@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Car from "assets/Car.png";
+import { getWaitingResvInfo, getUserInfo } from "api/myPageAxios";
 import {
   MdOutlineTimer,
   MdOutlinePlace,
@@ -7,7 +7,7 @@ import {
   MdOutlineConfirmationNumber,
   MdOutlinePerson,
 } from "react-icons/md";
-import { getWaitingResvInfo, getUserInfo } from "api/myPageAxios";
+import Car from "assets/Car.png";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
 
@@ -22,6 +22,7 @@ const Reservation = ({ setResvState }) => {
   ]);
   const [userInfo, setUserName] = useState(""); // 사용자 이름
   const [resvInfo, setResvInfo] = useState({}); // 예약 정보
+  const [driversInfo, setDriversInfo] = useState([]); // 등록된 운전자 정보
   useEffect(() => {
     getWaitingResvInfo()
       .then((response) => {
@@ -46,6 +47,7 @@ const Reservation = ({ setResvState }) => {
           tmp["차량"] = ` :   ${response.data.carName}`;
           tmp["차 번호"] = ` :   ${response.data.carNumber}`;
           setResvInfo(tmp);
+          setDriversInfo([...response.data.drivers]);
         }
       })
       .catch((error) =>
@@ -80,8 +82,8 @@ const Reservation = ({ setResvState }) => {
                 </div>
               );
             })}
-            {/* 운전자 */} {/* 서버에서 구현된 후에 추가될 예정 */}
-            {/*resvInfo.drivers.map((driver, index) => {
+            {/* 운전자 */}
+            {driversInfo.map((driver, index) => {
               return (
                 <div
                   className="w-[600px] h-[50px] bg-sky-200 flex items-center rounded-2xl mt-2"
@@ -89,11 +91,11 @@ const Reservation = ({ setResvState }) => {
                 >
                   <MdOutlinePerson className="ml-4 text-[26px] text-blue-600" />
                   <span className="ml-5 text-xl font-semibold ">
-                    {`제 ${index + 1} 운전자 : ${driver[index + 1]}`}
+                    {`제 ${index + 1} 운전자 : ${driver}`}
                   </span>
                 </div>
               );
-            })*/}
+            })}
           </div>
         </div>
       </div>
