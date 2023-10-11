@@ -109,7 +109,7 @@ const SelectStore = ({ popUpInfo }) => {
         province.classList.remove("selected");
       }
     }
-  }, [selectedProvince, rclStoreInfo]);
+  }, [selectedProvince]);
 
   return (
     <>
