@@ -1,5 +1,7 @@
 import { usePopUp } from "utils/usePopUp";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { loginCheck } from "utils/loginCheck";
 import Reservation from "./Reservation";
 import UserInfo from "./UserInfo";
 import PreferOption from "./PreferOption";
@@ -12,11 +14,15 @@ import Review from "popUp/MyPage/Review";
 import Quit from "popUp/MyPage/Quit";
 
 const MyPage = () => {
+  const nav = useNavigate();
   const popUpQuit = usePopUp("MyPage/Quit"); // Quit 팝업 제어
   const popUpPoint = usePopUp("MyPage/Point"); // Point 팝업 제어
   const popUpResv = usePopUp("MyPage/Resv"); // Resv 팝업 제어
   const popUpReview = usePopUp("MyPage/Review"); // Review 팝업 제어
   const [resvState, setResvState] = useState(true); // 예약 대기 중인 정보의 유무
+  useEffect(() => {
+    if (!loginCheck()) nav("/auth"); // 로그인 체크 실패 -> 로그인 화면으로
+  });
   return (
     <>
       <div className="w-[1140px] mx-auto mt-[176px]">
