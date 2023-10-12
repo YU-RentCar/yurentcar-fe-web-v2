@@ -12,11 +12,13 @@ const Resv = () => {
   useEffect(() => {
     getResvRecord() // 예약 내역 조회
       .then((response) => {
-        console.log("마이페이지 / 예약내역 : ", response.data);
         if (response.data.length === 0) {
-          alert("예약 내역이 없습니다");
+          alert.onAndOff("예약 내역이 없습니다");
           popUpResv.toggle();
-        } else setResvRecord([...response.data]);
+        } else {
+          console.log("마이페이지 / 예약내역 : ", response.data);
+          setResvRecord([...response.data]);
+        }
       })
       .catch((error) => {
         console.log("마이페이지 / 예약내역에러 : ", error.response);

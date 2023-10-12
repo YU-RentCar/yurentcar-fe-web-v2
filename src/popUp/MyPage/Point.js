@@ -12,13 +12,12 @@ const Point = () => {
   useEffect(() => {
     getPointRecord() // 포인트 내역 조회
       .then(async (response) => {
-        if (response.data.length === 0) popUpPoint.toggle();
-        else {
+        if (response.data.length === 0) {
+          alert.onAndOff("포인트 적립/차감 내역이 없습니다");
+          popUpPoint.toggle();
+        } else {
           console.log("마이페이지 / 포인트내역 : ", response.data);
-          if (response.data.length === 0) {
-            alert.onAndOff("포인트 적립/차감 내역이 없습니다");
-            popUpPoint.toggle();
-          } else setPointRecord(response.data);
+          setPointRecord(response.data);
         }
       })
       .catch((error) =>
