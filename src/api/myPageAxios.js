@@ -51,21 +51,50 @@ let changePreferOption = (newPrefer) => {
   });
 };
 
+/* 사용자 보유 포인트 조회 */
+let getUserPoint = () => {
+  return api({
+    url: "/users/points",
+    method: "get",
+  });
+};
+
 /* 사용자 포인트 내역 */
-// let getPointRecord = () => {
-//   return api({
-//     url: "/points",
-//     method: "get",
-//   });
-// };
+let getPointRecord = () => {
+  return api({
+    url: "/points",
+    method: "get",
+  });
+};
 
 /* 사용자 예약 내역 */
-// let getResvRecord = () => {
-//   return api({
-//     url: "/users/reservations",
-//     method: "get",
-//   });
-// };
+let getResvRecord = () => {
+  return api({
+    url: "/users/reservations",
+    method: "get",
+  });
+};
+
+/* 후기 작성 */
+let writeReview = (newReview) => {
+  return api({
+    url: "/reservations/reviews",
+    method: "post",
+    data: {
+      reservationId: newReview.reservationId,
+      title: newReview.title,
+      description: newReview.description,
+    },
+  });
+};
+
+/* 로그아웃 */
+let logout = () => {
+  return api({
+    url: "/logout",
+    method: "post",
+  });
+};
 
 /* 최근 본 차량 조회 */
 // let getRecentRecord = () => {
@@ -78,14 +107,6 @@ let changePreferOption = (newPrefer) => {
 //   });
 // };
 
-/* 로그아웃 */
-// let logout = () => {
-//   return api({
-//     url: "/logout",
-//     method: "post",
-//   });
-// };
-
 export {
   getWaitingResvInfo,
   getUserInfo,
@@ -93,4 +114,9 @@ export {
   changeNick,
   getPreferOption,
   changePreferOption,
+  getUserPoint,
+  getPointRecord,
+  getResvRecord,
+  writeReview,
+  logout,
 };

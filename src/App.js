@@ -2,6 +2,8 @@ import Nav from "components/Nav";
 import "./App.css";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useRecoilValue } from "recoil";
+import { alertAtom } from "recoil/alertAtom";
 import Home from "pages/Home/Home";
 import MyPage from "pages/MyPage/MyPage";
 import Reservation from "pages/Reservation/Reservation";
@@ -10,6 +12,7 @@ import Auth from "pages/Auth/Auth";
 import Notice from "pages/Notice/Notice";
 import NoticeDetail from "pages/NoticeDetail/NoticeDetail";
 import axios from "axios";
+import Alert from "popUp/Alert";
 
 function App() {
   /* 
@@ -20,7 +23,7 @@ function App() {
   const [navState, setNavState] = useState(false);
   let nav = useNavigate(); // 경로 이동
   let location = useLocation(); // 현재 경로 확인용
-
+  const alertState = useRecoilValue(alertAtom).state; // Alert 제어
   useEffect(() => {
     (async () => {
       await axios
@@ -65,6 +68,7 @@ function App() {
         <Route path="/notice" element={<Notice />}></Route>
         <Route path="/noticedetail" element={<NoticeDetail />}></Route>
       </Routes>
+      {alertState ? <Alert /> : null}
     </>
   );
 }
