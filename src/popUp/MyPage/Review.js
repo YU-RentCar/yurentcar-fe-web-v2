@@ -76,6 +76,8 @@ const Review = () => {
                   await writeReview(newReview)
                     .then((response) => {
                       console.log("마이페이지 / 후기작성 : ", response.data);
+                      popUpResv.toggle();
+                      popUpReview.toggle();
                     })
                     .catch((error) =>
                       console.log(
