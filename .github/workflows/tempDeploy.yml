@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: develop
+    branches: Feat/#96-resv-default-detail-repair-accident-map-api
 jobs:
   deploy:
     runs-on: ubuntu-latest
