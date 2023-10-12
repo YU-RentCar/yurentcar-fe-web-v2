@@ -76,7 +76,7 @@ const ResvCard = ({ resvInfo, idx, type }) => {
           </div>
           <button
             id={`reviewBtn${idx}`}
-            className="flex items-center justify-center w-full h-10 text-base font-semibold rounded-xl"
+            className="flex items-center justify-center w-full h-[34px] text-base font-semibold rounded-xl"
             onClick={() => {
               setReviewTarget(resvInfo);
               popUpReview.toggle();
