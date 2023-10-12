@@ -105,14 +105,14 @@ const Review = () => {
             <input
               id="reviewTitle"
               type="text"
-              className="border border-black text-xl font-bold text-black w-full h-[80px] placeholder:text-slate-300"
+              className="border border-black text-xl font-bold text-black w-full h-[80px] rounded-2xl px-8 placeholder:text-slate-300"
               placeholder="제목을 입력해주세요"
               onChange={(e) => setTitle(e.target.value)}
             />
             {/* 리뷰 내용 */}
             <textarea
               id="reviewContent"
-              className="border border-black text-lg font-semibold text-black w-full h-[480px] placeholder:text-slate-300"
+              className="border border-black text-lg font-semibold text-black w-full h-[480px] p-8 rounded-2xl placeholder:text-slate-300"
               placeholder="내용을 입력해주세요"
               onChange={(e) => setContent(e.target.value)}
             />

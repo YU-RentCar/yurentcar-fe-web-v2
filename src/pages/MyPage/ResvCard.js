@@ -60,7 +60,7 @@ const ResvCard = ({ resvInfo, idx, type }) => {
           />
         </div>
         {/* 예약 간단 정보 */}
-        <div className="flex flex-col items-start justify-between w-full h-24 px-8 mt-2">
+        <div className="flex flex-col items-start justify-between w-full px-8 mt-2 h-28">
           <div className="flex items-center text-base font-bold">
             <MdOutlineTimer className="mr-3 text-lg text-blue-600" />
             {dayjs(resvInfo.startDate).format("MM.DD(ddd) HH:mm")} ~{" "}
@@ -76,7 +76,7 @@ const ResvCard = ({ resvInfo, idx, type }) => {
           </div>
           <button
             id={`reviewBtn${idx}`}
-            className="w-full text-base font-semibold h-7 rounded-xl"
+            className="flex items-center justify-center w-full h-10 text-base font-semibold rounded-xl"
             onClick={() => {
               setReviewTarget(resvInfo);
               popUpReview.toggle();
