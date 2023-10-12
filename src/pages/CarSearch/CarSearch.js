@@ -13,6 +13,7 @@ import { useEffect, useState, useRef } from "react";
 import { finderAtom } from "recoil/finderAtom";
 import dayjs from "dayjs";
 import { getCarInfoList } from "api/homeAxios";
+import { useLocation, useNavigate } from "react-router";
 
 const CarSearch = () => {
   const storePopUp = usePopUp("CarSearch/SelectStore");
@@ -27,6 +28,12 @@ const CarSearch = () => {
   const finderInfo = useRecoilValue(finderAtom);
 
   const [carInfoList, setCarInfoList] = useState(null);
+
+  /*
+  현 페이지에서 finder를 클릭할 경우 리렌더링이 되지 않는 문제를 해결하기 위해 
+  각 route 마다 발급되는 고유의 key 값을 발급
+  */
+  const currentRouteKey = useLocation().key;
 
   /* 변경 정보 수집 함수 */
   const gatherInfo = () => {
@@ -61,10 +68,8 @@ const CarSearch = () => {
     infos.minCount = 1;
     infos.oilTypes = [true, true, true, true];
     infos.transmissions = [true, true];
-    // infos.branchName = "IT관점";
     infos.branchName = finderInfo.store;
     infos.siDo = finderInfo.province;
-    // infos.siDo = "경상북도";
 
     getCarInfoList(infos)
       .then((response) => {
@@ -74,7 +79,7 @@ const CarSearch = () => {
       .catch((error) => {
         console.log("CarSearch/getCarCard", error.response);
       });
-  }, []);
+  }, [currentRouteKey]);
 
   return (
     <>
