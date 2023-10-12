@@ -2,16 +2,21 @@ import { usePopUp } from "utils/usePopUp";
 import { MdOutlineClose } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { getResvRecord } from "api/myPageAxios";
+import { useAlert } from "utils/useAlert";
 import ResvCard from "pages/MyPage/ResvCard";
 
 const Resv = () => {
+  const alert = useAlert(); // Alert 제어
   const [resvRecord, setResvRecord] = useState([]); // 예약 내역
   const popUpResv = usePopUp("MyPage/Resv"); // Resv 팝업 제어
   useEffect(() => {
     getResvRecord() // 예약 내역 조회
       .then((response) => {
         console.log("마이페이지 / 예약내역 : ", response.data);
-        setResvRecord([...response.data]);
+        if (response.data.length === 0) {
+          alert("예약 내역이 없습니다");
+          popUpResv.toggle();
+        } else setResvRecord([...response.data]);
       })
       .catch((error) => {
         console.log("마이페이지 / 예약내역에러 : ", error.response);

@@ -32,7 +32,6 @@ const ResvCard = ({ resvInfo, idx, type }) => {
       } else if (resvInfo.reviewType === 4) {
         btn.classList.add("bg-amber-300");
         btn.textContent = "리뷰 작성 완료";
-        btn.disabled = true;
       }
     }
   }, []);
@@ -48,20 +47,20 @@ const ResvCard = ({ resvInfo, idx, type }) => {
         {/* 차량 해쉬태그 */}
         <div className="flex items-center justify-around w-full px-8 mt-2">
           <Chip
-            value={`# 더미`}
+            value={`# ${resvInfo.carName}`}
             className="text-[13px] font-semibold w-[88px] h-[22px] flex justify-center items-center rounded-[5px] m-1 bg-blue-500"
           />
           <Chip
-            value={`# 더미`}
+            value={`# ${resvInfo.carNumber}`}
             className="text-[13px] font-semibold w-[88px] h-[22px] flex justify-center items-center rounded-[5px] m-1 bg-blue-400"
           />
           <Chip
-            value={`# 더미`}
+            value={`# ${resvInfo.totalDistance}km`}
             className="text-[13px] font-semibold w-[88px] h-[22px] flex justify-center items-center rounded-[5px] m-1 bg-blue-300 text-blue-900"
           />
         </div>
         {/* 예약 간단 정보 */}
-        <div className="flex flex-col items-start justify-between w-full h-24 px-8 mt-4">
+        <div className="flex flex-col items-start justify-between w-full h-24 px-8 mt-2">
           <div className="flex items-center text-base font-bold">
             <MdOutlineTimer className="mr-3 text-lg text-blue-600" />
             {dayjs(resvInfo.startDate).format("MM.DD(ddd) HH:mm")} ~{" "}
@@ -69,15 +68,15 @@ const ResvCard = ({ resvInfo, idx, type }) => {
           </div>
           <div className="flex items-center text-base font-bold">
             <MdOutlinePlace className="mr-3 text-lg text-blue-600" />
-            {`예약 지점 : ${resvInfo.branchName}`}
+            {`${resvInfo.branchName}`}
           </div>
           <div className="flex items-center text-base font-bold">
             <MdOutlineMoney className="mr-3 text-lg text-blue-600" />
-            {`₩ 더미`}
+            {`₩ ${resvInfo.price}`}
           </div>
           <button
             id={`reviewBtn${idx}`}
-            className="w-full h-5 text-lg rounded-2xl"
+            className="w-full text-base font-semibold h-7 rounded-xl"
             onClick={() => {
               setReviewTarget(resvInfo);
               popUpReview.toggle();
