@@ -2,18 +2,23 @@ import { getPointRecord } from "api/myPageAxios";
 import { useState, useEffect } from "react";
 import { MdOutlineClose } from "react-icons/md";
 import { usePopUp } from "utils/usePopUp";
+import { useAlert } from "utils/useAlert";
 import dayjs from "dayjs";
 
 const Point = () => {
+  const alert = useAlert(); // Alert 제어
   const popUpPoint = usePopUp("MyPage/Point"); // Point 팝업 제어
   const [pointRecord, setPointRecord] = useState([]); // 사용자 포인트 내역
   useEffect(() => {
     getPointRecord() // 포인트 내역 조회
-      .then((response) => {
+      .then(async (response) => {
         if (response.data.length === 0) popUpPoint.toggle();
         else {
           console.log("마이페이지 / 포인트내역 : ", response.data);
-          setPointRecord(response.data);
+          if (response.data.length === 0) {
+            alert.onAndOff("포인트 적립/차감 내역이 없습니다");
+            popUpPoint.toggle();
+          } else setPointRecord(response.data);
         }
       })
       .catch((error) =>
