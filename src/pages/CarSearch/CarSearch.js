@@ -135,17 +135,19 @@ const CarSearch = () => {
                   {/* 불러오기 버튼 */}
                   <button
                     className="text-[20px] font-semibold w-[135px] h-[44px] rounded-xl bg-blue-500 text-white"
-                    onClick={getPreferOption()
-                      .then((response) => {
-                        console.log("CarSearch / 선호옵션 : ", response.data);
-                        setUserPrefer(response.data);
-                      })
-                      .catch((error) => {
-                        console.log(
-                          "CarSearch / 선호옵션에러 : ",
-                          error.response
-                        );
-                      })}
+                    onClick={async () => {
+                      await getPreferOption()
+                        .then((response) => {
+                          console.log("CarSearch / 선호옵션 : ", response.data);
+                          setUserPrefer(response.data);
+                        })
+                        .catch((error) => {
+                          console.log(
+                            "CarSearch / 선호옵션에러 : ",
+                            error.response
+                          );
+                        });
+                    }}
                   >
                     나의 선호 옵션
                   </button>
