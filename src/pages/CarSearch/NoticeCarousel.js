@@ -1,7 +1,10 @@
 import { Carousel } from "@material-tailwind/react";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 
 export default function CarouselWithContent({ noticeList }) {
+  const nav = useNavigate();
+
   return (
     <Carousel
       className="select-none rounded-xl shadow-figma"
@@ -15,7 +18,13 @@ export default function CarouselWithContent({ noticeList }) {
         ? null
         : noticeList.map((v, i) => {
             return (
-              <div className="relative w-full h-full" key={i}>
+              <div
+                className="relative w-full h-full cursor-pointer"
+                key={i}
+                onClick={() => {
+                  nav("/notice", { state: v.noticeId });
+                }}
+              >
                 <div className="absolute inset-0 grid w-full h-full bg-blue-100 place-items-center">
                   <div className="flex flex-col items-center justify-start w-full h-full">
                     <img
