@@ -7,15 +7,17 @@ const Map = () => {
   const [mapPoint, setMapPoint] = useState({});
   useEffect(() => {
     // location.state
-    getMapPoint({ province: "경상북도", store: "IT관점" }).then((response) => {
-      console.log("예약 / 지도 : ", response.data);
-      // 데이터 가공
-      const tmp = {
-        latitude: response.data.x,
-        longitude: response.data.y,
-      };
-      setMapPoint(tmp);
-    });
+    getMapPoint({ province: "경상북도", store: "IT관점" })
+      .then((response) => {
+        console.log("예약 / 지도 : ", response.data);
+        // 데이터 가공
+        const tmp = {
+          latitude: response.data.x,
+          longitude: response.data.y,
+        };
+        setMapPoint(tmp);
+      })
+      .catch((error) => console.log("예약 / 지도에러 : ", error.response));
   }, []);
   useEffect(() => {
     const { kakao } = window;
