@@ -1,16 +1,24 @@
-import { useRecoilValue } from "recoil";
-import { carAtom } from "recoil/carAtom";
-import { useState } from "react";
+import { getCarAccident } from "api/reservationAxios";
+import { useState, useEffect } from "react";
 import {
   Accordion,
   AccordionHeader,
   AccordionBody,
 } from "@material-tailwind/react";
+import dayjs from "dayjs";
 
 const Accident = () => {
-  const carInfo = useRecoilValue(carAtom); // 차량 정보
+  const [accident, setAccident] = useState([]); // 차량 사고 정보
   const [open, setOpen] = useState(1); // 아코디언 제어
   const handleOpen = (value) => setOpen(open === value ? 0 : value); // 아코디언 on/off
+  useEffect(() => {
+    getCarAccident("99가9999") // 차량 사고 내역
+      .then((response) => {
+        console.log("예약 / 사고 : ", response.data);
+        setAccident([...response.data]);
+      })
+      .catch((error) => console.log("예약 / 사고에러 : ", error.response));
+  });
   return (
     <div className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma">
       {/* 타이틀 */}
@@ -19,7 +27,7 @@ const Accident = () => {
       </div>
       {/* 상세 정보 */}
       <div className="w-[1100px] h-[500px] rounded-2xl bg-blue-200 mt-4 pt-4">
-        {carInfo.accident.map((v, i) => {
+        {accident.map((v, i) => {
           return (
             <Accordion
               key={i}
@@ -29,12 +37,13 @@ const Accident = () => {
               {/* 타이틀, 위에서 지정한 아코디언에 제어 기능 부여 */}
               <AccordionHeader
                 onClick={() => handleOpen(i + 1)}
-                className={`px-8 text-2xl font-bold ${
+                className={`px-8 text-2xl font-bold line-clamp-1 ${
                   open === i + 1 ? "!text-red-500" : ""
                 }`}
               >
-                {v["date"]}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                {v["title"]}
+                {`${dayjs(v["eventDate"]).format("YYYY.MM.DD")}     ${
+                  v["title"]
+                }`}
               </AccordionHeader>
               {/* 컨텐츠 */}
               <AccordionBody className="px-8 text-xl font-bold text-slate-700">

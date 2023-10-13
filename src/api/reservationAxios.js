@@ -12,6 +12,15 @@ let getCarInfo = (carNumber) => {
 /* 차량 수리 내역 */
 let getCarRepair = (carNumber) => {
   return api({
+    url: "/branches/cars/accidents",
+    method: "get",
+    params: { carNumber: carNumber },
+  });
+};
+
+/* 차량 사고 내역 */
+let getCarAccident = (carNumber) => {
+  return api({
     url: "/branches/cars/repairs",
     method: "get",
     params: { carNumber: carNumber },
@@ -35,4 +44,4 @@ let getUserPoint = () => {
   });
 };
 
-export { getCarInfo, getCarRepair, getMapPoint, getUserPoint };
+export { getCarInfo, getCarRepair, getCarAccident, getMapPoint, getUserPoint };
