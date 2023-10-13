@@ -1,38 +1,38 @@
 import api from "./interceptors";
 
-/* 차량 제원 정보 */
-let getCarSpec = (carNumber) => {
+/* 차량 정보 */
+let getCarInfo = (carNumber) => {
   return api({
-    url: "",
+    url: "/branches/cars/details",
     method: "get",
     params: { carNumber: carNumber },
   });
 };
 
 /* 차량 수리 내역 */
-let getRepairRecord = (carNumber) => {
+let getCarRepair = (carNumber) => {
   return api({
-    url: "",
+    url: "/branches/cars/accidents",
     method: "get",
     params: { carNumber: carNumber },
   });
 };
 
 /* 차량 사고 내역 */
-let getAccidentRecord = (carNumber) => {
+let getCarAccident = (carNumber) => {
   return api({
-    url: "",
+    url: "/branches/cars/repairs",
     method: "get",
     params: { carNumber: carNumber },
   });
 };
 
 /* 지점 위도, 경도 */
-let getMapPoint = (store) => {
+let getMapPoint = (storeInfo) => {
   return api({
-    url: "",
+    url: "/branches/location",
     method: "get",
-    params: { store: store },
+    params: { province: storeInfo.province, branchName: storeInfo.store },
   });
 };
 
@@ -44,10 +44,4 @@ let getUserPoint = () => {
   });
 };
 
-export {
-  getCarSpec,
-  getRepairRecord,
-  getAccidentRecord,
-  getMapPoint,
-  getUserPoint,
-};
+export { getCarInfo, getCarRepair, getCarAccident, getMapPoint, getUserPoint };
