@@ -85,6 +85,8 @@ const CarSearch = () => {
     infos.branchName = selectedFinderInfo.store;
     infos.siDo = selectedFinderInfo.province;
 
+    console.log("현재 라우트 키: ", currentRouteKey);
+
     getCarInfoList(infos)
       .then((response) => {
         console.log("CarSearch / getCarCardList", response.data);
