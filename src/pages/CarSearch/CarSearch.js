@@ -78,11 +78,11 @@ const CarSearch = () => {
       count: 3,
     })
       .then((response) => {
-        console.log("불러온 공지사항: ", response.data);
+        console.log("CarDetail / getNoticeList", response.data);
         setNoticeList(response.data);
       })
       .catch((error) => {
-        console.log(error.response);
+        console.log("CarDetail / getNoticeList error", error.response);
       });
   }, [currentRouteKey]);
 
