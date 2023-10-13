@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: Feat/#100-carousel-api-link
+    branches: develop
 jobs:
   deploy:
     runs-on: ubuntu-latest
