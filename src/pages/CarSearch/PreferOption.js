@@ -1,6 +1,13 @@
 import { Checkbox, Input } from "@material-tailwind/react";
 
-const PreferOption = ({ title, content, userPrefer, userInfo }) => {
+const PreferOption = ({
+  title,
+  content,
+  userPrefer,
+  minCount,
+  setUserPrefer,
+  gatherInfo,
+}) => {
   return (
     <div className="flex justify-center w-full">
       <div className="w-full px-4 font-bold text-medium">
@@ -19,7 +26,10 @@ const PreferOption = ({ title, content, userPrefer, userInfo }) => {
                     labelProps={{
                       className: "font-semibold text-black !mt-1",
                     }}
-                    defaultChecked={userPrefer[i]}
+                    checked={userPrefer[i]}
+                    onChange={() => {
+                      setUserPrefer(gatherInfo());
+                    }}
                   />
                 </div>
               );
@@ -32,8 +42,12 @@ const PreferOption = ({ title, content, userPrefer, userInfo }) => {
               id="minCount"
               type="number"
               className="!text-xl !font-bold !text-black !h-[45px]"
-              defaultValue={userInfo.prefer.minCount}
+              value={minCount}
               label="숫자만 입력가능"
+              labelProps={{ className: "border-black text-lg" }}
+              onChange={() => {
+                setUserPrefer(gatherInfo());
+              }}
             />
           </div>
         )}
