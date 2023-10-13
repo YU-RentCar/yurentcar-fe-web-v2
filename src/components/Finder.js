@@ -1,15 +1,24 @@
 import dayjs from "dayjs";
 import React from "react";
 import { useEffect, useState, useRef } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { finderAtom } from "recoil/finderAtom";
 import { useNavigate } from "react-router-dom";
 import { useAlert } from "utils/useAlert";
+import { selectedFinderAtom } from "recoil/selectedFinderAtom";
 
 const Finder = ({ storePopUp, dateTimePopUp }) => {
+  // 선택된(검색된) 시점의 finder의 상태를 저장한다.
+  const setSelectedFinderInfo = useSetRecoilState(selectedFinderAtom);
+
+  // finderAtom은 finder의 변경 상황을 실시간으로 저장한다.
   const [finderInfo, setFinderInfo] = useRecoilState(finderAtom);
   const [finderDateInfoString, setFinderDateInfoString] = useState("");
+
+  // 라우터 이동을 위한 변수
   const navigate = useNavigate();
+
+  // 토스트 메시지를 사용하기 위한 변수
   const alert = useAlert();
 
   useEffect(() => {
@@ -82,6 +91,11 @@ const Finder = ({ storePopUp, dateTimePopUp }) => {
                 return;
               }
             }
+
+            setSelectedFinderInfo({
+              ...finderInfo,
+            });
+
             navigate("/carsearch");
           }}
         >
