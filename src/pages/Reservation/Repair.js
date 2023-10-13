@@ -18,7 +18,7 @@ const Repair = () => {
         setRepair([...response.data]);
       })
       .catch((error) => console.log("예약 / 수리에러 : ", error.response));
-  });
+  }, []);
   return (
     <div className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma">
       {/* 타이틀 */}
