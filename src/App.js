@@ -1,9 +1,10 @@
-import Nav from "components/Nav";
-import "./App.css";
 import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useRecoilValue } from "recoil";
+import { useEffect } from "react";
+import { useRecoilValue, useRecoilState } from "recoil";
 import { alertAtom } from "recoil/alertAtom";
+import { navStateSelector } from "recoil/navStateAtom";
+import "./App.css";
+import Nav from "components/Nav";
 import Home from "pages/Home/Home";
 import MyPage from "pages/MyPage/MyPage";
 import Reservation from "pages/Reservation/Reservation";
@@ -20,7 +21,7 @@ function App() {
     true : Nav 표시o
     false : Nav 표시x
   */
-  const [navState, setNavState] = useState(false);
+  const [navState, setNavState] = useRecoilState(navStateSelector);
   let nav = useNavigate(); // 경로 이동
   let location = useLocation(); // 현재 경로 확인용
   const alertState = useRecoilValue(alertAtom).state; // Alert 제어
