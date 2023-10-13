@@ -37,8 +37,6 @@ const Finder = ({ storePopUp, dateTimePopUp }) => {
     }) ${endTime}`;
 
     setFinderDateInfoString(`${startString} ~ ${endString}`);
-
-    console.log(finderInfo);
   }, [finderInfo]);
   return (
     <>
