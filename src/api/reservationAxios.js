@@ -1,9 +1,9 @@
 import api from "./interceptors";
 
-/* 차량 제원 정보 */
+/* 차량 기본 정보 */
 let getCarSpec = (carNumber) => {
   return api({
-    url: "",
+    url: "/branches/cars/simple",
     method: "get",
     params: { carNumber: carNumber },
   });
