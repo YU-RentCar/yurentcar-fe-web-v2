@@ -57,6 +57,7 @@ const Open = React.memo(
                   setDrivers([...tmpDrivers]);
                   if (i === 0)
                     // 변경된 이름으로 atom 수정
+                    //setNewDriver({ name: e.target.value, idx: index });
                     setNewDriver({ name: e.target.value, idx: index });
                 }}
               />
