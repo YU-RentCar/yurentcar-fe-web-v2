@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: Feat/#99-prefer-car-search-menu-api
+    branches: develop
 jobs:
   deploy:
     runs-on: ubuntu-latest
