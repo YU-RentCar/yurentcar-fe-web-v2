@@ -1,41 +1,55 @@
 import Finder from "components/Finder";
-import { usePopUp } from "utils/usePopUp";
 import SelectStore from "popUp/SelectStore";
 import SelectDateTime from "popUp/SelectDateTime";
 import NoticeCarousel from "./NoticeCarousel";
-import { useRecoilValue, useRecoilState } from "recoil";
-import { userPreferSelector } from "recoil/userAtom";
-import { preferOptionAtom } from "recoil/preferOptionAtom";
 import CarCard from "components/CarCard";
 import PreferOption from "./PreferOption";
 import CarDetail from "popUp/CarSearch/CarDetail";
+import dayjs from "dayjs";
+import { usePopUp } from "utils/usePopUp";
+import { useRecoilValue, useRecoilState } from "recoil";
+import { preferOptionAtom } from "recoil/preferOptionAtom";
 import { useEffect, useState, useRef } from "react";
 import { finderAtom } from "recoil/finderAtom";
-import dayjs from "dayjs";
 import { getCarInfoList } from "api/homeAxios";
 import { useLocation, useNavigate } from "react-router";
+import { getPreferOption } from "api/myPageAxios";
+import { useAlert } from "utils/useAlert";
+import { selectedFinderAtom } from "recoil/selectedFinderAtom";
 
 const CarSearch = () => {
+  // 팝업을 제어하는데 필요한 변수
   const storePopUp = usePopUp("CarSearch/SelectStore");
   const dateTimePopUp = usePopUp("CarSearch/SelectDateTime");
   const carDetailPopUp = usePopUp("CarSearch/CarDetail");
 
-  const preferOption = useRecoilValue(preferOptionAtom); // 선호 옵션 데이터
-  const [userPreferInfo, setUserPreferInfo] =
-    useRecoilState(userPreferSelector); // 사용자의 선호 옵션 정보
-  const [preferTitles, _] = useState(["차량 크기", "유종", "구동기"]); // 옵션 타이틀
+  // 토스트 메시지 제어에 필요한 변수
+  const alert = useAlert();
 
-  const finderInfo = useRecoilValue(finderAtom);
+  // 선호 옵션 항목 Atom
+  const preferOption = useRecoilValue(preferOptionAtom);
+  // 선호 옵션 항목 타이틀
+  const [preferTitles, _] = useState(["차량 크기", "유종", "구동기"]);
 
-  const [carInfoList, setCarInfoList] = useState(null);
+  // 사용자의 선호 옵션 정보
+  const [userPrefer, setUserPrefer] = useState({
+    carSizes: [true, true, true, true],
+    oilTypes: [true, true, true, true],
+    transmissions: [true, true],
+    minCount: 1,
+  });
 
-  /*
-  현 페이지에서 finder를 클릭할 경우 리렌더링이 되지 않는 문제를 해결하기 위해 
-  각 route 마다 발급되는 고유의 key 값을 발급
-  */
+  // 검색된 상태의 finder 정보를 가지는 변수
+  const selectedFinderInfo = useRecoilValue(selectedFinderAtom);
+
+  // 각 route 마다 개별적으로 지급되는 key를 저장.
+  // 현재 route 에서 finder 검색이 작동하지 않는 것을 수정
   const currentRouteKey = useLocation().key;
 
-  /* 변경 정보 수집 함수 */
+  // 차량 리스트 렌더링에 필요한 state
+  const [carInfoList, setCarInfoList] = useState(null);
+
+  // 선호차량 검색 체크박스의 변경점을 체크하는 함수
   const gatherInfo = () => {
     let newPrefer = {
       carSizes: [],
@@ -52,32 +66,32 @@ const CarSearch = () => {
     return newPrefer;
   };
 
-  // 차량 리스트를 조회
+  // finder 검색 클릭 시, 선택된 finder 상태로 차량 리스트 조회
   useEffect(() => {
-    // 차량 리스트 조회 시 필요한 정보들 생성
     const infos = {};
 
     infos.startDate = String(
-      dayjs(finderInfo.startDate).format("YYYY. MM. DD. ") +
-        finderInfo.startTime
+      dayjs(selectedFinderInfo.startDate).format("YYYY. MM. DD. ") +
+        selectedFinderInfo.startTime
     );
     infos.endDate = String(
-      dayjs(finderInfo.endDate).format("YYYY. MM. DD. ") + finderInfo.endTime
+      dayjs(selectedFinderInfo.endDate).format("YYYY. MM. DD. ") +
+        selectedFinderInfo.endTime
     );
     infos.carSizes = [true, true, true, true];
     infos.minCount = 1;
     infos.oilTypes = [true, true, true, true];
     infos.transmissions = [true, true];
-    infos.branchName = finderInfo.store;
-    infos.siDo = finderInfo.province;
+    infos.branchName = selectedFinderInfo.store;
+    infos.siDo = selectedFinderInfo.province;
 
     getCarInfoList(infos)
       .then((response) => {
-        console.log("CarSearch/getCarCard", response.data);
+        console.log("CarSearch / getCarCardList", response.data);
         setCarInfoList(response.data);
       })
       .catch((error) => {
-        console.log("CarSearch/getCarCard", error.response);
+        console.log("CarSearch / getCarCardList", error.response);
       });
   }, [currentRouteKey]);
 
@@ -102,13 +116,21 @@ const CarSearch = () => {
                     <PreferOption
                       title={preferTitles[i]}
                       content={preferOption[v]}
-                      userPrefer={userPreferInfo.prefer[v]}
+                      userPrefer={userPrefer[v]}
+                      setUserPrefer={setUserPrefer}
+                      gatherInfo={gatherInfo}
                       key={i}
                     />
                   );
                 })}
                 {/* 최소 인원 */}
-                <PreferOption title="최소 인원" userInfo={userPreferInfo} />
+                <PreferOption
+                  title="최소 인원"
+                  minCount={userPrefer.minCount}
+                  setUserPrefer={setUserPrefer}
+                  gatherInfo={gatherInfo}
+                />
+
                 <div className="flex justify-around mt-9">
                   {/* 불러오기 버튼 */}
                   <button className="text-[20px] font-semibold w-[135px] h-[44px] rounded-xl bg-blue-500 text-white">
@@ -117,20 +139,48 @@ const CarSearch = () => {
                   {/* 찾기 버튼 */}
                   <button
                     className="text-[20px] font-semibold w-[55px] h-[44px] rounded-xl bg-amber-400"
-                    onClick={() => {
-                      if (
-                        document.getElementById("minCount").value.trim() === ""
-                      ) {
-                        // 최소 인원 수가 입력되지않은 경우
-                        // 왠진 모르겠는데 작동안함
-                        alert.onAndOff("최소 인원 수를 입력해주세요.");
+                    onClick={async () => {
+                      const minCount =
+                        document.getElementById("minCount").value;
+                      if (minCount.trim() === "") {
+                        alert.onAndOff("최소 인원 수를 입력해주세요");
+                      } else if (Number(minCount) <= 0) {
+                        alert.onAndOff("1명 이상 입력해주세요");
                       } else {
-                        alert.onAndOff("옵션을 변경하였습니다.");
-                        // 해당부분을 검색으로 변경해야 함.
-                        // 알람 작동 안함
+                        const newPrefer = gatherInfo();
 
-                        console.log(gatherInfo());
-                        setUserPreferInfo(gatherInfo());
+                        const infos = {};
+                        infos.startDate = String(
+                          dayjs(selectedFinderInfo.startDate).format(
+                            "YYYY. MM. DD. "
+                          ) + selectedFinderInfo.startTime
+                        );
+                        infos.endDate = String(
+                          dayjs(selectedFinderInfo.endDate).format(
+                            "YYYY. MM. DD. "
+                          ) + selectedFinderInfo.endTime
+                        );
+                        infos.branchName = selectedFinderInfo.store;
+                        infos.siDo = selectedFinderInfo.province;
+                        infos.carSizes = newPrefer.carSizes;
+                        infos.minCount = newPrefer.minCount;
+                        infos.oilTypes = newPrefer.oilTypes;
+                        infos.transmissions = newPrefer.transmissions;
+
+                        getCarInfoList(infos)
+                          .then((response) => {
+                            console.log(
+                              "CarSearch / getCarCardList",
+                              response.data
+                            );
+                            setCarInfoList(response.data);
+                          })
+                          .catch((error) => {
+                            console.log(
+                              "CarSearch / getCarCardList",
+                              error.response
+                            );
+                          });
                       }
                     }}
                   >
