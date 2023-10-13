@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: Feat/#97-login-check-util
+    branches: develop
 jobs:
   deploy:
     runs-on: ubuntu-latest
