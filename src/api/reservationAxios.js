@@ -10,18 +10,9 @@ let getCarInfo = (carNumber) => {
 };
 
 /* 차량 수리 내역 */
-let getRepairRecord = (carNumber) => {
+let getCarRepair = (carNumber) => {
   return api({
-    url: "",
-    method: "get",
-    params: { carNumber: carNumber },
-  });
-};
-
-/* 차량 사고 내역 */
-let getAccidentRecord = (carNumber) => {
-  return api({
-    url: "",
+    url: "/branches/cars/repairs",
     method: "get",
     params: { carNumber: carNumber },
   });
@@ -44,10 +35,4 @@ let getUserPoint = () => {
   });
 };
 
-export {
-  getCarInfo,
-  getRepairRecord,
-  getAccidentRecord,
-  getMapPoint,
-  getUserPoint,
-};
+export { getCarInfo, getCarRepair, getMapPoint, getUserPoint };
