@@ -6,6 +6,7 @@ export const rentAtom = atom({
     price: 20000,
     insurance: 0,
     point: 0,
+    drivers: [],
   },
 });
 
@@ -13,7 +14,6 @@ export const rentInsuranceSelector = selector({
   key: "rentInsuranceSelector",
   get: ({ get }) => get(rentAtom),
   set: ({ set, get }, newValue) => {
-    console.log("insurance", newValue);
     const rentInfo = get(rentAtom);
     const tmp = {
       ...rentInfo,
@@ -27,11 +27,25 @@ export const rentPointSelector = selector({
   key: "rentPointSelector",
   get: ({ get }) => get(rentAtom),
   set: ({ set, get }, newValue) => {
-    console.log("point", newValue);
     const rentInfo = get(rentAtom);
     const tmp = {
       ...rentInfo,
       point: newValue,
+    };
+    set(rentAtom, tmp);
+  },
+});
+
+export const driversSelector = selector({
+  key: "driversSelector",
+  get: ({ get }) => get(rentAtom),
+  set: ({ set, get }, newName) => {
+    const rentInfo = get(rentAtom);
+    const newDrivers = [...rentInfo.drivers];
+    newDrivers.splice(newName.idx, 1, newName.name);
+    const tmp = {
+      ...rentInfo,
+      drivers: [...newDrivers],
     };
     set(rentAtom, tmp);
   },
