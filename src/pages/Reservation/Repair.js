@@ -26,7 +26,7 @@ const Repair = () => {
         차량 수리 내역
       </div>
       {/* 상세 정보 */}
-      <div className="w-[1100px] h-[500px] rounded-2xl bg-blue-200 mt-4 pt-4">
+      <div className="w-[1100px] h-[500px] rounded-2xl bg-blue-200 mt-4 pt-4 overflow-y-scroll">
         {repair.map((v, i) => {
           return (
             <Accordion
