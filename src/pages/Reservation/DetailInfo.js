@@ -26,7 +26,7 @@ const DetailInfo = () => {
     <MdOutlineFlag className="text-[60px]" />,
   ]);
   useEffect(() => {
-    getCarInfo() // 차량 정보 조회
+    getCarInfo("99가9999") // 차량 정보 조회
       .then((response) => {
         console.log("예약 / 상세정보 : ", response.data);
         // 데이터 가공
