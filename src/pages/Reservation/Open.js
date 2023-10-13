@@ -18,7 +18,7 @@ const Open = React.memo(
     setIsInclude,
   }) => {
     const alert = useAlert(); // Alert 제어
-    const setNewDriver = useRecoilState(driversSelector); // 운전자 이름 저장
+    const [newDriver, setNewDriver] = useRecoilState(driversSelector); // 운전자 이름 저장
     // 입력 양식 placeholder
     const [placeholders, setPlaceholders] = useState([
       "이름을 입력해주세요",
@@ -57,7 +57,6 @@ const Open = React.memo(
                   setDrivers([...tmpDrivers]);
                   if (i === 0)
                     // 변경된 이름으로 atom 수정
-                    //setNewDriver({ name: e.target.value, idx: index });
                     setNewDriver({ name: e.target.value, idx: index });
                 }}
               />
