@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { getCarSpec } from "api/reservationAxios";
+import { getCarInfo } from "api/reservationAxios";
 import {
   MdOutlineDirectionsCarFilled,
   MdOutlineConfirmationNumber,
@@ -19,7 +19,7 @@ const DefaultInfo = () => {
   ]);
   useEffect(() => {
     // location.state
-    getCarSpec("33가1111") // 차량 기본 정보
+    getCarInfo("99가9999") // 차량 기본 정보
       .then((response) => {
         console.log("예약 / 기본정보 : ", response.data);
         // 데이터 가공
@@ -27,6 +27,9 @@ const DefaultInfo = () => {
           차종: response.data.carName,
           "차 번호": response.data.carNumber,
           "총 주행거리": response.data.totalDistance,
+          가격: response.data.beforePrice,
+          할인율: response.data.discountRate,
+          "할인 사유": response.data.discountReason,
         };
         setCarInfo(tmp);
       })
@@ -55,7 +58,9 @@ const DefaultInfo = () => {
               >
                 {iconList[i]}
                 <span className="ml-5 text-xl font-medium">
-                  {`${v} : ${carInfo[v]}${i === 2 ? "km" : ""}`}
+                  {`${v} : ${carInfo[v]}${
+                    i === 2 ? "km" : i === 3 ? "원" : i === 4 ? "%" : ""
+                  }`}
                 </span>
               </div>
             );
