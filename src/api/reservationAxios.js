@@ -28,11 +28,11 @@ let getCarAccident = (carNumber) => {
 };
 
 /* 지점 위도, 경도 */
-let getMapPoint = (store) => {
+let getMapPoint = (storeInfo) => {
   return api({
-    url: "",
+    url: "/branches/location",
     method: "get",
-    params: { store: store },
+    params: { province: storeInfo.province, branchName: storeInfo.store },
   });
 };
 
