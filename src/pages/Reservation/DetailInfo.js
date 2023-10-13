@@ -37,10 +37,8 @@ const DetailInfo = () => {
           등록일: `${dayjs(response.data.createdAt).format("YYYY")}년`,
           "승차 인원": response.data.maxPassenger,
           구동기: response.data.transmission,
-          //브랜드: response.data.brand,
-          브랜드: "현대",
-          //"국산/외제": response.data.is_korean ? "국산" : "외제",
-          "국산/외제": "국산",
+          브랜드: response.data.carBrand,
+          "국산/외제": response.data.isKorean ? "국산" : "외제",
         };
         setCarInfo(tmp);
       })
