@@ -5,6 +5,9 @@ import {
   MdOutlineDirectionsCarFilled,
   MdOutlineConfirmationNumber,
   MdOutlineEditRoad,
+  MdMoney,
+  MdOutlineDiscount,
+  MdOutlineArticle,
 } from "react-icons/md";
 import Car from "assets/Car.png";
 
@@ -16,6 +19,9 @@ const DefaultInfo = () => {
     <MdOutlineDirectionsCarFilled className="ml-4 text-[26px] text-blue-600" />,
     <MdOutlineConfirmationNumber className="ml-4 text-[26px] text-blue-600" />,
     <MdOutlineEditRoad className="ml-4 text-[26px] text-blue-600" />,
+    <MdMoney className="ml-4 text-[26px] text-blue-600" />,
+    <MdOutlineDiscount className="ml-4 text-[26px] text-blue-600" />,
+    <MdOutlineArticle className="ml-4 text-[26px] text-blue-600" />,
   ]);
   useEffect(() => {
     // location.state
