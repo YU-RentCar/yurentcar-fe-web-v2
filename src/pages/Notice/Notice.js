@@ -11,7 +11,7 @@ const Notice = () => {
   useEffect(() => {
     const params = {
       province: location.state.province,
-      branchName: location.state.branchName,
+      branchName: location.state.store,
       count: 0,
     };
     getNoticeList(params) // 리스트 조회

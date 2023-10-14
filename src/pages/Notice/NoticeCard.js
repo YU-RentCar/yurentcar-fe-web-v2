@@ -18,7 +18,7 @@ const NoticeCard = ({ noticeInfo, index }) => {
       nav("/noticedetail", {
         state: {
           province: selectedFinderInfo.province,
-          branchName: selectedFinderInfo.store,
+          store: selectedFinderInfo.store,
           noticeId: noticeInfo.noticeId,
         },
       });

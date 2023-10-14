@@ -36,7 +36,7 @@ const NoticeDetail = () => {
               nav("/notice", {
                 state: {
                   province: selectedFinderInfo.province,
-                  branchName: selectedFinderInfo.store,
+                  store: selectedFinderInfo.store,
                 },
               });
             }}
@@ -52,7 +52,7 @@ const NoticeDetail = () => {
           </span>
           {/* 지점 */}
           <span className="text-3xl font-bold text-blue-600">
-            {`${location.state.province}  ${location.state.branchName}`}
+            {`${location.state.province}  ${location.state.store}`}
           </span>
           {/* 이벤트 기간 & 디데이 */}
           <span className="text-3xl font-semibold text-gray-600">

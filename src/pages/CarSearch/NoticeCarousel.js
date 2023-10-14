@@ -40,7 +40,7 @@ export default function CarouselWithContent({ noticeList }) {
                     nav("/noticedetail", {
                       state: {
                         province: selectedFinderInfo.province,
-                        branchName: selectedFinderInfo.store,
+                        store: selectedFinderInfo.store,
                         noticeId: v.noticeId,
                       },
                     });
