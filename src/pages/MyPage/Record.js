@@ -1,12 +1,16 @@
 import { useState, useEffect } from "react";
 import { usePopUp } from "utils/usePopUp";
-import { getUserPoint } from "api/myPageAxios";
+import { getUserPoint, getRecent } from "api/myPageAxios";
 import CarCard from "components/CarCard";
 
 const Record = () => {
   const popUpPoint = usePopUp("MyPage/Point"); // Point 팝업 제어
   const popUpResv = usePopUp("MyPage/Resv"); // Resv 팝업 제어
   const [userPoint, setUserPoint] = useState(0); // 사용자 포인트
+  const [recent, setRecent] = useState([]); // 최근 본 차량 정보
+  const [numberList, setNumberList] = useState(
+    JSON.parse(localStorage.getItem("carNum"))
+  ); // 로컬스토리지에서 최근 본 최대 6대의 차량 번호
   useEffect(() => {
     getUserPoint() // 사용자 포인트 조회
       .then((response) => {
@@ -16,7 +20,23 @@ const Record = () => {
       .catch((error) => {
         console.log("마이페이지 / 포인트조회에러 : ", error.response);
       });
-  });
+  }, []);
+  useEffect(() => {
+    if (numberList.length !== 0) {
+      const tmp = [];
+      numberList.forEach((v, i) => {
+        getRecent(v) // 저장된 차량 번호 수만큼 상세 정보 조회
+          .then((response) => {
+            console.log("마이페이지 / 최근조회 : ", response.data);
+            tmp.push(response.data);
+          })
+          .catch((error) =>
+            console.log("마이페이지 / 최근조회에러 : ", error.response)
+          );
+      });
+      setRecent([...tmp]);
+    }
+  }, []);
   return (
     <>
       <div className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma">
@@ -58,11 +78,19 @@ const Record = () => {
           <div className="flex flex-col justify-between w-full text-2xl font-bold">
             최근 본 차량 조회
             <div className="grid w-full grid-cols-3 px-8 pb-8 mt-4 bg-blue-100 rounded-2xl">
-              {Array(5)
-                .fill(0)
-                .map((v, i) => {
-                  return <CarCard key={i} />;
-                })}
+              {recent.map((v, i) => {
+                return (
+                  <CarCard
+                    name={v.carName}
+                    number={v.carNumber}
+                    totalDistance={v.totalDistance}
+                    beforePrice={v.beforePrice}
+                    afterPrice={v.afterPrice}
+                    discountRatio={v.discountRate}
+                    key={i}
+                  />
+                );
+              })}
             </div>
           </div>
         </div>
