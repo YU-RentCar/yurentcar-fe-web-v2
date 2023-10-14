@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: develop
+    branches: Fix/#122-reservation-location-state-link
 jobs:
   deploy:
     runs-on: ubuntu-latest
