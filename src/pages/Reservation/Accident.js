@@ -1,5 +1,6 @@
 import { getCarAccident } from "api/reservationAxios";
 import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import {
   Accordion,
   AccordionHeader,
@@ -8,11 +9,12 @@ import {
 import dayjs from "dayjs";
 
 const Accident = () => {
+  const location = useLocation(); // location state 제어
   const [accident, setAccident] = useState([]); // 차량 사고 정보
   const [open, setOpen] = useState(1); // 아코디언 제어
   const handleOpen = (value) => setOpen(open === value ? 0 : value); // 아코디언 on/off
   useEffect(() => {
-    getCarAccident("99가9999") // 차량 사고 내역
+    getCarAccident(location.state.carNumber) // 차량 사고 내역
       .then((response) => {
         console.log("예약 / 사고 : ", response.data);
         setAccident([...response.data]);
