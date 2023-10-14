@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getCarInfo } from "api/reservationAxios";
+import { useLocation } from "react-router-dom";
 import {
   MdLocalCarWash,
   MdOutlineDateRange,
@@ -13,6 +14,7 @@ import {
 import dayjs from "dayjs";
 
 const DetailInfo = () => {
+  const location = useLocation(); // location state 제어
   const [carInfo, setCarInfo] = useState({}); // 차량 정보
   const [iconList, setIconList] = useState([
     // 아이콘
@@ -26,7 +28,7 @@ const DetailInfo = () => {
     <MdOutlineFlag className="text-[60px]" />,
   ]);
   useEffect(() => {
-    getCarInfo("99가9999") // 차량 정보 조회
+    getCarInfo(location.state.carNumber) // 차량 정보 조회
       .then((response) => {
         console.log("예약 / 상세정보 : ", response.data);
         // 데이터 가공
