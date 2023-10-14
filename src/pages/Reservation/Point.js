@@ -2,8 +2,9 @@ import { useRecoilState } from "recoil";
 import { rentPointSelector } from "recoil/rentAtom";
 import { useState, useEffect } from "react";
 import { getUserPoint } from "api/reservationAxios";
+import React from "react";
 
-const Point = () => {
+const Point = React.memo(() => {
   const [rentPoint, setRentPoint] = useRecoilState(rentPointSelector); // 포인트 사용 양 저장
   const [userPoint, setUserPoint] = useState(0); // 사용자 보유 포인트
   useEffect(() => {
@@ -58,6 +59,6 @@ const Point = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Point;
