@@ -82,7 +82,17 @@ const CarSearch = () => {
     })
       .then((response) => {
         console.log("CarDetail / getNoticeList", response.data);
-        setNoticeList(response.data);
+        if (response.data.length < 3) {
+          const array = [
+            ...response.data,
+            ...[...Array(3 - response.data.length)].map((v, i) => {
+              return { noticeId: null };
+            }),
+          ];
+          setNoticeList(array);
+        } else {
+          setNoticeList(response.data);
+        }
       })
       .catch((error) => {
         console.log("CarDetail / getNoticeList error", error.response);

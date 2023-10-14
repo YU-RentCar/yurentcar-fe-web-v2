@@ -17,31 +17,44 @@ export default function CarouselWithContent({ noticeList }) {
       {noticeList === null
         ? null
         : noticeList.map((v, i) => {
-            return (
-              <div
-                className="relative w-full h-full cursor-pointer"
-                key={i}
-                onClick={() => {
-                  nav("/notice", { state: v.noticeId });
-                }}
-              >
-                <div className="absolute inset-0 grid w-full h-full bg-blue-100 place-items-center">
-                  <div className="flex flex-col items-center justify-start w-full h-full">
-                    <img
-                      className="w-[160px] h-[114px] object-cover mt-[23px] rounded-xl"
-                      src="https://thecatapi.com/api/images/get?format=src&type=gif"
-                      alt=""
-                    />
-
-                    <h1 className="w-[200px] text-xl font-bold text-center text-blue-900 line-clamp-2 m-4">
-                      {v.title}
-                    </h1>
-
-                    <p className=" w-[200px] line-clamp-6">{v.description}</p>
+            if (v.noticeId === null) {
+              return (
+                <div className="relative w-full h-full" key={i}>
+                  <div className="absolute inset-0 grid w-full h-full bg-blue-100 place-items-center">
+                    <div className="flex flex-col items-center justify-center w-full h-full text-lg">
+                      <h1>아직 공지사항이 없어요...</h1>
+                      <p>더 좋은 서비스로 찾아올게요!</p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
+              );
+            } else {
+              return (
+                <div
+                  className="relative w-full h-full cursor-pointer"
+                  key={i}
+                  onClick={() => {
+                    nav("/notice", { state: v.noticeId });
+                  }}
+                >
+                  <div className="absolute inset-0 grid w-full h-full bg-blue-100 place-items-center">
+                    <div className="flex flex-col items-center justify-start w-full h-full">
+                      <img
+                        className="w-[160px] h-[114px] object-cover mt-[23px] rounded-xl"
+                        src="https://thecatapi.com/api/images/get?format=src&type=gif"
+                        alt=""
+                      />
+
+                      <h1 className="w-[200px] text-xl font-bold text-center text-blue-900 line-clamp-2 m-4">
+                        {v.title}
+                      </h1>
+
+                      <p className=" w-[200px] line-clamp-6">{v.description}</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
           })}
     </Carousel>
   );
