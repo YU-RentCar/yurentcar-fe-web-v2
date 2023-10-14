@@ -9,7 +9,7 @@ const Record = () => {
   const [userPoint, setUserPoint] = useState(0); // 사용자 포인트
   const [recent, setRecent] = useState([]); // 최근 본 차량 정보
   const [numberList, setNumberList] = useState(
-    JSON.parse(localStorage.getItem("carNum"))
+    JSON.parse(localStorage.getItem("resentInquireCar"))
   ); // 로컬스토리지에서 최근 본 최대 6대의 차량 번호
   useEffect(() => {
     getUserPoint() // 사용자 포인트 조회
