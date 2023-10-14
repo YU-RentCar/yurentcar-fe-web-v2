@@ -97,7 +97,7 @@ const CarSearch = () => {
       .catch((error) => {
         console.log("CarDetail / getNoticeList error", error.response);
       });
-  }, [currentRouteKey]);
+  }, [currentRouteKey, selectedFinderInfo]);
 
   // finder 검색 클릭 시, 선택된 finder 상태로 차량 리스트 조회
   useEffect(() => {
@@ -126,7 +126,7 @@ const CarSearch = () => {
       .catch((error) => {
         console.log("CarSearch / getCarCardList", error.response);
       });
-  }, [currentRouteKey]);
+  }, [currentRouteKey, selectedFinderInfo]);
 
   return (
     <>

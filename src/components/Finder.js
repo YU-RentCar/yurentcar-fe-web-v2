@@ -21,6 +21,28 @@ const Finder = ({ storePopUp, dateTimePopUp }) => {
   // 토스트 메시지를 사용하기 위한 변수
   const alert = useAlert();
 
+  // 로컬 스토리지에 정보가 들어 있다면 들고 온다.
+  useEffect(() => {
+    // 뭔가 들어가 있으면 이 구문은 넘긴다.
+    for (let prop in finderInfo) {
+      if (finderInfo[prop] !== null) {
+        return;
+      }
+    }
+
+    if (window.localStorage.getItem("finderInfos") === null) {
+      return;
+    } else {
+      // 역변환하여 우리가 아는 배열로 다시 바꿔온다.
+      const localFinderInfo = JSON.parse(
+        window.localStorage.getItem("finderInfos")
+      );
+
+      setFinderInfo(localFinderInfo);
+      setSelectedFinderInfo(localFinderInfo);
+    }
+  }, []);
+
   useEffect(() => {
     const startDate = dayjs(finderInfo.startDate);
     const startTime = finderInfo.startTime;
@@ -95,6 +117,11 @@ const Finder = ({ storePopUp, dateTimePopUp }) => {
             setSelectedFinderInfo({
               ...finderInfo,
             });
+
+            window.localStorage.setItem(
+              "finderInfos",
+              JSON.stringify(finderInfo)
+            );
 
             navigate("/carsearch");
           }}
