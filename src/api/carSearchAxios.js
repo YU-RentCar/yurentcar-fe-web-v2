@@ -13,3 +13,15 @@ export const getNoticeList = (payload) => {
     params: params,
   });
 };
+
+export const getCarDetail = (payload) => {
+  const params = new URLSearchParams();
+
+  params.append("carNumber", payload.carNumber);
+
+  return api({
+    url: "/branches/cars/details",
+    method: "get",
+    params: params,
+  });
+};
