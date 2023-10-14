@@ -35,7 +35,7 @@ const Review = () => {
         .then((response) => {
           console.log("마이페이지 / 리뷰조회 : ", response.data);
           reviewTitle.value = response.data.title;
-          reviewContent.value = response.data.content;
+          reviewContent.value = response.data.description;
           btn.classList.add("bg-amber-300");
           btn.textContent = "작성 완료";
           btn.disabled = true;
