@@ -81,6 +81,7 @@ const Review = () => {
                     reservationId: reviewTarget.reservationId,
                     title: title,
                     description: content,
+                    reason: "리뷰 작성",
                   };
                   await writeReview(newReview)
                     .then((response) => {
