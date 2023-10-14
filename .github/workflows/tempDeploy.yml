@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: Feat/#106-mypage-review-inquire-use-point-api
+    branches: develop
 jobs:
   deploy:
     runs-on: ubuntu-latest
