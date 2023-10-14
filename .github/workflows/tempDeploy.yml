@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: develop
+    branches: Feat/#102-car-popup-api
 jobs:
   deploy:
     runs-on: ubuntu-latest
