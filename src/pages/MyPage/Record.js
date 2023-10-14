@@ -8,9 +8,7 @@ const Record = () => {
   const popUpResv = usePopUp("MyPage/Resv"); // Resv 팝업 제어
   const [userPoint, setUserPoint] = useState(0); // 사용자 포인트
   const [recent, setRecent] = useState([]); // 최근 본 차량 정보
-  const [numberList, setNumberList] = useState(
-    JSON.parse(localStorage.getItem("resentInquireCar"))
-  ); // 로컬스토리지에서 최근 본 최대 6대의 차량 번호
+  const [numberList, setNumberList] = useState([]); // 로컬스토리지에서 최근 본 최대 6대의 차량 번호
   useEffect(() => {
     getUserPoint() // 사용자 포인트 조회
       .then((response) => {
@@ -20,6 +18,7 @@ const Record = () => {
       .catch((error) => {
         console.log("마이페이지 / 포인트조회에러 : ", error.response);
       });
+    setNumberList(JSON.parse(localStorage.getItem("resentInquireCar")));
   }, []);
   useEffect(() => {
     if (numberList.length !== 0) {
@@ -34,9 +33,9 @@ const Record = () => {
             console.log("마이페이지 / 최근조회에러 : ", error.response)
           );
       });
-      setRecent([...tmp]);
+      setRecent(tmp);
     }
-  }, []);
+  }, [numberList]);
   return (
     <>
       <div className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma">
