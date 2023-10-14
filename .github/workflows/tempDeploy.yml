@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: Fix/#112-defense-recoil-browser-reload
+    branches: develop
 jobs:
   deploy:
     runs-on: ubuntu-latest
