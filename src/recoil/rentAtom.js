@@ -63,7 +63,16 @@ export const driversSelector = selector({
   set: ({ set, get }, newName) => {
     const rentInfo = get(rentAtom);
     const newDrivers = [...rentInfo.drivers];
-    newDrivers.splice(newName.idx, 1, newName.driver);
+    const tmpDriver = {
+      name: newName.driver["이름"],
+      birthdate: newName.driver["생년월일"],
+      phoneNumber: newName.driver["전화번호"],
+      licenseType: newName.driver["면허 종류"],
+      licenseNumber: newName.driver["면허 번호"],
+      issueDate: newName.drivier["발급 일자"],
+      expirationDate: newName.driver["만료 일자"],
+    };
+    newDrivers.splice(newName.idx, 1, tmpDriver);
     const tmp = {
       ...rentInfo,
       drivers: [...newDrivers],

@@ -65,7 +65,7 @@ const Final = () => {
                 carNumber: rentInfo.carNumber,
                 startDate: rentInfo.startDate,
                 endDate: rentInfo.endDate,
-                reservationPrice:
+                price:
                   rentInfo.afterPrice + rentInfo.insurance - rentInfo.point,
                 usePoint: -1 * rentInfo.point,
                 reason: "차량 예약 사용",
