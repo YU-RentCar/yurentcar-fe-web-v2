@@ -84,6 +84,7 @@ let writeReview = (newReview) => {
       reservationId: newReview.reservationId,
       title: newReview.title,
       description: newReview.description,
+      reason: newReview.reason,
     },
   });
 };
