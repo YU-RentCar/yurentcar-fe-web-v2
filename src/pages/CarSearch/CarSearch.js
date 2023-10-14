@@ -250,6 +250,7 @@ const CarSearch = () => {
               ? carInfoList.map((v, i) => {
                   return (
                     <div
+                      key={i}
                       onClick={() => {
                         carDetailPopUp.toggle();
                       }}
