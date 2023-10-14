@@ -2,12 +2,17 @@ import { useState } from "react";
 import { useAlert } from "utils/useAlert";
 import { Input } from "@material-tailwind/react";
 import { checkNickname, changeNick } from "api/myPageAxios";
+import { useRecoilState } from "recoil";
+import { navNickNameAtom } from "recoil/navNickNameAtom";
 
 /* 닉네임 변경 시 사용할 박스 */
 const UserNickChange = ({ before, userInfo, setUserInfo, changeSetter }) => {
   let [tmpNick, setTmpNick] = useState(""); // 새로 입력된 닉네임
   let [newNick, setNewNick] = useState(""); // 최종적으로 변경할 닉네임
   let [isChekced, setIsChecked] = useState(false); // 중복 검사 여부
+
+  const [rclNavNickName, setRclNavNickName] = useRecoilState(navNickNameAtom);
+
   const alert = useAlert();
   return (
     <div className="w-[1010px] h-40 bg-white rounded-2xl flex items-center px-8 mt-7">
@@ -72,6 +77,7 @@ const UserNickChange = ({ before, userInfo, setUserInfo, changeSetter }) => {
                       console.log("마이페이지 / 닉네임변경 : ", response.data);
                       setUserInfo({ ...userInfo, nickname: newNick });
                       changeSetter(true);
+                      setRclNavNickName(newNick);
                       alert.onAndOff("닉네임이 변경되었습니다.");
                     })
                     .catch((error) =>
