@@ -31,16 +31,16 @@ const Review = () => {
       reviewTitle.disabled = true;
       reviewContent.disabled = true;
     } else if (reviewTarget.reviewType === 4) {
-      btn.classList.add("bg-amber-300");
-      btn.textContent = "작성 완료";
-      btn.disabled = true;
-      reviewTitle.disabled = true;
-      reviewContent.disabled = true;
       getReview(reviewTarget.reservationId)
         .then((response) => {
           console.log("마이페이지 / 리뷰조회 : ", response.data);
-          reviewTitle.textContent = response.data.title;
-          reviewContent.textContent = response.data.content;
+          reviewTitle.value = response.data.title;
+          reviewContent.value = response.data.content;
+          btn.classList.add("bg-amber-300");
+          btn.textContent = "작성 완료";
+          btn.disabled = true;
+          reviewTitle.disabled = true;
+          reviewContent.disabled = true;
         })
         .catch((error) =>
           console.log("마이페이지 / 리뷰조회에러 : ", error.response)
