@@ -1,7 +1,12 @@
+import { resvRent } from "api/reservationAxios";
+import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { rentAtom } from "recoil/rentAtom";
+import { useAlert } from "utils/useAlert";
 
 const Final = () => {
+  const nav = useNavigate(); // nav 제어
+  const alert = useAlert(); // Alert 제어
   const rentInfo = useRecoilValue(rentAtom); // 예약 결제 금액 정보
   return (
     <div className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma">
@@ -47,7 +52,36 @@ const Final = () => {
           </div>
         </div>
         {/* 최종 결제 버튼 */}
-        <button className="w-[400px] h-[100px] rounded-2xl bg-amber-400 text-4xl font-bold flex justify-center items-center shadow-figma">
+        <button
+          className="w-[400px] h-[100px] rounded-2xl bg-amber-400 text-4xl font-bold flex justify-center items-center shadow-figma"
+          onClick={() => {
+            if (rentInfo.insurance < 0) alert.onAndOff("보험을 선택해주세요");
+            else if (rentInfo.point < 0)
+              alert.onAndOff("0 이상의 포인트를 입력해주세요");
+            else if (rentInfo.drivers.length === 0)
+              alert.onAndOff("1명 이상의 운전자를 등록해주세요");
+            else {
+              const data = {
+                carNumber: rentInfo.carNumber,
+                startDate: rentInfo.startDate,
+                endDate: rentInfo.endDate,
+                reservationPrice:
+                  rentInfo.afterPrice + rentInfo.insurance - rentInfo.point,
+                usePoint: -1 * rentInfo.point,
+                reason: "차량 예약 사용",
+                drivers: rentInfo.drivers,
+              };
+              resvRent(data)
+                .then((response) => {
+                  console.log("예약 / 예약 : ", response.data);
+                  nav("/mypage");
+                })
+                .catch((error) =>
+                  console.log("예약 / 예약에러 : ", error.response)
+                );
+            }
+          }}
+        >
           결제하기
         </button>
       </div>
