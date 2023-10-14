@@ -3,10 +3,36 @@ import { atom, selector } from "recoil";
 export const rentAtom = atom({
   key: "rentAtom",
   default: {
-    price: 20000,
-    insurance: 0,
-    point: 0,
+    beforePrice: -1,
+    afterPrice: -1,
+    insurance: -1,
+    point: -1,
     drivers: [],
+  },
+});
+
+export const rentBeforeSelector = selector({
+  key: "rentBeforeSelector",
+  get: ({ get }) => get(rentAtom),
+  set: ({ set, get }, newValue) => {
+    const rentInfo = get(rentAtom);
+    const tmp = {
+      ...rentInfo,
+      beforePrice: newValue,
+    };
+    set(rentAtom, tmp);
+  },
+});
+export const rentAfterSelector = selector({
+  key: "rentAfterSelector",
+  get: ({ get }) => get(rentAtom),
+  set: ({ set, get }, newValue) => {
+    const rentInfo = get(rentAtom);
+    const tmp = {
+      ...rentInfo,
+      afterPrice: newValue,
+    };
+    set(rentAtom, tmp);
   },
 });
 

@@ -8,7 +8,6 @@ const Point = React.memo(() => {
   const [rentPoint, setRentPoint] = useRecoilState(rentPointSelector); // 포인트 사용 양 저장
   const [userPoint, setUserPoint] = useState(0); // 사용자 보유 포인트
   useEffect(() => {
-    console.log("re-rendering test");
     getUserPoint()
       .then((response) => {
         // 포인트 조회
