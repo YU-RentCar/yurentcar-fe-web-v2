@@ -55,9 +55,7 @@ const Open = React.memo(
                   const tmpDrivers = [...drivers];
                   tmpDrivers.splice(index, 1, tmp); // 변경된 객체로 수정
                   setDrivers([...tmpDrivers]);
-                  if (i === 0)
-                    // 변경된 이름으로 atom 수정
-                    setNewDriver({ name: e.target.value, idx: index });
+                  setNewDriver({ driver: tmp, idx: index });
                 }}
               />
             </div>
@@ -81,8 +79,7 @@ const Open = React.memo(
                     // 사용자의 정보 채워넣기 + 면허 정보는 더미 데이터
                     const tmp = {
                       이름: response.data.name,
-                      //생년월일: dayjs(response.data.birth).format("YYYY-MM-DD"),
-                      생년월일: "1999-03-13",
+                      생년월일: dayjs(response.data.birth).format("YYYY-MM-DD"),
                       전화번호: response.data.phoneNumber,
                       "면허 종류": "1종 보통",
                       "면허 번호": "00-11-222222-33",
