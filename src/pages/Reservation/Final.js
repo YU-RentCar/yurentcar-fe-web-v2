@@ -40,7 +40,9 @@ const Final = () => {
           <div className="w-[400px] h-[50px] flex justify-between items-center">
             <span className="text-3xl font-bold">결제금액</span>
             <span className="text-3xl font-bold text-blue-600">
-              {rentInfo.afterPrice + rentInfo.insurance - rentInfo.point}원
+              {rentInfo.afterPrice +
+                (rentInfo.insurance < 0 ? 0 : rentInfo.insurance) -
+                (rentInfo.point < 0 ? 0 : rentInfo.point)}
             </span>
           </div>
         </div>
