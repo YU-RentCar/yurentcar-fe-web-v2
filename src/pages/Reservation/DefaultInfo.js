@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { getCarInfo } from "api/reservationAxios";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { rentInfoSelector } from "recoil/rentAtom";
+import { selectedFinderAtom } from "recoil/selectedFinderAtom";
 import {
   MdOutlineDirectionsCarFilled,
   MdOutlineConfirmationNumber,
@@ -10,10 +13,13 @@ import {
   MdOutlineArticle,
 } from "react-icons/md";
 import Car from "assets/Car.png";
+import dayjs from "dayjs";
 
 const DefaultInfo = () => {
   const location = useLocation(); // 받아온 props 받기 위함
   const [carInfo, setCarInfo] = useState({}); // 차량 정보
+  const [rentInfo, setRentInfo] = useRecoilState(rentInfoSelector); // 최종 결제 시 필요 정보 저장
+  const dateInfo = useRecoilValue(selectedFinderAtom); // 예약 기간
   const [iconList, setIconList] = useState([
     // 아이콘
     <MdOutlineDirectionsCarFilled className="ml-4 text-[26px] text-blue-600" />,
@@ -38,6 +44,13 @@ const DefaultInfo = () => {
           "할인 사유": response.data.discountReason,
         };
         setCarInfo(tmp);
+        setRentInfo({
+          carNumber: response.data.carNumber,
+          startDate: dayjs(new Date()).format("YYYY. MM. DD. HH:mm"),
+          endDate: dayjs(new Date()).format("YYYY. MM. DD. HH:mm"),
+          beforePrice: response.data.beforePrice,
+          afterPrice: response.data.afterPrice,
+        });
       })
       .catch((error) => {
         console.log("예약 / 기본정보에러 : ", error.response);

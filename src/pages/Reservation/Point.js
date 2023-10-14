@@ -1,11 +1,23 @@
-import { useRecoilValue } from "recoil";
-import { userAtom } from "recoil/userAtom";
 import { useRecoilState } from "recoil";
 import { rentPointSelector } from "recoil/rentAtom";
+import { useState, useEffect } from "react";
+import { getUserPoint } from "api/reservationAxios";
+import React from "react";
 
-const Point = () => {
+const Point = React.memo(() => {
   const [rentPoint, setRentPoint] = useRecoilState(rentPointSelector); // 포인트 사용 양 저장
-  const userPoint = useRecoilValue(userAtom).point; // 사용자 보유 포인트
+  const [userPoint, setUserPoint] = useState(0); // 사용자 보유 포인트
+  useEffect(() => {
+    getUserPoint()
+      .then((response) => {
+        // 포인트 조회
+        console.log("예약 / 포인트조회 : ", response.data);
+        setUserPoint(response.data);
+      })
+      .catch((error) =>
+        console.log("예약 / 포인트조회에러 : ", error.response)
+      );
+  }, []);
   return (
     <div className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma">
       {/* 타이틀 */}
@@ -33,10 +45,10 @@ const Point = () => {
               let ment = document.getElementById("ment");
               if (e.target.value === "" || Number(e.target.value) < 0) {
                 ment.textContent = "0 이상의 숫자를 입력해주세요";
-                setRentPoint(0);
+                setRentPoint(-1);
               } else if (Number(e.target.value) > userPoint) {
                 ment.textContent = "보유 포인트를 초과할 수 없습니다";
-                setRentPoint(0);
+                setRentPoint(-1);
               } else {
                 ment.textContent = "";
                 setRentPoint(Number(e.target.value));
@@ -47,6 +59,6 @@ const Point = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Point;

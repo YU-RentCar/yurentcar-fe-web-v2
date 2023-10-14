@@ -36,6 +36,14 @@ let getMapPoint = (storeInfo) => {
   });
 };
 
+/* 사용자 기본 정보 */
+let getUserInfo = () => {
+  return api({
+    url: "/users/profiles",
+    method: "get",
+  });
+};
+
 /* 사용자 포인트 */
 let getUserPoint = () => {
   return api({
@@ -44,4 +52,21 @@ let getUserPoint = () => {
   });
 };
 
-export { getCarInfo, getCarRepair, getCarAccident, getMapPoint, getUserPoint };
+/* 차량 예약 */
+let resvRent = (data) => {
+  return api({
+    url: "/reservations",
+    method: "post",
+    data: data,
+  });
+};
+
+export {
+  getCarInfo,
+  getCarRepair,
+  getCarAccident,
+  getMapPoint,
+  getUserInfo,
+  getUserPoint,
+  resvRent,
+};
