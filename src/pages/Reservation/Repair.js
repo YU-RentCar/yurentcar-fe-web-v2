@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { getCarRepair } from "api/reservationAxios";
+import { useLocation } from "react-router-dom";
 import {
   Accordion,
   AccordionHeader,
@@ -8,11 +9,12 @@ import {
 import dayjs from "dayjs";
 
 const Repair = () => {
+  const location = useLocation(); // location state 제어
   const [repair, setRepair] = useState([]); // 차량 수리 내역
   const [open, setOpen] = useState(1); // 아코디언 제어
   const handleOpen = (value) => setOpen(open === value ? 0 : value); // 아코디언 on/off
   useEffect(() => {
-    getCarRepair("99가9999") // 차량 수리 내역
+    getCarRepair(location.state.carNumber) // 차량 수리 내역
       .then((response) => {
         console.log("예약 / 수리 : ", response.data);
         setRepair([...response.data]);

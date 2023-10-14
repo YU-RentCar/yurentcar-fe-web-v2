@@ -16,7 +16,7 @@ import Car from "assets/Car.png";
 import dayjs from "dayjs";
 
 const DefaultInfo = () => {
-  const location = useLocation(); // 받아온 props 받기 위함
+  const location = useLocation(); // location state 제어
   const [carInfo, setCarInfo] = useState({}); // 차량 정보
   const [rentInfo, setRentInfo] = useRecoilState(rentInfoSelector); // 최종 결제 시 필요 정보 저장
   const dateInfo = useRecoilValue(selectedFinderAtom); // 예약 기간
@@ -30,8 +30,7 @@ const DefaultInfo = () => {
     <MdOutlineArticle className="ml-4 text-[26px] text-blue-600" />,
   ]);
   useEffect(() => {
-    // location.state
-    getCarInfo("99가9999") // 차량 기본 정보
+    getCarInfo(location.state.carNumber) // 차량 기본 정보
       .then((response) => {
         console.log("예약 / 기본정보 : ", response.data);
         // 데이터 가공

@@ -3,11 +3,14 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 const Map = () => {
-  const location = useLocation();
+  const location = useLocation(); // location state 제어
   const [mapPoint, setMapPoint] = useState({});
   useEffect(() => {
     // location.state
-    getMapPoint({ province: "경상북도", store: "IT관점" })
+    getMapPoint({
+      province: location.state.province,
+      store: location.state.store,
+    })
       .then((response) => {
         console.log("예약 / 지도 : ", response.data);
         // 데이터 가공
