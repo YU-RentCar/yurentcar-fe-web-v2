@@ -20,18 +20,20 @@ const Final = () => {
           </div>
           <div className="w-[400px] h-[50px] flex justify-between items-center">
             <span className="text-3xl font-bold">할인 후</span>
-            <span className="text-3xl font-bold">{rentInfo.afterPrice}원</span>
+            <span className="text-3xl font-bold text-red-500">
+              {rentInfo.afterPrice}원
+            </span>
           </div>
           <div className="w-[400px] h-[50px] flex justify-between items-center">
             <span className="text-3xl font-bold">보험료</span>
             <span className="text-3xl font-bold text-blue-600">
-              +{rentInfo.insurance}원
+              +{rentInfo.insurance < 0 ? 0 : rentInfo.insurance}원
             </span>
           </div>
           <div className="w-[400px] h-[50px] flex justify-between items-center">
             <span className="text-3xl font-bold">포인트</span>
             <span className="text-3xl font-bold text-red-500">
-              -{rentInfo.point}P
+              -{rentInfo.point < 0 ? 0 : rentInfo.point}P
             </span>
           </div>
           <hr className="border-2 border-black w-[400px]" />

@@ -45,10 +45,10 @@ const Point = React.memo(() => {
               let ment = document.getElementById("ment");
               if (e.target.value === "" || Number(e.target.value) < 0) {
                 ment.textContent = "0 이상의 숫자를 입력해주세요";
-                setRentPoint(0);
+                setRentPoint(-1);
               } else if (Number(e.target.value) > userPoint) {
                 ment.textContent = "보유 포인트를 초과할 수 없습니다";
-                setRentPoint(0);
+                setRentPoint(-1);
               } else {
                 ment.textContent = "";
                 setRentPoint(Number(e.target.value));
