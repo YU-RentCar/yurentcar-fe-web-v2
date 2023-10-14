@@ -88,6 +88,15 @@ let writeReview = (newReview) => {
   });
 };
 
+/* 후기 조회 */
+let getReview = (reservationId) => {
+  return api({
+    url: "/reservations/reviews",
+    method: "get",
+    params: { reservationId: reservationId },
+  });
+};
+
 /* 로그아웃 */
 let logout = () => {
   return api({
@@ -118,5 +127,6 @@ export {
   getPointRecord,
   getResvRecord,
   writeReview,
+  getReview,
   logout,
 };

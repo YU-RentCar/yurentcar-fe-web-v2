@@ -3,7 +3,7 @@ import { MdOutlineClose } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { reviewTargetAtom } from "recoil/reviewTargetAtom";
-import { writeReview } from "api/myPageAxios";
+import { getReview, writeReview } from "api/myPageAxios";
 import { useAlert } from "utils/useAlert";
 import ResvCard from "pages/MyPage/ResvCard";
 
@@ -36,6 +36,15 @@ const Review = () => {
       btn.disabled = true;
       reviewTitle.disabled = true;
       reviewContent.disabled = true;
+      getReview(reviewTarget.reservationId)
+        .then((response) => {
+          console.log("마이페이지 / 리뷰조회 : ", response.data);
+          reviewTitle.textContent = response.data.title;
+          reviewContent.textContent = response.data.content;
+        })
+        .catch((error) =>
+          console.log("마이페이지 / 리뷰조회에러 : ", error.response)
+        );
     }
   }, []);
   return (
