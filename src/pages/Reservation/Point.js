@@ -8,6 +8,7 @@ const Point = React.memo(() => {
   const [rentPoint, setRentPoint] = useRecoilState(rentPointSelector); // 포인트 사용 양 저장
   const [userPoint, setUserPoint] = useState(0); // 사용자 보유 포인트
   useEffect(() => {
+    console.log("re-rendering test");
     getUserPoint()
       .then((response) => {
         // 포인트 조회
@@ -17,7 +18,7 @@ const Point = React.memo(() => {
       .catch((error) =>
         console.log("예약 / 포인트조회에러 : ", error.response)
       );
-  });
+  }, []);
   return (
     <div className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma">
       {/* 타이틀 */}
