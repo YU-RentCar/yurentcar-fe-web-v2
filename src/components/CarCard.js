@@ -1,9 +1,14 @@
-import Car from "assets/Car.png";
-import { useRecoilValue } from "recoil";
-import { carAtom } from "recoil/carAtom";
 import { Chip } from "@material-tailwind/react";
 
-const CarCard = ({ name, number, odo, price, imageURI, discountRatio }) => {
+const CarCard = ({
+  name,
+  number,
+  totalDistance,
+  beforePrice,
+  afterPrice,
+  imageURI,
+  discountRatio,
+}) => {
   return (
     <div className="w-[270px] h-[376px] rounded-2xl bg-white mt-8 hover:shadow-figma mx-auto border-2">
       {/* 차량 사진 */}
@@ -24,11 +29,11 @@ const CarCard = ({ name, number, odo, price, imageURI, discountRatio }) => {
           className="text-[13px] font-semibold w-[88px] h-[22px] flex justify-center items-center rounded-[5px] m-1 bg-blue-400"
         />
         <Chip
-          value={`# ${odo}km`}
+          value={`# ${totalDistance}km`}
           className="text-[13px] font-semibold w-[88px] h-[22px] flex justify-center items-center rounded-[5px] m-1 bg-blue-300 text-blue-900"
         />
         <Chip
-          value={`# ${price / 10000}만원대`}
+          value={`# ${afterPrice / 10000}만원대`}
           className="text-[13px] font-semibold w-[88px] h-[22px] flex justify-center items-center rounded-[5px] m-1 bg-blue-200 text-blue-900"
         />
       </div>
@@ -36,12 +41,10 @@ const CarCard = ({ name, number, odo, price, imageURI, discountRatio }) => {
       <div className="pl-4 mt-4 text-2xl font-extrabold">{name}</div>
       {/* 차량 가격 */}
       <div className="pl-4 mt-4 text-xl font-bold">
-        <span className="line-through text-slate-500">{`₩${
-          price * (1.0 + discountRatio / 100)
-        }`}</span>
-        <span className="ml-2 text-red-500">{-`${discountRatio}%`}</span>
+        <span className="line-through text-slate-500">{`₩${beforePrice}`}</span>
+        <span className="ml-2 text-red-500">{`-${discountRatio}%`}</span>
       </div>
-      <div className="flex justify-end pr-4 mt-2 font-extrabold text-[28px] text-blue-500">{`₩${price}`}</div>
+      <div className="flex justify-end pr-4 mt-2 font-extrabold text-[28px] text-blue-500">{`₩${afterPrice}`}</div>
     </div>
   );
 };

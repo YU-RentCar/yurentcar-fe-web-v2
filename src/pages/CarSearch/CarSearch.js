@@ -297,8 +297,11 @@ const CarSearch = () => {
                       <CarCard
                         name={v.carName}
                         number={v.carNumber}
-                        odo={v.totalDistance}
-                        price={v.price}
+                        totalDistance={v.totalDistance}
+                        beforePrice={v.beforePrice}
+                        afterPrice={v.afterPrice}
+                        imageURI={v.imageUri}
+                        discountRatio={v.discountRatio}
                       ></CarCard>
                     </div>
                   );
