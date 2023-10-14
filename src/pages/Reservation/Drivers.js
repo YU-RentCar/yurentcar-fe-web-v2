@@ -1,5 +1,5 @@
 import { useAlert } from "utils/useAlert";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Close from "./Close";
 import Open from "./Open";
 
