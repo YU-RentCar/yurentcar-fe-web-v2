@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: develop
+    branches: Fix/#115-nav-name-immediately-change
 jobs:
   deploy:
     runs-on: ubuntu-latest
