@@ -52,6 +52,15 @@ let getUserPoint = () => {
   });
 };
 
+/* 차량 예약 */
+let resvRent = (data) => {
+  return api({
+    url: "/reservations",
+    method: "post",
+    data: data,
+  });
+};
+
 export {
   getCarInfo,
   getCarRepair,
@@ -59,4 +68,5 @@ export {
   getMapPoint,
   getUserInfo,
   getUserPoint,
+  resvRent,
 };

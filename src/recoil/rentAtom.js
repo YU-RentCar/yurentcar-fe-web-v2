@@ -3,6 +3,9 @@ import { atom, selector } from "recoil";
 export const rentAtom = atom({
   key: "rentAtom",
   default: {
+    carNumber: "",
+    startDate: "",
+    endDate: "",
     beforePrice: -1,
     afterPrice: -1,
     insurance: -1,
@@ -11,26 +14,18 @@ export const rentAtom = atom({
   },
 });
 
-export const rentBeforeSelector = selector({
-  key: "rentBeforeSelector",
+export const rentInfoSelector = selector({
+  key: "rentDateSelector",
   get: ({ get }) => get(rentAtom),
   set: ({ set, get }, newValue) => {
     const rentInfo = get(rentAtom);
     const tmp = {
       ...rentInfo,
-      beforePrice: newValue,
-    };
-    set(rentAtom, tmp);
-  },
-});
-export const rentAfterSelector = selector({
-  key: "rentAfterSelector",
-  get: ({ get }) => get(rentAtom),
-  set: ({ set, get }, newValue) => {
-    const rentInfo = get(rentAtom);
-    const tmp = {
-      ...rentInfo,
-      afterPrice: newValue,
+      carNumber: newValue.carNumber,
+      startDate: newValue.startDate,
+      endDate: newValue.endDate,
+      beforePrice: newValue.beforePrice,
+      afterPrice: newValue.afterPrice,
     };
     set(rentAtom, tmp);
   },
@@ -68,7 +63,7 @@ export const driversSelector = selector({
   set: ({ set, get }, newName) => {
     const rentInfo = get(rentAtom);
     const newDrivers = [...rentInfo.drivers];
-    newDrivers.splice(newName.idx, 1, newName.name);
+    newDrivers.splice(newName.idx, 1, newName.driver);
     const tmp = {
       ...rentInfo,
       drivers: [...newDrivers],
