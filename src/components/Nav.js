@@ -1,16 +1,18 @@
 import { Link } from "react-router-dom";
 import Logo from "assets/Logo.png";
-import { useEffect, useState, useRef } from "react";
+import { useEffect } from "react";
 import { getUserInfo } from "api/myPageAxios";
+import { useRecoilState } from "recoil";
+import { navNickNameAtom } from "recoil/navNickNameAtom";
 
 const Nav = () => {
-  const [userName, setUserName] = useState(null);
+  const [rclNickName, setRclNickName] = useRecoilState(navNickNameAtom);
 
   useEffect(() => {
     getUserInfo()
       .then((response) => {
         console.log("Nav / 사용자기본정보 : ", response.data);
-        setUserName(response.data.nickname);
+        setRclNickName(response.data.nickname);
       })
       .catch((error) => {
         console.log("Nav / 사용자기본정보 에러", error.response);
@@ -48,7 +50,7 @@ const Nav = () => {
               </Link>
             </div>
             <span className="pr-4 ml-4 text-lg font-bold">
-              <span className="text-amber-400">{userName}</span> 고객님
+              <span className="text-amber-400">{rclNickName}</span> 고객님
               안녕하세요!
             </span>
           </div>
