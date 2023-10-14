@@ -53,6 +53,9 @@ const CarSearch = () => {
   // 차량 리스트 렌더링에 필요한 state
   const [carInfoList, setCarInfoList] = useState(null);
 
+  // 차량 상세정보를 확인할때 사용하는 현재 클릭한 차량의 번호
+  const [selectedCarNumber, setSelectedCarNumber] = useState(null);
+
   // 선호차량 검색 체크박스의 변경점을 체크하는 함수
   const gatherInfo = () => {
     let newPrefer = {
@@ -254,6 +257,9 @@ const CarSearch = () => {
                       onClick={() => {
                         carDetailPopUp.toggle();
 
+                        // 팝업에 정보를 넘겨주는 목적으로 state 저장
+                        setSelectedCarNumber(v.carNumber);
+
                         // 로컬스토리지에 없으면 null, 빈 배열로 초기화
                         if (
                           window.localStorage.getItem("resentInquireCar") ===
@@ -319,7 +325,7 @@ const CarSearch = () => {
         <SelectDateTime popUpInfo={dateTimePopUp} />
       ) : undefined}
       {carDetailPopUp.isClicked ? (
-        <CarDetail popUpInfo={carDetailPopUp} />
+        <CarDetail popUpInfo={carDetailPopUp} carNumber={selectedCarNumber} />
       ) : undefined}
     </>
   );
