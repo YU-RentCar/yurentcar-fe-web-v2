@@ -46,6 +46,7 @@ const Open = React.memo(
                 className="w-full h-16 px-4 text-2xl font-bold border-2 border-black rounded-2xl"
                 value={info[v]}
                 placeholder={placeholders[i]}
+                disabled={i === 3 || i === 4 || i === 5 || i === 6}
                 onChange={(e) => {
                   // 새로운 내용이 입력되면 수정
                   const tmp = {

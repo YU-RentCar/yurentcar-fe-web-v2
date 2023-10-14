@@ -67,10 +67,10 @@ export const driversSelector = selector({
       name: newName.driver["이름"],
       birthdate: newName.driver["생년월일"] + " 00:00",
       phoneNumber: newName.driver["전화번호"],
-      licenseType: newName.driver["면허종류"],
-      licenseNumber: newName.driver["면허번호"],
-      issueDate: newName.drivier["발급일자"],
-      expirationDate: newName.driver["만료일자"],
+      licenseType: "1종 보통",
+      licenseNumber: "00-11-222222-33",
+      issueDate: "2023. 01. 01. 00:00",
+      expirationDate: "2023. 12. 31. 00:00",
     };
     newDrivers.splice(newName.idx, 1, tmpDriver);
     const tmp = {
