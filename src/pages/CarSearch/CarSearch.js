@@ -73,7 +73,7 @@ const CarSearch = () => {
     return newPrefer;
   };
 
-  // finder 검색 클릭 시, 공지사항 리스트 불러옴
+  // finder 검색 클릭하거나, 새로고침 시, 공지사항 리스트 불러옴
   useEffect(() => {
     getNoticeList({
       province: selectedFinderInfo.province,
@@ -99,7 +99,7 @@ const CarSearch = () => {
       });
   }, [currentRouteKey, selectedFinderInfo]);
 
-  // finder 검색 클릭 시, 선택된 finder 상태로 차량 리스트 조회
+  // finder 검색 클릭하거나, 새로고침 시, 차량 리스트 조회
   useEffect(() => {
     const infos = {};
 
