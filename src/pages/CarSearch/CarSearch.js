@@ -270,17 +270,17 @@ const CarSearch = () => {
                           window.localStorage.getItem("resentInquireCar")
                         );
 
-                        // 이미 6개 있으면 제일 앞을 뺌
-                        if (queue.length === 6) {
-                          queue.shift();
-                        }
-
                         // 같은 차량이 들어갈 수 없음
                         if (queue.includes(v.carNumber)) {
                           const idx = queue.findIndex(
                             (elm) => v.carNumber === elm
                           );
                           queue.splice(idx, 1);
+                        }
+
+                        // 이미 6개 있으면 제일 앞을 뺌
+                        if (queue.length === 6) {
+                          queue.shift();
                         }
 
                         // 새로운 차 번호를 배열 뒤에 넣는다.
