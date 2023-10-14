@@ -65,12 +65,12 @@ export const driversSelector = selector({
     const newDrivers = [...rentInfo.drivers];
     const tmpDriver = {
       name: newName.driver["이름"],
-      birthdate: newName.driver["생년월일"],
+      birthdate: newName.driver["생년월일"] + " 00:00",
       phoneNumber: newName.driver["전화번호"],
-      licenseType: newName.driver["면허 종류"],
-      licenseNumber: newName.driver["면허 번호"],
-      issueDate: newName.drivier["발급 일자"],
-      expirationDate: newName.driver["만료 일자"],
+      licenseType: newName.driver["면허종류"],
+      licenseNumber: newName.driver["면허번호"],
+      issueDate: newName.drivier["발급일자"],
+      expirationDate: newName.driver["만료일자"],
     };
     newDrivers.splice(newName.idx, 1, tmpDriver);
     const tmp = {

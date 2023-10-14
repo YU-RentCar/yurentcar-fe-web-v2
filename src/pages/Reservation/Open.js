@@ -79,19 +79,20 @@ const Open = React.memo(
                     // 사용자의 정보 채워넣기 + 면허 정보는 더미 데이터
                     const tmp = {
                       이름: response.data.name,
-                      생년월일:
-                        dayjs(response.data.birth).format("YYYY. MM. DD. ") +
-                        "00:00",
+                      생년월일: dayjs(response.data.birth).format(
+                        "YYYY. MM. DD."
+                      ),
                       전화번호: response.data.phoneNumber,
-                      "면허 종류": "1종 보통",
-                      "면허 번호": "00-11-222222-33",
-                      "발급 일자": "2023. 01. 01. 00:00",
-                      "만료 일자": "2033. 12. 31. 00:00",
+                      면허종류: "1종 보통",
+                      면허번호: "00-11-222222-33",
+                      발급일자: "2023. 01. 01. 00:00",
+                      만료일자: "2033. 12. 31. 00:00",
                     }; // 해당 객체의 정보 변경
                     const tmpDrivers = [...drivers];
                     tmpDrivers.splice(index, 1, tmp); // 변경된 객체로 수정
                     setDrivers([...tmpDrivers]);
                     setIsInclude({ state: true, index: index });
+                    setNewDriver({ driver: tmp, idx: index });
                   })
                   .catch((error) =>
                     console.log("예약 / 사용자조회에러 : ", error.response)
