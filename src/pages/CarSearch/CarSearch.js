@@ -16,6 +16,7 @@ import { useLocation, useNavigate } from "react-router";
 import { getPreferOption } from "api/myPageAxios";
 import { useAlert } from "utils/useAlert";
 import { selectedFinderAtom } from "recoil/selectedFinderAtom";
+import { getNoticeList } from "api/carSearchAxios";
 
 const CarSearch = () => {
   // 팝업을 제어하는데 필요한 변수
@@ -38,6 +39,9 @@ const CarSearch = () => {
     transmissions: [true, true],
     minCount: 1,
   });
+
+  // 공지사항 리스트
+  const [noticeList, setNoticeList] = useState(null);
 
   // 검색된 상태의 finder 정보를 가지는 변수
   const selectedFinderInfo = useRecoilValue(selectedFinderAtom);
@@ -65,6 +69,22 @@ const CarSearch = () => {
     newPrefer.minCount = document.getElementById("minCount").value;
     return newPrefer;
   };
+
+  // finder 검색 클릭 시, 공지사항 리스트 불러옴
+  useEffect(() => {
+    getNoticeList({
+      province: selectedFinderInfo.province,
+      store: selectedFinderInfo.store,
+      count: 3,
+    })
+      .then((response) => {
+        console.log("CarDetail / getNoticeList", response.data);
+        setNoticeList(response.data);
+      })
+      .catch((error) => {
+        console.log("CarDetail / getNoticeList error", error.response);
+      });
+  }, [currentRouteKey]);
 
   // finder 검색 클릭 시, 선택된 finder 상태로 차량 리스트 조회
   useEffect(() => {
@@ -209,7 +229,9 @@ const CarSearch = () => {
               {/* 어떤 지점 공지사항 */}
               <div className="flex flex-col items-center justify-center my-3">
                 <span>
-                  <span className="font-bold text-blue-600">대구 수성구</span>점
+                  <span className="font-bold text-blue-600">
+                    {`${selectedFinderInfo.province} ${selectedFinderInfo.store} `}
+                  </span>
                   <br />
                 </span>
                 <span className="text-xl font-semibold">공지사항</span>
@@ -217,7 +239,7 @@ const CarSearch = () => {
 
               {/* 공지사항 슬라이더 */}
               <div className="h-[485px]">
-                <NoticeCarousel />
+                <NoticeCarousel noticeList={noticeList} />
               </div>
             </div>
           </div>
@@ -228,6 +250,7 @@ const CarSearch = () => {
               ? carInfoList.map((v, i) => {
                   return (
                     <div
+                      key={i}
                       onClick={() => {
                         carDetailPopUp.toggle();
                       }}

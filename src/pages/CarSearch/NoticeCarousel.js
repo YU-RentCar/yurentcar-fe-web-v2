@@ -1,26 +1,9 @@
 import { Carousel } from "@material-tailwind/react";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-export default function CarouselWithContent() {
-  const dummy = [
-    {
-      image: "https://thecatapi.com/api/images/get?format=src&type=gif",
-      title: "Take a look Take a look",
-      paragragh:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur, vitae! Quam nemo, recusandae ipsum ab impedit illo, harum fuga repellendus quo esse quisquam vitae explicabo et ipsa, ut perferendis ducimus.",
-    },
-    {
-      image: "https://thecatapi.com/api/images/get?format=src&type=gif",
-      title: "떼껄룩",
-      paragragh: "카짓은 죽여도 현상금이 걸리지 않는다.",
-    },
-    {
-      image: "https://thecatapi.com/api/images/get?format=src&type=gif",
-      title:
-        "제목이 매우 김 제목이 매우 김 제목이 매우 김 제목이 매우 김 제목이",
-      paragragh:
-        "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Tenetur, vitae! Quam nemo, recusandae ipsum ab impedit illo, harum fuga repellendus quo esse quisquam vitae explicabo et ipsa, ut perferendis ducimus.",
-    },
-  ];
+import { useNavigate } from "react-router-dom";
+
+export default function CarouselWithContent({ noticeList }) {
+  const nav = useNavigate();
 
   return (
     <Carousel
@@ -31,27 +14,35 @@ export default function CarouselWithContent() {
       autoplay={true}
       loop={true}
     >
-      {dummy.map((v, i) => {
-        return (
-          <div className="relative w-full h-full" key={i}>
-            <div className="absolute inset-0 grid w-full h-full bg-blue-100 place-items-center">
-              <div className="flex flex-col items-center justify-start w-full h-full">
-                <img
-                  className="w-[160px] h-[114px] object-cover mt-[23px] rounded-xl"
-                  src={v.image}
-                  alt=""
-                />
+      {noticeList === null
+        ? null
+        : noticeList.map((v, i) => {
+            return (
+              <div
+                className="relative w-full h-full cursor-pointer"
+                key={i}
+                onClick={() => {
+                  nav("/notice", { state: v.noticeId });
+                }}
+              >
+                <div className="absolute inset-0 grid w-full h-full bg-blue-100 place-items-center">
+                  <div className="flex flex-col items-center justify-start w-full h-full">
+                    <img
+                      className="w-[160px] h-[114px] object-cover mt-[23px] rounded-xl"
+                      src="https://thecatapi.com/api/images/get?format=src&type=gif"
+                      alt=""
+                    />
 
-                <h1 className="w-[200px] text-xl font-bold text-center text-blue-900 line-clamp-2 m-4">
-                  {v.title}
-                </h1>
+                    <h1 className="w-[200px] text-xl font-bold text-center text-blue-900 line-clamp-2 m-4">
+                      {v.title}
+                    </h1>
 
-                <p className=" w-[200px] line-clamp-6">{v.paragragh}</p>
+                    <p className=" w-[200px] line-clamp-6">{v.description}</p>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        );
-      })}
+            );
+          })}
     </Carousel>
   );
 }
@@ -82,7 +73,7 @@ function nextArrowCustom({ loop, handleNext, lastIndex }) {
 
 function navigationCustom({ setActiveIndex, activeIndex, length }) {
   return (
-    <div className="absolute z-50 flex gap-2 bottom-10 left-2/4 -translate-x-2/4">
+    <div className="absolute z-40 flex gap-2 bottom-10 left-2/4 -translate-x-2/4">
       {new Array(length).fill("").map((_, i) => (
         <span
           key={i}
