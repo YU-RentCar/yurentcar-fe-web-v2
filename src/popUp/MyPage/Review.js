@@ -3,7 +3,7 @@ import { MdOutlineClose } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { reviewTargetAtom } from "recoil/reviewTargetAtom";
-import { writeReview } from "api/myPageAxios";
+import { getReview, writeReview } from "api/myPageAxios";
 import { useAlert } from "utils/useAlert";
 import ResvCard from "pages/MyPage/ResvCard";
 
@@ -31,11 +31,20 @@ const Review = () => {
       reviewTitle.disabled = true;
       reviewContent.disabled = true;
     } else if (reviewTarget.reviewType === 4) {
-      btn.classList.add("bg-amber-300");
-      btn.textContent = "작성 완료";
-      btn.disabled = true;
-      reviewTitle.disabled = true;
-      reviewContent.disabled = true;
+      getReview(reviewTarget.reservationId)
+        .then((response) => {
+          console.log("마이페이지 / 리뷰조회 : ", response.data);
+          reviewTitle.value = response.data.title;
+          reviewContent.value = response.data.description;
+          btn.classList.add("bg-amber-300");
+          btn.textContent = "작성 완료";
+          btn.disabled = true;
+          reviewTitle.disabled = true;
+          reviewContent.disabled = true;
+        })
+        .catch((error) =>
+          console.log("마이페이지 / 리뷰조회에러 : ", error.response)
+        );
     }
   }, []);
   return (
@@ -72,6 +81,7 @@ const Review = () => {
                     reservationId: reviewTarget.reservationId,
                     title: title,
                     description: content,
+                    reason: "리뷰 작성",
                   };
                   await writeReview(newReview)
                     .then((response) => {

@@ -84,7 +84,26 @@ let writeReview = (newReview) => {
       reservationId: newReview.reservationId,
       title: newReview.title,
       description: newReview.description,
+      reason: newReview.reason,
     },
+  });
+};
+
+/* 후기 조회 */
+let getReview = (reservationId) => {
+  return api({
+    url: "/reservations/reviews",
+    method: "get",
+    params: { reservationId: reservationId },
+  });
+};
+
+/* 차량 정보 */
+let getRecent = (carNumber) => {
+  return api({
+    url: "/branches/cars/details",
+    method: "get",
+    params: { carNumber: carNumber },
   });
 };
 
@@ -95,17 +114,6 @@ let logout = () => {
     method: "post",
   });
 };
-
-/* 최근 본 차량 조회 */
-// let getRecentRecord = () => {
-//   let params = new URLSearchParams();
-//   params.append("carNumbers", ["11가1111", "12삼4567"]);
-//   return api({
-//     url: "/branches/cars/views",
-//     method: "get",
-//     params: params,
-//   });
-// };
 
 export {
   getWaitingResvInfo,
@@ -118,5 +126,7 @@ export {
   getPointRecord,
   getResvRecord,
   writeReview,
+  getReview,
+  getRecent,
   logout,
 };
