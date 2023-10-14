@@ -75,6 +75,9 @@ const CarSearch = () => {
     return newPrefer;
   };
 
+  // 공지사항 전체 리스트 조회 화면으로 이동
+  const nav = useNavigate();
+
   // finder 검색 클릭 시, 공지사항 리스트 불러옴
   useEffect(() => {
     getNoticeList({
@@ -243,7 +246,18 @@ const CarSearch = () => {
             <div className="w-full">
               {/* 어떤 지점 공지사항 */}
               <Tooltip content="전체 공지사항 보러가기">
-                <button className="flex items-center justify-around w-full h-20 my-3 rounded-2xl bg-sky-50 border-[1px] border-blue-600 px-4 hover:bg-sky-200 hover:shadow-figma">
+                <button
+                  className="flex items-center justify-around w-full h-20 my-3 rounded-2xl bg-sky-50 border-[1px] border-blue-600 px-4 hover:bg-sky-200 hover:shadow-figma"
+                  onClick={() => {
+                    // 공지사항 전체 리스트 조회 화면으로 이동하기 위한 state 정의
+                    nav("/notice", {
+                      state: {
+                        store: selectedFinderInfo.store,
+                        province: selectedFinderInfo.province,
+                      },
+                    });
+                  }}
+                >
                   <div className="flex flex-col items-center justify-around h-full py-8">
                     <span>
                       <span className="font-bold text-blue-600">

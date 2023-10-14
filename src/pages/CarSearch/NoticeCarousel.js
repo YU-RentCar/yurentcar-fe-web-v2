@@ -1,9 +1,12 @@
 import { Carousel } from "@material-tailwind/react";
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue } from "recoil";
+import { selectedFinderAtom } from "recoil/selectedFinderAtom";
 
 export default function CarouselWithContent({ noticeList }) {
   const nav = useNavigate();
+  const selectedFinderInfo = useRecoilValue(selectedFinderAtom);
 
   return (
     <Carousel
@@ -34,7 +37,13 @@ export default function CarouselWithContent({ noticeList }) {
                   className="relative w-full h-full cursor-pointer"
                   key={i}
                   onClick={() => {
-                    nav("/notice", { state: v.noticeId });
+                    nav("/noticedetail", {
+                      state: {
+                        province: selectedFinderInfo.province,
+                        branchName: selectedFinderInfo.store,
+                        noticeId: v.noticeId,
+                      },
+                    });
                   }}
                 >
                   <div className="absolute inset-0 grid w-full h-full bg-blue-100 place-items-center">

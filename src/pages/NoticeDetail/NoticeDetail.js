@@ -1,23 +1,46 @@
 import dayjs from "dayjs";
-import { useRecoilValue } from "recoil";
 import { MdOutlineArrowBack } from "react-icons/md";
-import { noticeAtom } from "recoil/noticeAtom";
-import { finderAtom } from "recoil/finderAtom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { getNotice } from "api/noticeAxios";
+import { useRecoilValue } from "recoil";
+import { selectedFinderAtom } from "recoil/selectedFinderAtom";
 
 const NoticeDetail = () => {
-  const noticeInfo = useRecoilValue(noticeAtom)[0]; // 공지사항 정보
-  const store = useRecoilValue(finderAtom).store; // 지점
-  // 남은 날짜 계산
-  const [leftDate, setLeftDate] = useState(
-    dayjs().diff(dayjs(noticeInfo.endDate), "day")
-  );
+  const location = useLocation(); // location state 제어
+  const nav = useNavigate(); // nav 제어
+  const selectedFinderInfo = useRecoilValue(selectedFinderAtom); // 시/도 지점 정보
+  const [noticeInfo, setNoticeInfo] = useState({}); // 공지사항 정보
+  const [leftDate, setLeftDate] = useState(); // 남은 날짜
+  useEffect(() => {
+    // 공지사항 조회
+    getNotice(location.state.noticeId)
+      .then((response) => {
+        console.log("공지사항 / 조회 : ", response.data);
+        setNoticeInfo(response.data);
+      })
+      .catch((error) => console.log("공지사항 / 조회에러 : ", error.response));
+  }, []);
+  useEffect(() => {
+    // 남은 날짜 계산
+    setLeftDate(dayjs(noticeInfo.finishDate).diff(dayjs(new Date()), "day"));
+  }, [noticeInfo]);
   return (
     <>
       <div className="w-[1140px] mx-auto mt-[120px]">
         {/* 뒤로 가기 */}
         <div className="flex">
-          <MdOutlineArrowBack className="text-4xl font-bold text-black" />
+          <MdOutlineArrowBack
+            className="text-4xl font-bold text-black"
+            onClick={() => {
+              nav("/notice", {
+                state: {
+                  province: selectedFinderInfo.province,
+                  branchName: selectedFinderInfo.store,
+                },
+              });
+            }}
+          />
           <span className="ml-4 text-4xl font-bold text-indigo-900">
             리스트로 돌아가기
           </span>
@@ -28,11 +51,22 @@ const NoticeDetail = () => {
             {noticeInfo.title}
           </span>
           {/* 지점 */}
-          <span className="text-3xl font-bold text-blue-600">{store}</span>
+          <span className="text-3xl font-bold text-blue-600">
+            {`${location.state.province}  ${location.state.branchName}`}
+          </span>
           {/* 이벤트 기간 & 디데이 */}
           <span className="text-3xl font-semibold text-gray-600">
-            {dayjs(noticeInfo.startDate).format("YY년 MM월 DD일")} ~{" "}
-            {dayjs(noticeInfo.endDate).format("YY년 MM월 DD일")}
+            {noticeInfo.startDate === null && noticeInfo.finishDate === null
+              ? ""
+              : `${
+                  noticeInfo.startDate === null
+                    ? ""
+                    : dayjs(noticeInfo.startDate).format("YY년 MM월 DD일")
+                } ~ ${
+                  noticeInfo.finishDate === null
+                    ? ""
+                    : dayjs(noticeInfo.finishDate).format("YY년 MM월 DD일")
+                }`}
             <span className="ml-12 text-red-500">
               {leftDate > 0
                 ? `${leftDate}일 남았어요!`
@@ -43,7 +77,7 @@ const NoticeDetail = () => {
           </span>
           {/* 최종 작성일 */}
           <span className="text-3xl font-semibold text-blue-600">
-            최종 작성일 {dayjs(noticeInfo.recentEdit).format("YY년 MM월 DD일")}
+            최종 작성일 {dayjs(noticeInfo.modifiedAt).format("YY년 MM월 DD일")}
           </span>
         </div>
         {/* 공지사항 사진 */}
@@ -54,7 +88,7 @@ const NoticeDetail = () => {
         ></img>
         {/* 본문 내용 */}
         <p className="w-[1100px] mx-auto mt-4 mb-40 text-3xl font-normal">
-          {noticeInfo.content}
+          {noticeInfo.description}
         </p>
       </div>
     </>
