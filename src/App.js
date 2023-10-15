@@ -44,6 +44,8 @@ function App() {
             // 로그인 성공 -> 네비게이션바on, 기존에 있던 경로 or home 으로 이동
             setNavState(true);
             if (location.pathname.split("/")[1] === "") nav("/");
+            else if (location.pathname.split("/")[1] === "reservation")
+              nav("/carsearch");
             else nav("/" + location.pathname.split("/")[1]);
           }
         })
