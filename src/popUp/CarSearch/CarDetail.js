@@ -12,10 +12,14 @@ import { selectedFinderAtom } from "recoil/selectedFinderAtom";
 import { useRecoilState } from "recoil";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
+import { usePopUp } from "utils/usePopUp";
 
 const CarDetail = ({ popUpInfo, carNumber }) => {
   // 예약 페이지로 이동
   const navigate = useNavigate();
+
+  // 팝업 제어를 위한 변수
+  const carDetailPopUp = usePopUp("CarSearch/CarDetail");
 
   const detailTemplate = [
     {
@@ -171,6 +175,7 @@ const CarDetail = ({ popUpInfo, carNumber }) => {
                   <button
                     className="w-[110px] h-[44px] bg-amber-400 rounded-xl font-semibold text-[20px] self-end mb-[10px] mr-3"
                     onClick={() => {
+                      carDetailPopUp.toggle();
                       navigate("/reservation", {
                         state: {
                           carNumber: carNumber,
