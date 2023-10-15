@@ -67,7 +67,7 @@ const DefaultInfo = () => {
         <img
           src={`http://be.yurentcar.kro.kr:1234/api/v1/images/display/${carInfo["차종"]}.png`}
           alt="차량 사진"
-          className="mr-2"
+          className="object-cover h-[295px] w-[400px] rounded-2xl mr-2"
         ></img>
         {/* 기본 정보 */}
         <div className="w-[660px] flex flex-col justify-around items-center bg-blue-100 rounded-2xl py-8 ml-2">
