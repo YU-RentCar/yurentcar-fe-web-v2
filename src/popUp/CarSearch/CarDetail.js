@@ -131,7 +131,7 @@ const CarDetail = ({ popUpInfo, carNumber }) => {
                   })}
                 </div>
                 {/* 차량 결제 정보 */}
-                <div className="flex flex-col justify-around col-span-1 px-5 bg-white rounded-xl">
+                <div className="flex flex-col justify-around col-span-1 pl-5 bg-white rounded-xl">
                   <div className="text-[20px] font-semibold text-blue-900 mt-[15px]">
                     결제정보
                   </div>
@@ -153,7 +153,7 @@ const CarDetail = ({ popUpInfo, carNumber }) => {
                         ₩{`${carInfo.beforePrice}`}
                       </div>
                     </div>
-                    <div className="flex flex-col items-end mt-1">
+                    <div className="flex flex-col items-end pr-5 mt-1">
                       <div className="text-[12px] font-medium">
                         {carInfo.discountReason}
                       </div>
@@ -169,7 +169,7 @@ const CarDetail = ({ popUpInfo, carNumber }) => {
                     </div>
                   </div>
                   <button
-                    className="w-[110px] h-[44px] bg-amber-400 rounded-xl font-semibold text-[20px] self-end mb-[10px] -mr-2"
+                    className="w-[110px] h-[44px] bg-amber-400 rounded-xl font-semibold text-[20px] self-end mb-[10px] mr-3"
                     onClick={() => {
                       navigate("/reservation", {
                         state: {
