@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: Fix/#129-reservation-backspace
+    branches: develop
 jobs:
   deploy:
     runs-on: ubuntu-latest
