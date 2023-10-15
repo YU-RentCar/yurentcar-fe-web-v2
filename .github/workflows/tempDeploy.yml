@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: develop
+    branches: Fix/#132-reservation-carsearch-popup
 jobs:
   deploy:
     runs-on: ubuntu-latest
