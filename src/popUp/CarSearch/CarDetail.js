@@ -89,7 +89,6 @@ const CarDetail = ({ popUpInfo, carNumber }) => {
               <div className="w-[839px] h-[250px] bg-white rounded-xl shadow-figma flex items-center justify-around">
                 {/* 차량 사진 */}
                 <div className="w-[345px] h-[210px] bg-blue-200 rounded-2xl">
-                  {/* 일시적인 떼껄룩 */}
                   <img
                     className="object-fill w-full h-full rounded-2xl"
                     src={`http://be.yurentcar.kro.kr:1234/api/v1/images/display/${carInfo.carName}.png`}

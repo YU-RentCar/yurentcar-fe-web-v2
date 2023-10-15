@@ -40,7 +40,7 @@ const ResvCard = ({ resvInfo, idx, type }) => {
       <div className="w-[350px] h-[373px] rounded-2xl bg-white mx-auto hover:shadow-figma">
         {/* 차량 사진 */}
         <img
-          src={Car}
+          src={`http://be.yurentcar.kro.kr:1234/api/v1/images/display/${resvInfo.carName}.png`}
           alt="차량 사진"
           className="w-full h-[196px] rounded-t-2xl object-cover"
         ></img>
