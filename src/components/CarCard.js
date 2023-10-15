@@ -14,7 +14,7 @@ const CarCard = ({
       {/* 차량 사진 */}
       <img
         // 일시적으로 고양이 움짤로 대체
-        src="https://thecatapi.com/api/images/get?format=src&type=gif"
+        src={`http://be.yurentcar.kro.kr:1234/api/v1/images/display/${name}.png`}
         alt="차량 사진"
         className="object-cover h-[164px] w-full rounded-t-2xl"
       ></img>

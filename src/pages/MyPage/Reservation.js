@@ -24,6 +24,7 @@ const Reservation = ({ setResvState }) => {
   const [resvInfo, setResvInfo] = useState({}); // 예약 정보
   const [driversInfo, setDriversInfo] = useState([]); // 등록된 운전자 정보
   useEffect(() => {
+    const img = document.getElementById("mypageImg");
     getWaitingResvInfo()
       .then((response) => {
         // 객체가 없다면 대기 중인 예약이 없으니 해당 컴포넌트 off
@@ -48,10 +49,12 @@ const Reservation = ({ setResvState }) => {
           tmp["차 번호"] = ` :   ${response.data.carNumber}`;
           setResvInfo(tmp);
           setDriversInfo([...response.data.drivers]);
+          img.src = `http://be.yurentcar.kro.kr:1234/api/v1/images/display/${response.data.carName}.png`;
+          console.log(img.src);
         }
       })
       .catch((error) => {
-        console.log("마이페이지 / 렌트대기예약정보에러 : ", error.reponse);
+        console.log("마이페이지 / 렌트대기예약정보에러 : ", error.response);
         setResvState(false);
       });
   }, []);
@@ -66,7 +69,12 @@ const Reservation = ({ setResvState }) => {
         {/* 차량 정보 */}
         <div className="flex items-center justify-around w-full mt-3">
           {/* 차량 사진 */}
-          <img src={Car} alt="차량 사진"></img>
+          <img
+            id="mypageImg"
+            src=""
+            alt="차량 사진"
+            className="object-cover h-[295px] w-[400px] rounded-2xl"
+          ></img>
           {/* 렌트 정보 */}
           <div className="w-[660px] flex flex-col justify-around items-center bg-blue-100 rounded-2xl py-4">
             {/* 예약 기간, 예약 지점, 차량, 차 번호 */}
