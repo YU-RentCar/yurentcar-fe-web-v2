@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: Fix/#130-prefer-oil-local-check-fix
+    branches: develop
 jobs:
   deploy:
     runs-on: ubuntu-latest
