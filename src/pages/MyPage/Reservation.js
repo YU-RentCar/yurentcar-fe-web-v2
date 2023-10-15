@@ -55,6 +55,10 @@ const Reservation = ({ setResvState }) => {
         setResvState(false);
       });
   }, []);
+  useEffect(() => {
+    const img = document.getElementById("mypageImg");
+    img.src = `http://be.yurentcar.kro.kr:1234/api/v1/images/display/${resvInfo["차량"]}.png`;
+  }, [resvInfo]);
   return (
     <>
       <div className="flex flex-col items-center w-full py-4 bg-sky-50 rounded-2xl shadow-figma">
@@ -66,10 +70,7 @@ const Reservation = ({ setResvState }) => {
         {/* 차량 정보 */}
         <div className="flex items-center justify-around w-full mt-3">
           {/* 차량 사진 */}
-          <img
-            src={`http://be.yurentcar.kro.kr:1234/api/v1/images/display/${resvInfo["차량"]}.png`}
-            alt="차량 사진"
-          ></img>
+          <img id="mypageImg" src="" alt="차량 사진"></img>
           {/* 렌트 정보 */}
           <div className="w-[660px] flex flex-col justify-around items-center bg-blue-100 rounded-2xl py-4">
             {/* 예약 기간, 예약 지점, 차량, 차 번호 */}
