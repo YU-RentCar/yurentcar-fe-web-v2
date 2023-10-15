@@ -21,6 +21,35 @@ const Finder = ({ storePopUp, dateTimePopUp }) => {
   // 토스트 메시지를 사용하기 위한 변수
   const alert = useAlert();
 
+  // finder가 렌더링 될 때 세션 스토리지에 정보가 있다면 들고 오는 코드
+  useEffect(() => {
+    // 뭔가 들어가 있으면 이 구문은 넘긴다.
+    for (let prop in finderInfo) {
+      if (finderInfo[prop] !== null) {
+        return;
+      }
+    }
+
+    if (window.sessionStorage.getItem("finderInfos") === null) {
+      return;
+    } else {
+      // 역변환하여 우리가 아는 배열로 다시 바꿔온다.
+      const sessionFinderInfo = JSON.parse(
+        window.sessionStorage.getItem("finderInfos")
+      );
+
+      const temp = {
+        ...sessionFinderInfo,
+        endDate: new Date(sessionFinderInfo.endDate),
+        startDate: new Date(sessionFinderInfo.startDate),
+      };
+
+      setFinderInfo(temp);
+      setSelectedFinderInfo(temp);
+    }
+  }, []);
+
+  // finder 내부의 변화를 감지하여 state에 저장
   useEffect(() => {
     const startDate = dayjs(finderInfo.startDate);
     const startTime = finderInfo.startTime;
@@ -95,6 +124,12 @@ const Finder = ({ storePopUp, dateTimePopUp }) => {
             setSelectedFinderInfo({
               ...finderInfo,
             });
+
+            // 세션 스토리지는 selectedFinderAtom과 내용이 같다
+            window.sessionStorage.setItem(
+              "finderInfos",
+              JSON.stringify(finderInfo)
+            );
 
             navigate("/carsearch");
           }}
