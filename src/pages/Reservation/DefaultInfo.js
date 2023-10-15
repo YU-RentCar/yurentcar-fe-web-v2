@@ -45,8 +45,8 @@ const DefaultInfo = () => {
         setCarInfo(tmp);
         setRentInfo({
           carNumber: response.data.carNumber,
-          startDate: dayjs(new Date()).format("YYYY. MM. DD. HH:mm"),
-          endDate: dayjs(new Date()).format("YYYY. MM. DD. HH:mm"),
+          startDate: dayjs(dateInfo.startDate).format("YYYY. MM. DD. HH:mm"),
+          endDate: dayjs(dateInfo.endDate).format("YYYY. MM. DD. HH:mm"),
           beforePrice: response.data.beforePrice,
           afterPrice: response.data.afterPrice,
         });
