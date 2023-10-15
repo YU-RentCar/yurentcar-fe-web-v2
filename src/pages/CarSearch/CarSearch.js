@@ -287,10 +287,10 @@ const CarSearch = () => {
                       <div
                         key={i}
                         onClick={() => {
-                          carDetailPopUp.toggle();
-
                           // 팝업에 정보를 넘겨주는 목적으로 state 저장
                           setSelectedCarNumber(v.carNumber);
+
+                          carDetailPopUp.toggle();
 
                           // 로컬스토리지에 없으면 null, 빈 배열로 초기화
                           if (
