@@ -51,13 +51,18 @@ const Reservation = ({ setResvState }) => {
         }
       })
       .catch((error) => {
-        console.log("마이페이지 / 렌트대기예약정보에러 : ", error.reponse);
+        console.log("마이페이지 / 렌트대기예약정보에러 : ", error.response);
         setResvState(false);
       });
   }, []);
   useEffect(() => {
     const img = document.getElementById("mypageImg");
     img.src = `http://be.yurentcar.kro.kr:1234/api/v1/images/display/${resvInfo["차량"]}.png`;
+    console.log(
+      resvInfo["차량"],
+      img.src,
+      `http://be.yurentcar.kro.kr:1234/api/v1/images/display/${resvInfo["차량"]}.png`
+    );
   }, [resvInfo]);
   return (
     <>
