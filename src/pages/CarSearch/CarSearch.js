@@ -283,63 +283,65 @@ const CarSearch = () => {
             {carInfoList
               ? carInfoList.map((v, i) => {
                   return (
-                    <div
-                      key={i}
-                      onClick={() => {
-                        carDetailPopUp.toggle();
+                    <div>
+                      <div
+                        key={i}
+                        onClick={() => {
+                          carDetailPopUp.toggle();
 
-                        // 팝업에 정보를 넘겨주는 목적으로 state 저장
-                        setSelectedCarNumber(v.carNumber);
+                          // 팝업에 정보를 넘겨주는 목적으로 state 저장
+                          setSelectedCarNumber(v.carNumber);
 
-                        // 로컬스토리지에 없으면 null, 빈 배열로 초기화
-                        if (
-                          window.localStorage.getItem("resentInquireCar") ===
-                          null
-                        ) {
+                          // 로컬스토리지에 없으면 null, 빈 배열로 초기화
+                          if (
+                            window.localStorage.getItem("resentInquireCar") ===
+                            null
+                          ) {
+                            window.localStorage.setItem(
+                              "resentInquireCar",
+                              JSON.stringify([])
+                            );
+                          }
+
+                          // 역변환하여 우리가 아는 배열로 다시 바꿔온다.
+                          let queue = JSON.parse(
+                            window.localStorage.getItem("resentInquireCar")
+                          );
+
+                          // 같은 차량이 들어갈 수 없음
+                          if (queue.includes(v.carNumber)) {
+                            const idx = queue.findIndex(
+                              (elm) => v.carNumber === elm
+                            );
+                            queue.splice(idx, 1);
+                          }
+
+                          // 이미 6개 있으면 제일 앞을 뺌
+                          if (queue.length === 6) {
+                            queue.shift();
+                          }
+
+                          // 새로운 차 번호를 배열 뒤에 넣는다.
+                          queue.push(v.carNumber);
+
+                          // 로컬 스토리지에 배열을 저장
                           window.localStorage.setItem(
                             "resentInquireCar",
-                            JSON.stringify([])
+                            JSON.stringify(queue)
                           );
-                        }
-
-                        // 역변환하여 우리가 아는 배열로 다시 바꿔온다.
-                        let queue = JSON.parse(
-                          window.localStorage.getItem("resentInquireCar")
-                        );
-
-                        // 같은 차량이 들어갈 수 없음
-                        if (queue.includes(v.carNumber)) {
-                          const idx = queue.findIndex(
-                            (elm) => v.carNumber === elm
-                          );
-                          queue.splice(idx, 1);
-                        }
-
-                        // 이미 6개 있으면 제일 앞을 뺌
-                        if (queue.length === 6) {
-                          queue.shift();
-                        }
-
-                        // 새로운 차 번호를 배열 뒤에 넣는다.
-                        queue.push(v.carNumber);
-
-                        // 로컬 스토리지에 배열을 저장
-                        window.localStorage.setItem(
-                          "resentInquireCar",
-                          JSON.stringify(queue)
-                        );
-                      }}
-                    >
-                      {/* 추후 빠진 props 추가할 것 */}
-                      <CarCard
-                        name={v.carName}
-                        number={v.carNumber}
-                        totalDistance={v.totalDistance}
-                        beforePrice={v.beforePrice}
-                        afterPrice={v.afterPrice}
-                        imageURI={v.imageUri}
-                        discountRatio={v.discountRatio}
-                      ></CarCard>
+                        }}
+                      >
+                        {/* 추후 빠진 props 추가할 것 */}
+                        <CarCard
+                          name={v.carName}
+                          number={v.carNumber}
+                          totalDistance={v.totalDistance}
+                          beforePrice={v.beforePrice}
+                          afterPrice={v.afterPrice}
+                          imageURI={v.imageUri}
+                          discountRatio={v.discountRatio}
+                        ></CarCard>
+                      </div>
                     </div>
                   );
                 })
