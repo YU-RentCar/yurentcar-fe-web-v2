@@ -57,7 +57,9 @@ const Reservation = ({ setResvState }) => {
   }, []);
   useEffect(() => {
     const img = document.getElementById("mypageImg");
-    img.src = `http://be.yurentcar.kro.kr:1234/api/v1/images/display/${resvInfo["차량"]}.png`;
+    img.src = `http://be.yurentcar.kro.kr:1234/api/v1/images/display/${resvInfo[
+      "차량"
+    ].substring(5)}.png`;
     console.log(
       resvInfo["차량"],
       img.src,
