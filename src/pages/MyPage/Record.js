@@ -21,7 +21,7 @@ const Record = () => {
     setNumberList(JSON.parse(localStorage.getItem("resentInquireCar")));
   }, []);
   useEffect(() => {
-    if (numberList.length !== 0) {
+    if (numberList !== null) {
       const tmp = [];
       numberList.forEach((v, i) => {
         getRecent(v) // 저장된 차량 번호 수만큼 상세 정보 조회
