@@ -24,6 +24,7 @@ const Reservation = ({ setResvState }) => {
   const [resvInfo, setResvInfo] = useState({}); // 예약 정보
   const [driversInfo, setDriversInfo] = useState([]); // 등록된 운전자 정보
   useEffect(() => {
+    const img = document.getElementById("mypageImg");
     getWaitingResvInfo()
       .then((response) => {
         // 객체가 없다면 대기 중인 예약이 없으니 해당 컴포넌트 off
@@ -48,6 +49,8 @@ const Reservation = ({ setResvState }) => {
           tmp["차 번호"] = ` :   ${response.data.carNumber}`;
           setResvInfo(tmp);
           setDriversInfo([...response.data.drivers]);
+          img.src = `http://be.yurentcar.kro.kr:1234/api/v1/images/display/${response.data.carName}.png`;
+          console.log(img.src);
         }
       })
       .catch((error) => {
@@ -55,17 +58,6 @@ const Reservation = ({ setResvState }) => {
         setResvState(false);
       });
   }, []);
-  useEffect(() => {
-    const img = document.getElementById("mypageImg");
-    img.src = `http://be.yurentcar.kro.kr:1234/api/v1/images/display/${resvInfo[
-      "차량"
-    ].substring(5)}.png`;
-    console.log(
-      resvInfo["차량"],
-      img.src,
-      `http://be.yurentcar.kro.kr:1234/api/v1/images/display/${resvInfo["차량"]}.png`
-    );
-  }, [resvInfo]);
   return (
     <>
       <div className="flex flex-col items-center w-full py-4 bg-sky-50 rounded-2xl shadow-figma">
