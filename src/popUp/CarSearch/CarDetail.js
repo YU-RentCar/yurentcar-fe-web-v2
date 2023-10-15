@@ -92,7 +92,7 @@ const CarDetail = ({ popUpInfo, carNumber }) => {
                   {/* 일시적인 떼껄룩 */}
                   <img
                     className="object-fill w-full h-full rounded-2xl"
-                    src="https://thecatapi.com/api/images/get?format=src&type=gif"
+                    src={`http://be.yurentcar.kro.kr:1234/api/v1/images/display/${carInfo.carName}.png`}
                     alt=""
                   />
                 </div>
