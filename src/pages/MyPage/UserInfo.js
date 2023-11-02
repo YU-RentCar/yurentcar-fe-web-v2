@@ -9,7 +9,6 @@ const UserInfo = () => {
   useEffect(() => {
     getUserInfo() // 사용자 기본 정보 api
       .then((response) => {
-        console.log("마이페이지 / 사용자기본정보2 : ", response.data);
         setUserInfo(response.data);
       })
       .catch((error) =>

@@ -32,13 +32,11 @@ const Reservation = ({ setResvState }) => {
           setResvState(true);
           getUserInfo() // 사용자 이름을 위한 api
             .then((response) => {
-              console.log("마이페이지 / 사용자기본정보1 : ", response.data);
               setUserName(response.data.nickname);
             })
             .catch((error) =>
               console.log("마이페이지 / 사용자기본정보1에러 : ", error.response)
             );
-          console.log("마이페이지 / 렌트대기예약정보 : ", response.data);
           const tmp = {};
           // 데이터 가공
           tmp["렌트 기간"] = ` :   ${dayjs(response.data.startDate).format(

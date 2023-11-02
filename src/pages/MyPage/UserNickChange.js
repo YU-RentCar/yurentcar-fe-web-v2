@@ -34,10 +34,6 @@ const UserNickChange = ({ before, userInfo, setUserInfo, changeSetter }) => {
               } else {
                 await checkNickname(tmpNick) // 닉네임 중복 검사
                   .then((response) => {
-                    console.log(
-                      "마이페이지 / 닉네임중복확인 : ",
-                      response.data
-                    );
                     if (response.data)
                       alert.onAndOff("중복된 닉네임입니다"); // 중복 o
                     else {
@@ -67,7 +63,6 @@ const UserNickChange = ({ before, userInfo, setUserInfo, changeSetter }) => {
                 await changeNick(newNick)
                   .then((response) => {
                     // 닉네임 변경
-                    console.log("마이페이지 / 닉네임변경 : ", response.data);
                     setUserInfo({ ...userInfo, nickname: newNick });
                     changeSetter(true);
                     setRclNavNickName(newNick);

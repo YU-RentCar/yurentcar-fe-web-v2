@@ -35,7 +35,6 @@ const PreferOption = () => {
   useEffect(() => {
     getPreferOption() // 사용자 선호 옵션 api
       .then((response) => {
-        console.log("마이페이지 / 선호옵션 : ", response.data);
         setUserPrefer(response.data);
       })
       .catch((error) =>
@@ -65,7 +64,6 @@ const PreferOption = () => {
               // 사용자 선호 옵션 변경 api
               await changePreferOption(newPrefer)
                 .then((response) => {
-                  console.log("마이페이지 / 선호옵션변경 : ", response.data);
                   alert.onAndOff("옵션을 변경하였습니다");
                   setUserPrefer(newPrefer);
                 })

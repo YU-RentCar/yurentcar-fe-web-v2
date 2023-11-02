@@ -11,7 +11,6 @@ const Record = () => {
   useEffect(() => {
     getUserPoint() // 사용자 포인트 조회
       .then((response) => {
-        console.log("마이페이지 / 포인트조회 : ", response.data);
         setUserPoint(response.data);
       })
       .catch((error) => {
@@ -25,7 +24,6 @@ const Record = () => {
       for (let i = 0; i < numberList.length; i++) {
         getRecent(numberList[i])
           .then((response) => {
-            console.log("마이페이지 / 최근조회 : ", response.data);
             tmp[tmp.length] = response.data;
             setRecent([...tmp]);
           })

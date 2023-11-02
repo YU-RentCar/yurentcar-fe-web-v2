@@ -37,7 +37,6 @@ const Account = () => {
           onClick={async () => {
             await logout()
               .then((response) => {
-                console.log("마이페이지 / 로그아웃 : ", response.data);
                 setNavState(false);
                 nav("/auth");
               })
