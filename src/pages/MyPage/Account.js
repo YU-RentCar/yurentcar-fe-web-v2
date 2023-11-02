@@ -1,10 +1,13 @@
 import { logout } from "api/myPageAxios";
 import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { navStateSelector } from "recoil/navStateAtom";
 import { usePopUp } from "utils/usePopUp";
 
 const Account = () => {
   const popUpInfo = usePopUp("MyPage/Quit"); // 팝업 제어
   const nav = useNavigate(); // 경로 이동
+  const [navState, setNavState] = useRecoilState(navStateSelector); // 로그아웃 시 Nav 제어
   return (
     <div
       className="flex flex-col items-center w-full py-8 mt-12 mb-40 bg-sky-50 rounded-2xl shadow-figma"
@@ -35,6 +38,7 @@ const Account = () => {
             await logout()
               .then((response) => {
                 console.log("마이페이지 / 로그아웃 : ", response.data);
+                setNavState(false);
                 nav("/auth");
               })
               .catch((error) =>
