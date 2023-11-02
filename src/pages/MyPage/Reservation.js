@@ -14,10 +14,10 @@ const Reservation = ({ setResvState }) => {
   dayjs.locale("ko"); // dayjs 에 한국어 적용
   const [iconList, setIconList] = useState([
     // 아이콘
-    <MdOutlineTimer className="ml-4 text-[26px] text-blue-600" />,
-    <MdOutlinePlace className="ml-4 text-[26px] text-blue-600" />,
-    <MdOutlineDirectionsCarFilled className="ml-4 text-[26px] text-blue-600" />,
-    <MdOutlineConfirmationNumber className="ml-4 text-[26px] text-blue-600" />,
+    <MdOutlineTimer className="ml-4 text-[22px] text-blue-600" />,
+    <MdOutlinePlace className="ml-4 text-[22px] text-blue-600" />,
+    <MdOutlineDirectionsCarFilled className="ml-4 text-[22px] text-blue-600" />,
+    <MdOutlineConfirmationNumber className="ml-4 text-[22px] text-blue-600" />,
   ]);
   const [userInfo, setUserName] = useState(""); // 사용자 이름
   const [resvInfo, setResvInfo] = useState({}); // 예약 정보
@@ -74,19 +74,19 @@ const Reservation = ({ setResvState }) => {
           id="mypageImg"
           src=""
           alt="차량 사진"
-          className="object-cover h-[295px] w-[400px] rounded-2xl"
+          className="object-cover h-[150px] w-[300px] rounded-2xl"
         ></img>
         {/* 렌트 정보 */}
-        <div className="w-[660px] flex flex-col justify-around items-center bg-blue-100 rounded-2xl py-4">
+        <div className="w-[450px] flex flex-col justify-around items-center bg-blue-100 rounded-2xl py-4">
           {/* 예약 기간, 예약 지점, 차량, 차 번호 */}
           {Object.keys(resvInfo).map((v, i) => {
             return (
               <div
-                className="w-[600px] h-[50px] bg-sky-200 flex items-center rounded-2xl mt-2"
+                className="w-[420px] h-[35px] bg-sky-200 flex items-center rounded-2xl mt-2"
                 key={i}
               >
                 {iconList[i]}
-                <span className="ml-5 text-xl font-semibold ">
+                <span className="ml-5 text-base font-semibold ">
                   {v + resvInfo[v]}
                 </span>
               </div>
