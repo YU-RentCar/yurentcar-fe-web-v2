@@ -54,20 +54,20 @@ const DetailInfo = () => {
       id="Reservation/DetailInfo"
     >
       {/* 타이틀 */}
-      <div className="w-[1010px] h-[70px] flex justify-between items-center text-blue-800 text-[45px] font-bold">
+      <div className="w-[700px] h-[35px] flex justify-between items-center text-blue-800 text-[30px] font-extrabold">
         차량 상세 정보
       </div>
       {/* 상세 정보 */}
-      <div className="w-[1100px] h-[510px] mx-auto bg-blue-200 rounded-2xl mt-4 flex flex-wrap justify-center items-center">
+      <div className="w-[700px] h-[510px] mx-auto bg-blue-200 rounded-2xl mt-4 flex flex-wrap justify-center items-center">
         {Object.keys(carInfo).map((v, i) => {
           return (
             <div
-              className="w-[200px] h-[200px] bg-sky-50 flex flex-col justify-around rounded-2xl mx-8 pl-4 py-4"
+              className="w-[150px] h-[150px] bg-sky-50 flex flex-col justify-around rounded-xl mx-6 pl-3 py-3"
               key={i}
             >
               {iconList[i]}
-              <span className="text-2xl font-semibold">{v}</span>
-              <span className="text-4xl font-bold text-blue-900">
+              <span className="text-lg font-semibold">{v}</span>
+              <span className="text-2xl font-bold text-blue-900">
                 {carInfo[v]}
               </span>
             </div>
