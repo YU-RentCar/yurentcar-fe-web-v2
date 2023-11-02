@@ -49,20 +49,20 @@ const Insurance = () => {
       id="Reservation/Insurance"
     >
       {/* 타이틀 */}
-      <div className="w-[1010px] h-[70px] flex justify-between items-center text-blue-800 text-[45px] font-bold">
+      <div className="w-[700px] h-[35px] flex justify-between items-center text-blue-800 text-[30px] font-bold">
         차량 종합 보험
       </div>
       {/* 보험 정보 */}
-      <div className="w-[1100px] h-[542px] mt-4 rounded-2xl bg-white flex justify-around items-center">
+      <div className="w-[750px] h-[360px] mt-4 rounded-2xl bg-white flex justify-around items-center">
         {Object.keys(contents).map((v, i) => {
           return (
             <div
               key={i}
               name="ins"
-              className="w-[320px] h-[500px] rounded-lg bg-sky-200 flex flex-col justify-around items-center"
+              className="w-[230px] h-[340px] rounded-lg bg-sky-200 flex flex-col justify-around items-center"
             >
-              <span className="text-5xl font-extrabold text-blue-800">{v}</span>
-              <div className="text-3xl font-bold text-center">
+              <span className="text-2xl font-extrabold text-blue-800">{v}</span>
+              <div className="text-lg font-bold text-center">
                 {contents[v][0]}
                 <br />
                 <br />
