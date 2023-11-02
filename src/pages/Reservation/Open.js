@@ -65,7 +65,7 @@ const Open = React.memo(
         <div className="w-[200px] h-8 flex justify-between items-center absolute right-0 top-0 mr-12 mt-4">
           {/* 사용자 정보 가져오기 버튼 */}
           <button
-            className="w-[100px] h-full text-base font-bold rounded-2xl bg-amber-300 hover:shadow-figma"
+            className="w-[100px] h-full text-base font-bold rounded-lg bg-amber-300 hover:shadow-figma"
             onClick={async () => {
               if (isInclude.state)
                 alert.onAndOff(
@@ -105,7 +105,7 @@ const Open = React.memo(
           </button>
           {/* 카드 접기 버튼 */}
           <button
-            className="w-[100px] h-full text-base font-bold text-white bg-blue-400 rounded-2xl hover:shadow-figma"
+            className="w-[90px] h-full text-base font-bold text-white bg-blue-400 rounded-lg hover:shadow-figma"
             onClick={() => {
               const tmp = [...cardStatus];
               tmp.splice(index, 1, false); // 해당 카드의 상태를 false로 바꾸기

@@ -41,7 +41,7 @@ const Reservation = () => {
           {/* 운전자 등록 */}
           <Drivers />
           {/* 포인트 사용 */}
-          {/*<Point />
+          <Point />
           {/* 최종 결제 */}
           {/*<Final /> */}
         </div>
