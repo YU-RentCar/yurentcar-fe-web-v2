@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useAlert } from "utils/useAlert";
-import { Input } from "@material-tailwind/react";
 import { checkNickname, changeNick } from "api/myPageAxios";
 import { useRecoilState } from "recoil";
 import { navNickNameAtom } from "recoil/navNickNameAtom";
@@ -10,16 +9,12 @@ const UserNickChange = ({ before, userInfo, setUserInfo, changeSetter }) => {
   let [tmpNick, setTmpNick] = useState(""); // 새로 입력된 닉네임
   let [newNick, setNewNick] = useState(""); // 최종적으로 변경할 닉네임
   let [isChekced, setIsChecked] = useState(false); // 중복 검사 여부
-
   const [rclNavNickName, setRclNavNickName] = useRecoilState(navNickNameAtom);
-
   const alert = useAlert();
   return (
     <div className="w-[700px] h-24 bg-white rounded-2xl flex flex-col justify-between px-8 py-[15px] mt-4">
       {/* 기존 닉네임 */}
-      <div className="font-bold text-slate-400">
-        기존 닉네임{/*before*/} : hello
-      </div>
+      <div className="font-bold text-slate-400">기존 닉네임 : {before}</div>
       <div className="flex items-center justify-between w-full text-xl font-bold">
         {/* 새로운 닉네임 입력 */}
         <input
