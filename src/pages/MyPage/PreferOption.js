@@ -35,7 +35,6 @@ const PreferOption = () => {
   useEffect(() => {
     getPreferOption() // 사용자 선호 옵션 api
       .then((response) => {
-        console.log("마이페이지 / 선호옵션 : ", response.data);
         setUserPrefer(response.data);
       })
       .catch((error) =>
@@ -43,14 +42,17 @@ const PreferOption = () => {
       );
   }, []);
   return (
-    <div className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma">
+    <div
+      className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma"
+      id="MyPage/PreferOption"
+    >
       {/* 타이틀 */}
-      <div className="w-[1010px] h-[70px] flex justify-between items-center">
-        <span className="text-blue-800 text-[45px] font-extrabold">
+      <div className="w-[700px] h-[40px] flex justify-between items-center">
+        <span className="text-blue-800 text-[30px] font-extrabold">
           선호 차량
         </span>
         <button
-          className="text-xl font-semibold w-44 h-14 rounded-2xl bg-amber-400"
+          className="w-32 h-10 text-lg font-semibold rounded-xl bg-amber-400 hover:shadow-figma"
           onClick={async () => {
             const minCount = document.getElementById("minCount").value;
             if (minCount.trim() === "") {
@@ -62,7 +64,6 @@ const PreferOption = () => {
               // 사용자 선호 옵션 변경 api
               await changePreferOption(newPrefer)
                 .then((response) => {
-                  console.log("마이페이지 / 선호옵션변경 : ", response.data);
                   alert.onAndOff("옵션을 변경하였습니다");
                   setUserPrefer(newPrefer);
                 })

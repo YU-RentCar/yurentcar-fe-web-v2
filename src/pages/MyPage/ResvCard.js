@@ -4,7 +4,6 @@ import { usePopUp } from "utils/usePopUp";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { rtSelector } from "recoil/reviewTargetAtom";
-import Car from "assets/Car.png";
 import dayjs from "dayjs";
 import "dayjs/locale/ko";
 
