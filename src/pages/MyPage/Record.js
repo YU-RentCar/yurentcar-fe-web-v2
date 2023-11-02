@@ -8,7 +8,6 @@ const Record = () => {
   const popUpResv = usePopUp("MyPage/Resv"); // Resv 팝업 제어
   const [userPoint, setUserPoint] = useState(0); // 사용자 포인트
   const [recent, setRecent] = useState([]); // 최근 본 차량 정보
-  const [numberList, setNumberList] = useState([]); // 로컬스토리지에서 최근 본 최대 6대의 차량 번호
   useEffect(() => {
     getUserPoint() // 사용자 포인트 조회
       .then((response) => {
@@ -18,9 +17,8 @@ const Record = () => {
       .catch((error) => {
         console.log("마이페이지 / 포인트조회에러 : ", error.response);
       });
-    setNumberList(JSON.parse(localStorage.getItem("resentInquireCar")));
-  }, []);
-  useEffect(() => {
+    const numberList = JSON.parse(localStorage.getItem("resentInquireCar"));
+    console.log("numberList 체크 : ", numberList);
     if (numberList !== null) {
       const tmp = [];
       numberList.forEach((v, i) => {
@@ -36,7 +34,7 @@ const Record = () => {
       console.log("데이터 체크1 : ", tmp);
       setRecent([...tmp]);
     }
-  }, [numberList]);
+  }, []);
   return (
     <div
       className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma"
