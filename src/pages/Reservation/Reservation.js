@@ -35,7 +35,7 @@ const Reservation = () => {
           {/* 차량 사고 내역 */}
           <Accident />
           {/* 지점 지도 */}
-          {/*<Map />
+          <Map />
           {/* 차량 종합 보험 */}
           {/*<Insurance />
           {/* 운전자 등록 */}
