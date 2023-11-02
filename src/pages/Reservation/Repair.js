@@ -37,12 +37,12 @@ const Repair = () => {
             <Accordion
               key={i}
               open={open === i + 1}
-              className="w-[700px] h-[50px] bg-white rounded-xl border-2 border-blue-600 mx-auto mt-2"
+              className="w-[700px] bg-white rounded-xl border-2 border-blue-600 mx-auto mt-2"
             >
               {/* 타이틀, 위에서 지정한 아코디언에 제어 기능 부여 */}
               <AccordionHeader
                 onClick={() => handleOpen(i + 1)}
-                className={`px-4 text-lg font-bold line-clamp-1 ${
+                className={`px-4 text-xl font-bold line-clamp-1 ${
                   open === i + 1 ? "!text-red-500" : ""
                 }`}
               >
@@ -51,7 +51,7 @@ const Repair = () => {
                 }`}
               </AccordionHeader>
               {/* 컨텐츠 */}
-              <AccordionBody className="px-4 text-base font-bold text-slate-700">
+              <AccordionBody className="px-4 text-lg font-bold text-slate-700">
                 {v["content"]}
               </AccordionBody>
             </Accordion>

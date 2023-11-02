@@ -33,7 +33,7 @@ const Reservation = () => {
           {/* 차량 수리 내역 */}
           <Repair />
           {/* 차량 사고 내역 */}
-          {/*<Accident />
+          <Accident />
           {/* 지점 지도 */}
           {/*<Map />
           {/* 차량 종합 보험 */}
