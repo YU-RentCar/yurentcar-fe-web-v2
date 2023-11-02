@@ -1,7 +1,7 @@
 name: Build and Deploy
 on:
   push:
-    branches: Fix/#137-log-ui-fix
+    branches: develop
 jobs:
   deploy:
     runs-on: ubuntu-latest
