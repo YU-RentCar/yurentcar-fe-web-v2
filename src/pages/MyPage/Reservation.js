@@ -27,7 +27,8 @@ const Reservation = ({ setResvState }) => {
     getWaitingResvInfo()
       .then((response) => {
         // 객체가 없다면 대기 중인 예약이 없으니 해당 컴포넌트 off
-        if (Object.keys(response.data) === null) setResvState(false);
+        console.log("데이터 체크 : ", response.data);
+        if (response.data == null) setResvState(false);
         else {
           setResvState(true);
           getUserInfo() // 사용자 이름을 위한 api
