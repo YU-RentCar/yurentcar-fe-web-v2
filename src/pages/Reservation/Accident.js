@@ -16,7 +16,6 @@ const Accident = () => {
   useEffect(() => {
     getCarAccident(location.state.carNumber) // 차량 사고 내역
       .then((response) => {
-        console.log("예약 / 사고 : ", response.data);
         setAccident([...response.data]);
       })
       .catch((error) => console.log("예약 / 사고에러 : ", error.response));

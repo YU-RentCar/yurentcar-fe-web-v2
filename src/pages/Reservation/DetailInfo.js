@@ -30,7 +30,6 @@ const DetailInfo = () => {
   useEffect(() => {
     getCarInfo(location.state.carNumber) // 차량 정보 조회
       .then((response) => {
-        console.log("예약 / 상세정보 : ", response.data);
         // 데이터 가공
         const tmp = {
           유종: response.data.oilType,

@@ -12,7 +12,6 @@ const Map = () => {
       store: location.state.store,
     })
       .then((response) => {
-        console.log("예약 / 지도 : ", response.data);
         // 데이터 가공
         const tmp = {
           latitude: response.data.x,

@@ -11,7 +11,6 @@ const Point = React.memo(() => {
     getUserPoint()
       .then((response) => {
         // 포인트 조회
-        console.log("예약 / 포인트조회 : ", response.data);
         setUserPoint(response.data);
       })
       .catch((error) =>

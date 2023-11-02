@@ -13,7 +13,7 @@ const Pay = () => {
       <div className="flex items-center justify-center w-full mt-4 text-2xl font-bold text-blue-800">
         최종 결제
       </div>
-      <div className="w-[280px] h-[260px] flex flex-col justify-between items-center mt-4">
+      <div className="w-[280px] h-[260px] flex flex-col justify-around items-center mt-2">
         {/* 금액 결산 */}
         <div className="flex flex-col items-center justify-around w-full h-[200px] px-4 py-2 bg-white rounded-2xl">
           <div className="w-full h-[30px] flex justify-between items-center">
@@ -52,7 +52,7 @@ const Pay = () => {
         </div>
         {/* 최종 결제 버튼 */}
         <button
-          className="flex items-center justify-center w-3/5 text-lg font-bold rounded-lg h-9 bg-amber-400 hover:shadow-figma"
+          className="flex items-center justify-center w-4/5 h-10 mb-2 text-lg font-bold rounded-lg bg-amber-400 hover:shadow-figma"
           onClick={() => {
             if (rentInfo.insurance < 0) alert.onAndOff("보험을 선택해주세요");
             else if (rentInfo.point < 0)
@@ -72,7 +72,6 @@ const Pay = () => {
               };
               resvRent(data)
                 .then((response) => {
-                  console.log("예약 / 예약 : ", response.data);
                   nav("/mypage");
                 })
                 .catch((error) =>

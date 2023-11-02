@@ -16,7 +16,6 @@ const Repair = () => {
   useEffect(() => {
     getCarRepair(location.state.carNumber) // 차량 수리 내역
       .then((response) => {
-        console.log("예약 / 수리 : ", response.data);
         setRepair([...response.data]);
       })
       .catch((error) => console.log("예약 / 수리에러 : ", error.response));

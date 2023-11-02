@@ -76,7 +76,6 @@ const Open = React.memo(
               else {
                 await getUserInfo()
                   .then((response) => {
-                    console.log("예약 / 사용자조회 : ", response.data);
                     // 사용자의 정보 채워넣기 + 면허 정보는 더미 데이터
                     const tmp = {
                       이름: response.data.name,
