@@ -58,8 +58,8 @@ const DetailInfo = () => {
         차량 상세 정보
       </div>
       {/* 상세 정보 */}
-      <div className="w-[750px] h-[510px] mx-auto bg-blue-200 rounded-2xl mt-4 flex justify-center items-center">
-        <div className="grid w-full grid-cols-4 gap-y-2">
+      <div className="w-[750px] h-[360px] mx-auto bg-blue-200 rounded-2xl mt-4 flex justify-center items-center">
+        <div className="grid w-full grid-cols-4 gap-y-4">
           {Object.keys(carInfo).map((v, i) => {
             return (
               <div
