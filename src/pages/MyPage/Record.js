@@ -17,22 +17,23 @@ const Record = () => {
       .catch((error) => {
         console.log("마이페이지 / 포인트조회에러 : ", error.response);
       });
+
+    // 로컬스토리지의 최근 조회 차량 번호
     const numberList = JSON.parse(localStorage.getItem("resentInquireCar"));
-    console.log("numberList 체크 : ", numberList);
     if (numberList !== null) {
       const tmp = [];
-      numberList.forEach((v, i) => {
-        getRecent(v) // 저장된 차량 번호 수만큼 상세 정보 조회
+      for (let i = 0; i < numberList.length; i++) {
+        getRecent(numberList[i])
           .then((response) => {
             console.log("마이페이지 / 최근조회 : ", response.data);
-            tmp.push(response.data);
+            tmp[tmp.length] = response.data;
+            setRecent([...tmp]);
           })
           .catch((error) =>
             console.log("마이페이지 / 최근조회에러 : ", error.response)
           );
-      });
-      console.log("데이터 체크1 : ", tmp);
-      setRecent([...tmp]);
+      }
+      setRecent(tmp);
     }
   }, []);
   return (
@@ -80,9 +81,8 @@ const Record = () => {
               최근 본 차량이 없습니다
             </div>
           ) : (
-            <div className="grid w-full grid-cols-2 px-8 mt-4 bg-blue-100 gap-y-4 rounded-2xl">
+            <div className="grid w-full h-[400px] grid-cols-2 px-6 mt-4 overflow-y-scroll bg-blue-100 rounded-2xl pb-8">
               {recent.map((v, i) => {
-                console.log("데이터 체크2 : ", v, recent.length);
                 return (
                   <CarCard
                     name={v.carName}
