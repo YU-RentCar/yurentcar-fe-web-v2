@@ -7,7 +7,7 @@ import Map from "./Map";
 import Insurance from "./Insurance";
 import Drivers from "./Drivers";
 import Point from "./Point";
-import Final from "./Final";
+import Pay from "./Pay";
 import SelectDateTime from "popUp/SelectDateTime";
 import SelectStore from "popUp/SelectStore";
 import Finder from "components/Finder";
@@ -25,6 +25,8 @@ const Reservation = () => {
       <div className="w-[1140px] mx-auto mt-10 relative">
         {/* 사이드 메뉴 */}
         <SideMenu />
+        {/* 최종 결제 */}
+        <Pay />
         <div className="w-[800px] absolute left-0 top-0">
           {/* 차량 기본 정보 */}
           <DefaultInfo />
@@ -42,8 +44,6 @@ const Reservation = () => {
           <Drivers />
           {/* 포인트 사용 */}
           <Point />
-          {/* 최종 결제 */}
-          {/*<Final /> */}
         </div>
       </div>
       {/* 팝업 구역 */}

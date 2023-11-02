@@ -20,7 +20,7 @@ const Point = React.memo(() => {
   }, []);
   return (
     <div
-      className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma"
+      className="flex flex-col items-center w-full py-8 mt-12 mb-40 bg-sky-50 rounded-2xl shadow-figma"
       id="Reservation/Point"
     >
       {/* 타이틀 */}
