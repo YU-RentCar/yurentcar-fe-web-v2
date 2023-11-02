@@ -13,7 +13,7 @@ const Pay = () => {
       <div className="flex items-center justify-center w-full mt-4 text-2xl font-bold text-blue-800">
         최종 결제
       </div>
-      <div className="w-[280px] h-[300px] flex justify-between items-center mt-4">
+      <div className="w-[280px] h-[300px] flex flex-col justify-between items-center mt-4">
         {/* 금액 결산 */}
         <div className="flex flex-col items-center justify-around w-full h-full px-4 py-4 bg-white rounded-2xl">
           <div className="w-full h-[35px] flex justify-between items-center">
