@@ -9,7 +9,7 @@ const Pay = () => {
   const alert = useAlert(); // Alert 제어
   const rentInfo = useRecoilValue(rentAtom); // 예약 결제 금액 정보
   return (
-    <div className="w-[300px] h-[300px] rounded-2xl fixed top-[576px] right-[390px] bg-sky-50 shadow-figma flex flex-col items-center">
+    <div className="w-[300px] h-[320px] rounded-2xl fixed top-[576px] right-[390px] bg-sky-50 shadow-figma flex flex-col items-center">
       <div className="flex items-center justify-center w-full mt-4 text-2xl font-bold text-blue-800">
         최종 결제
       </div>
@@ -52,7 +52,7 @@ const Pay = () => {
         </div>
         {/* 최종 결제 버튼 */}
         <button
-          className="flex items-center justify-center w-full h-12 text-xl font-bold rounded-lg bg-amber-400 hover:shadow-figma"
+          className="flex items-center justify-center w-3/5 text-lg font-bold rounded-lg h-9 bg-amber-400 hover:shadow-figma"
           onClick={() => {
             if (rentInfo.insurance < 0) alert.onAndOff("보험을 선택해주세요");
             else if (rentInfo.point < 0)
