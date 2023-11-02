@@ -1,3 +1,4 @@
+import SideMenu from "./SideMenu";
 import DefaultInfo from "./DefaultInfo";
 import DetailInfo from "./DetailInfo";
 import Repair from "./Repair";
@@ -22,6 +23,7 @@ const Reservation = () => {
         <Finder storePopUp={storePopUp} dateTimePopUp={dateTimePopUp} />
       </div>
       <div className="w-[1140px] mx-auto mt-10">
+        <SideMenu />
         {/* 차량 기본 정보 */}
         <DefaultInfo />
         {/* 차량 상세 정보 */}

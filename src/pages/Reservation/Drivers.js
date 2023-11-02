@@ -41,7 +41,10 @@ const Drivers = () => {
     }
   };
   return (
-    <div className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma">
+    <div
+      className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma"
+      id="Reservation/Drivers"
+    >
       {/* 타이틀 */}
       <div className="w-[1010px] h-[70px] flex justify-between items-center">
         <span className="text-blue-800 text-[45px] font-extrabold">
