@@ -45,7 +45,7 @@ const Insurance = () => {
   }, [ins]);
   return (
     <div
-      className="flex flex-col items-center w-full h-[670px] pt-8 mt-12 bg-sky-50 rounded-2xl shadow-figma"
+      className="flex flex-col items-center w-full h-[450px] pt-8 mt-12 bg-sky-50 rounded-2xl shadow-figma"
       id="Reservation/Insurance"
     >
       {/* 타이틀 */}

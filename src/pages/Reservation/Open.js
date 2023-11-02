@@ -30,20 +30,20 @@ const Open = React.memo(
       "",
     ]);
     return (
-      <div className="w-[1100px] rounded-2xl bg-white pb-6 pt-4 mt-4 relative">
+      <div className="w-[750px] rounded-2xl bg-white pb-6 pt-4 mt-4 relative">
         {/* 항목 수만큼 생성 */}
         {Object.keys(info).map((v, i) => {
           return (
             <div
               key={i}
-              className="w-[1000px] h-[105px] flex flex-col justify-between mx-auto mt-6"
+              className="w-[700px] h-20 flex flex-col justify-between mx-auto mt-3"
             >
               {/* 항목 타이틀 */}
-              <span className="text-2xl font-bold text-slate-600">{v}</span>
+              <span className="text-xl font-bold text-slate-600">{v}</span>
               {/* 컨텐츠 입력 */}
               <input
                 type="text"
-                className="w-full h-16 px-4 text-2xl font-bold border-2 border-black rounded-2xl"
+                className="w-full h-12 px-4 text-xl font-bold border-2 border-black rounded-2xl"
                 value={info[v]}
                 placeholder={placeholders[i]}
                 disabled={i === 3 || i === 4 || i === 5 || i === 6}
@@ -62,10 +62,10 @@ const Open = React.memo(
             </div>
           );
         })}
-        <div className="w-[330px] h-12 flex justify-between items-center absolute right-0 top-0 mr-12 mt-4">
+        <div className="w-[200px] h-8 flex justify-between items-center absolute right-0 top-0 mr-12 mt-4">
           {/* 사용자 정보 가져오기 버튼 */}
           <button
-            className="w-[160px] h-full rounded-2xl bg-amber-300 font-bold text-xl shadow-figma"
+            className="w-20 h-full text-lg font-bold rounded-2xl bg-amber-300 hover:shadow-figma"
             onClick={async () => {
               if (isInclude.state)
                 alert.onAndOff(
@@ -105,7 +105,7 @@ const Open = React.memo(
           </button>
           {/* 카드 접기 버튼 */}
           <button
-            className="w-[140px] h-full rounded-2xl bg-blue-400 font-bold text-xl text-white shadow-figma"
+            className="w-20 h-full text-lg font-bold text-white bg-blue-400 rounded-2xl hover:shadow-figma"
             onClick={() => {
               const tmp = [...cardStatus];
               tmp.splice(index, 1, false); // 해당 카드의 상태를 false로 바꾸기

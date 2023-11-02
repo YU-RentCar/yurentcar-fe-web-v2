@@ -46,13 +46,13 @@ const Drivers = () => {
       id="Reservation/Drivers"
     >
       {/* 타이틀 */}
-      <div className="w-[1010px] h-[70px] flex justify-between items-center">
-        <span className="text-blue-800 text-[45px] font-extrabold">
+      <div className="w-[700px] h-[35px] flex justify-between items-center">
+        <span className="text-blue-800 text-[30px] font-extrabold">
           운전자 등록
         </span>
         {/* 운전자 추가 */}
         <button
-          className="w-40 h-12 text-xl font-semibold rounded-2xl bg-sky-200 shadow-figma"
+          className="w-32 h-10 text-lg font-semibold rounded-xl bg-sky-200 hover:shadow-figma"
           onClick={() => {
             addDriver();
           }}

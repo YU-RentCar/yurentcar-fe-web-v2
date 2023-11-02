@@ -39,7 +39,7 @@ const Reservation = () => {
           {/* 차량 종합 보험 */}
           <Insurance />
           {/* 운전자 등록 */}
-          {/*<Drivers />
+          <Drivers />
           {/* 포인트 사용 */}
           {/*<Point />
           {/* 최종 결제 */}
