@@ -12,7 +12,6 @@ const Map = () => {
       store: location.state.store,
     })
       .then((response) => {
-        console.log("예약 / 지도 : ", response.data);
         // 데이터 가공
         const tmp = {
           latitude: response.data.x,
@@ -45,13 +44,16 @@ const Map = () => {
     map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
   }, [mapPoint]);
   return (
-    <div className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma">
+    <div
+      className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma"
+      id="Reservation/Map"
+    >
       {/* 타이틀 */}
-      <div className="w-[1010px] h-[70px] flex justify-between items-center text-blue-800 text-[45px] font-bold">
+      <div className="w-[700px] h-[35px] flex justify-between items-center text-blue-800 text-[30px] font-bold">
         지도
       </div>
       {/* 지도가 보여질 영역 */}
-      <div id="map" className="w-[1100px] h-[600px] mt-4"></div>
+      <div id="map" className="w-[750px] h-[450px] mt-4"></div>
     </div>
   );
 };

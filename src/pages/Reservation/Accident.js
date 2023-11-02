@@ -16,30 +16,32 @@ const Accident = () => {
   useEffect(() => {
     getCarAccident(location.state.carNumber) // 차량 사고 내역
       .then((response) => {
-        console.log("예약 / 사고 : ", response.data);
         setAccident([...response.data]);
       })
       .catch((error) => console.log("예약 / 사고에러 : ", error.response));
   }, []);
   return (
-    <div className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma">
+    <div
+      className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma"
+      id="Reservation/Accident"
+    >
       {/* 타이틀 */}
-      <div className="w-[1010px] h-[70px] flex justify-between items-center text-blue-800 text-[45px] font-bold">
+      <div className="w-[700px] h-[35px] flex justify-between items-center text-blue-800 text-[30px] font-bold">
         차량 사고 내역
       </div>
       {/* 상세 정보 */}
-      <div className="w-[1100px] h-[500px] rounded-2xl bg-blue-200 mt-4 pt-4 overflow-y-scroll">
+      <div className="w-[750px] h-[360px] rounded-2xl bg-blue-200 mt-4 pt-4 overflow-y-scroll">
         {accident.map((v, i) => {
           return (
             <Accordion
               key={i}
               open={open === i + 1}
-              className="w-[1040px] bg-white rounded-2xl border-2 border-blue-600 mx-auto mt-2"
+              className="w-[700px] bg-white rounded-xl border-2 border-blue-600 mx-auto mt-2"
             >
               {/* 타이틀, 위에서 지정한 아코디언에 제어 기능 부여 */}
               <AccordionHeader
                 onClick={() => handleOpen(i + 1)}
-                className={`px-8 text-2xl font-bold line-clamp-1 ${
+                className={`px-4 text-xl font-bold line-clamp-1 ${
                   open === i + 1 ? "!text-red-500" : ""
                 }`}
               >
@@ -48,7 +50,7 @@ const Accident = () => {
                 }`}
               </AccordionHeader>
               {/* 컨텐츠 */}
-              <AccordionBody className="px-8 text-xl font-bold text-slate-700">
+              <AccordionBody className="px-4 text-lg font-bold text-slate-700">
                 {v["content"]}
               </AccordionBody>
             </Accordion>

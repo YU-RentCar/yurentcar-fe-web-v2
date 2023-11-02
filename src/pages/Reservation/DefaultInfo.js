@@ -12,7 +12,6 @@ import {
   MdOutlineDiscount,
   MdOutlineArticle,
 } from "react-icons/md";
-import Car from "assets/Car.png";
 import dayjs from "dayjs";
 
 const DefaultInfo = () => {
@@ -22,12 +21,12 @@ const DefaultInfo = () => {
   const dateInfo = useRecoilValue(selectedFinderAtom); // 예약 기간
   const [iconList, setIconList] = useState([
     // 아이콘
-    <MdOutlineDirectionsCarFilled className="ml-4 text-[26px] text-blue-600" />,
-    <MdOutlineConfirmationNumber className="ml-4 text-[26px] text-blue-600" />,
-    <MdOutlineEditRoad className="ml-4 text-[26px] text-blue-600" />,
-    <MdMoney className="ml-4 text-[26px] text-blue-600" />,
-    <MdOutlineDiscount className="ml-4 text-[26px] text-blue-600" />,
-    <MdOutlineArticle className="ml-4 text-[26px] text-blue-600" />,
+    <MdOutlineDirectionsCarFilled className="ml-4 text-[22px] text-blue-600" />,
+    <MdOutlineConfirmationNumber className="ml-4 text-[22px] text-blue-600" />,
+    <MdOutlineEditRoad className="ml-4 text-[22px] text-blue-600" />,
+    <MdMoney className="ml-4 text-[22px] text-blue-600" />,
+    <MdOutlineDiscount className="ml-4 text-[22px] text-blue-600" />,
+    <MdOutlineArticle className="ml-4 text-[22px] text-blue-600" />,
   ]);
   useEffect(() => {
     getCarInfo(location.state.carNumber) // 차량 기본 정보
@@ -56,30 +55,33 @@ const DefaultInfo = () => {
       });
   }, []);
   return (
-    <div className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma">
+    <div
+      className="flex flex-col items-center w-full py-4 bg-sky-50 rounded-2xl shadow-figma"
+      id="Reservation/DefaultInfo"
+    >
       {/* 타이틀 */}
-      <div className="w-[1010px] h-[70px] flex justify-between items-center text-blue-800 text-[45px] font-bold">
+      <div className="w-[700px] h-[35px] flex justify-between items-center text-blue-800 text-[30px] font-extrabold">
         차량 기본 정보
       </div>
       {/* 차량 정보 */}
-      <div className="flex items-center justify-center w-full mt-3">
+      <div className="flex items-center justify-around w-full mt-3">
         {/* 차량 사진 */}
         <img
           src={`http://be.yurentcar.kro.kr:1234/api/v1/images/display/${carInfo["차종"]}.png`}
           alt="차량 사진"
-          className="object-cover h-[295px] w-[400px] rounded-2xl mr-2"
+          className="object-cover h-[200px] w-[300px] rounded-2xl"
         ></img>
         {/* 기본 정보 */}
-        <div className="w-[660px] flex flex-col justify-around items-center bg-blue-100 rounded-2xl py-8 ml-2">
+        <div className="w-[450px] flex flex-col justify-around items-center bg-blue-100 rounded-2xl py-4">
           {/* 차종, 차 번호, 총 주행거리 */}
           {Object.keys(carInfo).map((v, i) => {
             return (
               <div
-                className="w-[600px] h-[50px] bg-sky-200 flex items-center rounded-2xl mt-2"
+                className="w-[420px] h-[35px] bg-sky-200 flex items-center rounded-lg mt-2"
                 key={i}
               >
                 {iconList[i]}
-                <span className="ml-5 text-xl font-medium">
+                <span className="ml-3 text-base font-semibold">
                   {`${v} : ${carInfo[v]}${
                     i === 2 ? "km" : i === 3 ? "원" : i === 4 ? "%" : ""
                   }`}

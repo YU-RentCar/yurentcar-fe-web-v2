@@ -41,15 +41,18 @@ const Drivers = () => {
     }
   };
   return (
-    <div className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma">
+    <div
+      className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma"
+      id="Reservation/Drivers"
+    >
       {/* 타이틀 */}
-      <div className="w-[1010px] h-[70px] flex justify-between items-center">
-        <span className="text-blue-800 text-[45px] font-extrabold">
+      <div className="w-[700px] h-[35px] flex justify-between items-center">
+        <span className="text-blue-800 text-[30px] font-extrabold">
           운전자 등록
         </span>
         {/* 운전자 추가 */}
         <button
-          className="w-40 h-12 text-xl font-semibold rounded-2xl bg-sky-200 shadow-figma"
+          className="w-32 h-10 text-lg font-semibold rounded-xl bg-sky-200 hover:shadow-figma"
           onClick={() => {
             addDriver();
           }}
