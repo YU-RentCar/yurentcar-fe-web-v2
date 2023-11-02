@@ -19,7 +19,7 @@ const MyPage = () => {
   const popUpPoint = usePopUp("MyPage/Point"); // Point 팝업 제어
   const popUpResv = usePopUp("MyPage/Resv"); // Resv 팝업 제어
   const popUpReview = usePopUp("MyPage/Review"); // Review 팝업 제어
-  const [resvState, setResvState] = useState(false); // 예약 대기 중인 정보의 유무
+  const [resvState, setResvState] = useState(true); // 예약 대기 중인 정보의 유무
   useEffect(() => {
     auth.loginCheck();
   });
