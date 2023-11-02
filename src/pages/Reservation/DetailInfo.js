@@ -18,14 +18,14 @@ const DetailInfo = () => {
   const [carInfo, setCarInfo] = useState({}); // 차량 정보
   const [iconList, setIconList] = useState([
     // 아이콘
-    <MdLocalCarWash className="text-[60px]" />,
-    <MdPhotoSizeSelectSmall className="text-[60px]" />,
-    <MdOutlineDateRange className="text-[60px]" />,
-    <MdDateRange className="text-[60px]" />,
-    <MdPeopleAlt className="text-[60px]" />,
-    <MdSettings className="text-[60px]" />,
-    <MdTag className="text-[60px]" />,
-    <MdOutlineFlag className="text-[60px]" />,
+    <MdLocalCarWash className="text-[45px]" />,
+    <MdPhotoSizeSelectSmall className="text-[45px]" />,
+    <MdOutlineDateRange className="text-[45px]" />,
+    <MdDateRange className="text-[45px]" />,
+    <MdPeopleAlt className="text-[45px]" />,
+    <MdSettings className="text-[45px]" />,
+    <MdTag className="text-[45px]" />,
+    <MdOutlineFlag className="text-[45px]" />,
   ]);
   useEffect(() => {
     getCarInfo(location.state.carNumber) // 차량 정보 조회
@@ -58,21 +58,23 @@ const DetailInfo = () => {
         차량 상세 정보
       </div>
       {/* 상세 정보 */}
-      <div className="w-[700px] h-[510px] mx-auto bg-blue-200 rounded-2xl mt-4 flex flex-wrap justify-center items-center">
-        {Object.keys(carInfo).map((v, i) => {
-          return (
-            <div
-              className="w-[150px] h-[150px] bg-sky-50 flex flex-col justify-around rounded-xl mx-6 pl-3 py-3"
-              key={i}
-            >
-              {iconList[i]}
-              <span className="text-lg font-semibold">{v}</span>
-              <span className="text-2xl font-bold text-blue-900">
-                {carInfo[v]}
-              </span>
-            </div>
-          );
-        })}
+      <div className="w-[750px] h-[510px] mx-auto bg-blue-200 rounded-2xl mt-4 flex justify-center items-center">
+        <div className="grid w-full grid-cols-4 gap-y-2">
+          {Object.keys(carInfo).map((v, i) => {
+            return (
+              <div
+                className="w-[150px] h-[150px] bg-sky-50 flex flex-col justify-around rounded-xl mx-6 pl-3 py-3"
+                key={i}
+              >
+                {iconList[i]}
+                <span className="text-lg font-semibold">{v}</span>
+                <span className="text-2xl font-bold text-blue-900">
+                  {carInfo[v]}
+                </span>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

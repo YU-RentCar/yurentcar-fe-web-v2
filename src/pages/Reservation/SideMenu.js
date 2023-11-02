@@ -35,10 +35,10 @@ const SideMenu = () => {
     // 해당 컴포넌트로 이동
     const target = document.getElementById(ids[idx][1]);
     const targetTop = window.scrollY + target.getBoundingClientRect().top; // 절대좌표(y)
-    window.scrollTo(window.scrollY, targetTop - 144);
+    window.scrollTo(window.scrollY, targetTop - 176);
   }
   return (
-    <div className="w-[300px] h-[270px] rounded-2xl fixed top-44 right-[390px] bg-sky-50 shadow-figma flex flex-col items-center">
+    <div className="w-[300px] h-[360px] rounded-2xl fixed top-44 right-[390px] bg-sky-50 shadow-figma flex flex-col items-center">
       <div className="flex items-center justify-center w-full mt-4 text-2xl font-bold text-blue-800">
         메뉴
       </div>
