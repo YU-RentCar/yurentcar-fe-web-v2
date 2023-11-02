@@ -9,6 +9,7 @@ const Record = () => {
   const [userPoint, setUserPoint] = useState(0); // 사용자 포인트
   const [recent, setRecent] = useState([]); // 최근 본 차량 정보
   const [numberList, setNumberList] = useState([]); // 로컬스토리지에서 최근 본 최대 6대의 차량 번호
+  const [recentList, setRecentList] = useState(null); // 입력 후 차량 정보 조회
   useEffect(() => {
     getUserPoint() // 사용자 포인트 조회
       .then((response) => {
@@ -33,9 +34,32 @@ const Record = () => {
             console.log("마이페이지 / 최근조회에러 : ", error.response)
           );
       });
-      setRecent(tmp);
+      setRecent([...tmp]);
     }
   }, [numberList]);
+  useEffect(() => {
+    const rl = () => {
+      return (
+        <div className="grid w-full grid-cols-2 px-8 mt-4 bg-blue-100 gap-y-4 rounded-2xl">
+          {recent.map((v, i) => {
+            console.log("데이터 체크 : ", v, recent.length);
+            return (
+              <CarCard
+                name={v.carName}
+                number={v.carNumber}
+                totalDistance={v.totalDistance}
+                beforePrice={v.beforePrice}
+                afterPrice={v.afterPrice}
+                discountRatio={v.discountRate}
+                key={i}
+              />
+            );
+          })}
+        </div>
+      );
+    };
+    setRecentList(rl());
+  }, [recent]);
   return (
     <div
       className="flex flex-col items-center w-full py-8 mt-12 bg-sky-50 rounded-2xl shadow-figma"
@@ -76,26 +100,12 @@ const Record = () => {
       <div className="w-[700px] bg-white rounded-2xl flex items-center px-8 py-[15px] mt-4">
         <div className="flex flex-col justify-between w-full text-xl font-bold">
           최근 본 차량 조회
-          {recent.length !== 0 ? (
-            <div className="grid w-full grid-cols-2 px-8 mt-4 bg-blue-100 gap-y-4 rounded-2xl">
-              {recent.map((v, i) => {
-                return (
-                  <CarCard
-                    name={v.carName}
-                    number={v.carNumber}
-                    totalDistance={v.totalDistance}
-                    beforePrice={v.beforePrice}
-                    afterPrice={v.afterPrice}
-                    discountRatio={v.discountRate}
-                    key={i}
-                  />
-                );
-              })}
-            </div>
-          ) : (
+          {recentList === null ? (
             <div className="flex items-center justify-center w-full h-24 mt-4 text-xl font-bold bg-blue-100 rounded-2xl">
               최근 본 차량이 없습니다
             </div>
+          ) : (
+            recentList
           )}
         </div>
       </div>
