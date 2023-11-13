@@ -368,7 +368,7 @@ const CarSearch = () => {
         <CarDetail popUpInfo={carDetailPopUp} carNumber={selectedCarNumber} />
       ) : undefined}
 
-      {alertState && <Alert />}
+      {alertState.state && <Alert />}
     </>
   );
 };
