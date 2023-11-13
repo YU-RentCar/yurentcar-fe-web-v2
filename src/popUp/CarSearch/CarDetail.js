@@ -91,7 +91,7 @@ const CarDetail = ({ popUpInfo, carNumber }) => {
                 <div className="w-[345px] h-[210px] bg-blue-200 rounded-2xl">
                   <img
                     className="object-fill w-full h-full rounded-2xl"
-                    src={`http://be.yurentcar.kro.kr:1234/api/v1/images/display/${carInfo.carName}.png`}
+                    src={`http://deploytest.iptime.org:8080/api/v1/images/display/${carInfo.photoUrl}.png`}
                     alt=""
                   />
                 </div>

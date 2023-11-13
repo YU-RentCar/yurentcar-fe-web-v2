@@ -40,6 +40,7 @@ const DefaultInfo = () => {
           가격: response.data.beforePrice,
           할인율: response.data.discountRate,
           "할인 사유": response.data.discountReason,
+          사진: response.data.photoUrl,
         };
         setCarInfo(tmp);
         setRentInfo({
@@ -67,7 +68,7 @@ const DefaultInfo = () => {
       <div className="flex items-center justify-around w-full mt-3">
         {/* 차량 사진 */}
         <img
-          src={`http://be.yurentcar.kro.kr:1234/api/v1/images/display/${carInfo["차종"]}.png`}
+          src={`http://deploytest.iptime.org:8080/api/v1/images/display${carInfo.photoUrl}`}
           alt="차량 사진"
           className="object-cover h-[200px] w-[300px] rounded-2xl"
         ></img>
