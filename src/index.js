@@ -8,6 +8,7 @@ import { ThemeProvider } from "@material-tailwind/react";
 import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import { CookiesProvider } from "react-cookie";
+import ScrollToTop from "components/ScrollToTop";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -16,6 +17,7 @@ root.render(
     <RecoilRoot>
       <BrowserRouter>
         <ThemeProvider>
+          <ScrollToTop />
           <App />
         </ThemeProvider>
       </BrowserRouter>

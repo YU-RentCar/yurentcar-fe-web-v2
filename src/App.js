@@ -25,11 +25,12 @@ function App() {
   let nav = useNavigate(); // 경로 이동
   let location = useLocation(); // 현재 경로 확인용
   const alertState = useRecoilValue(alertAtom).state; // Alert 제어
+
   useEffect(() => {
     (async () => {
       await axios
         .post(
-          "http://be.yurentcar.kro.kr:1234/api/v1/auth/user-info",
+          "http://deploytest.iptime.org:8080/api/v1/auth/user-info",
           {},
           {
             headers: {
