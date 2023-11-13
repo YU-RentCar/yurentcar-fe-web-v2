@@ -14,11 +14,12 @@ import { finderAtom } from "recoil/finderAtom";
 import { getCarInfoList } from "api/homeAxios";
 import { useLocation, useNavigate } from "react-router";
 import { getPreferOption } from "api/myPageAxios";
-import { useAlert } from "utils/useAlert";
 import { selectedFinderAtom } from "recoil/selectedFinderAtom";
 import { getNoticeList } from "api/carSearchAxios";
 import { MdNotificationsActive } from "react-icons/md";
 import { Tooltip } from "@material-tailwind/react";
+import { alertAtom } from "recoil/alertAtom";
+import Alert from "popUp/Alert";
 
 const CarSearch = () => {
   // 팝업을 제어하는데 필요한 변수
@@ -27,7 +28,7 @@ const CarSearch = () => {
   const carDetailPopUp = usePopUp("CarSearch/CarDetail");
 
   // 토스트 메시지 제어에 필요한 변수
-  const alert = useAlert();
+  const alertState = useRecoilValue(alertAtom);
 
   // 선호 옵션 항목 Atom
   const preferOption = useRecoilValue(preferOptionAtom);
@@ -177,9 +178,11 @@ const CarSearch = () => {
                       await getPreferOption()
                         .then((response) => {
                           console.log("CarSearch / 선호옵션 : ", response.data);
+                          alert.onAndOff("선호 옵션을 불러왔습니다");
                           setUserPrefer(response.data);
                         })
                         .catch((error) => {
+                          alert.onAndOff("선호 옵션을 불러오는데 실패했습니다");
                           console.log(
                             "CarSearch / 선호옵션에러 : ",
                             error.response
@@ -222,6 +225,7 @@ const CarSearch = () => {
 
                         getCarInfoList(infos)
                           .then((response) => {
+                            alert.onAndOff("차량을 검색했습니다.");
                             console.log(
                               "CarSearch / getCarCardList",
                               response.data
@@ -229,6 +233,7 @@ const CarSearch = () => {
                             setCarInfoList(response.data);
                           })
                           .catch((error) => {
+                            alert.onAndOff("차량 검색에 실패했습니다.");
                             console.log(
                               "CarSearch / getCarCardList",
                               error.response
@@ -360,6 +365,8 @@ const CarSearch = () => {
       {carDetailPopUp.isClicked ? (
         <CarDetail popUpInfo={carDetailPopUp} carNumber={selectedCarNumber} />
       ) : undefined}
+
+      {alert && <Alert />}
     </>
   );
 };

@@ -19,7 +19,7 @@ const Auth = () => {
       </div>
       {/* 네이버 소셜 로그인 버튼 */}
       <div className="w-[250px] mx-auto mt-12">
-        <a href="http://be.yurentcar.kro.kr:1234/oauth2/authorization/naver">
+        <a href="http://deploytest.iptime.org:8080/oauth2/authorization/naver">
           <img src={Naver} alt="네이버" className="w-full" />
         </a>
       </div>
