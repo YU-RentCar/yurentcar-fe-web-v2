@@ -11,7 +11,7 @@ export const useAuth = function () {
   auth.loginCheck = async function () {
     await axios
       .post(
-        "http://be.yurentcar.kro.kr:1234/api/v1/auth/user-info",
+        "http://deploytest.iptime.org:8080/api/v1/auth/user-info",
         {},
         {
           headers: {

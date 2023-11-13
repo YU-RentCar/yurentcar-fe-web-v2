@@ -6,15 +6,14 @@ const CarCard = ({
   totalDistance,
   beforePrice,
   afterPrice,
-  imageURI,
+  photoUrl,
   discountRatio,
 }) => {
   return (
     <div className="w-[270px] h-[376px] rounded-2xl bg-white mt-8 hover:shadow-figma mx-auto border-2">
       {/* 차량 사진 */}
       <img
-        // 일시적으로 고양이 움짤로 대체
-        src={`http://be.yurentcar.kro.kr:1234/api/v1/images/display/${name}.png`}
+        src={`http://deploytest.iptime.org:8080/api/v1/images/display/${photoUrl}.png`}
         alt="차량 사진"
         className="object-cover h-[164px] w-full rounded-t-2xl"
       ></img>

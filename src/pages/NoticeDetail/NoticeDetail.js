@@ -82,7 +82,7 @@ const NoticeDetail = () => {
         </div>
         {/* 공지사항 사진 */}
         <img
-          src="https://thecatapi.com/api/images/get?format=src&type=gif"
+          src={`http://deploytest.iptime.org:8080/api/v1/images/display/${noticeInfo.photoUrl}`}
           alt="공지사항 사진"
           className="w-[1100px] h-[500px] mx-auto mt-4 rounded-2xl"
         ></img>
