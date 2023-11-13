@@ -20,6 +20,7 @@ import { MdNotificationsActive } from "react-icons/md";
 import { Tooltip } from "@material-tailwind/react";
 import { alertAtom } from "recoil/alertAtom";
 import Alert from "popUp/Alert";
+import { useAlert } from "utils/useAlert";
 
 const CarSearch = () => {
   // 팝업을 제어하는데 필요한 변수
@@ -28,6 +29,7 @@ const CarSearch = () => {
   const carDetailPopUp = usePopUp("CarSearch/CarDetail");
 
   // 토스트 메시지 제어에 필요한 변수
+  const alert = useAlert();
   const alertState = useRecoilValue(alertAtom);
 
   // 선호 옵션 항목 Atom
