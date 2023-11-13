@@ -47,7 +47,7 @@ const Reservation = ({ setResvState }) => {
           tmp["차 번호"] = ` :   ${response.data.carNumber}`;
           setResvInfo(tmp);
           setDriversInfo([...response.data.drivers]);
-          img.src = `http://be.yurentcar.kro.kr:1234/api/v1/images/display/${response.data.carName}.png`;
+          img.src = `http://deploytest.iptime.org:8080/api/v1/images/display/${response.data.photoUrl}.png`;
         }
       })
       .catch((error) => {

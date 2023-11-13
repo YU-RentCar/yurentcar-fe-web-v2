@@ -50,7 +50,7 @@ export default function CarouselWithContent({ noticeList }) {
                     <div className="flex flex-col items-center justify-start w-full h-full">
                       <img
                         className="w-[160px] h-[114px] object-cover mt-[23px] rounded-xl"
-                        src="https://thecatapi.com/api/images/get?format=src&type=gif"
+                        src={`http://deploytest.iptime.org:8080/api/v1/images/display/${v.photoUrl}`}
                         alt=""
                       />
 
