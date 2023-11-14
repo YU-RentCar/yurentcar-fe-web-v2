@@ -287,8 +287,9 @@ const CarSearch = () => {
 
           {/* 차량 리스트 */}
           <div className="w-[860px] h-[1000px] pb-5 grid grid-cols-3 overflow-y-scroll">
-            {carInfoList
-              ? carInfoList.map((v, i) => {
+            {carInfoList ? (
+              carInfoList.length !== 0 ? (
+                carInfoList.map((v, i) => {
                   return (
                     <div>
                       <div
@@ -352,7 +353,12 @@ const CarSearch = () => {
                     </div>
                   );
                 })
-              : null}
+              ) : (
+                <div className="p-10 mt-10 text-3xl font-bold">
+                  검색된 차량이 없습니다.
+                </div>
+              )
+            ) : null}
           </div>
         </div>
       </div>
