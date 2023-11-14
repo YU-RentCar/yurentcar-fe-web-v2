@@ -177,6 +177,9 @@ const CarDetail = ({ popUpInfo, carNumber }) => {
                     onClick={() => {
                       getWaitingResvInfo()
                         .then((response) => {
+                          alert.onAndOff("이미 예약했던 차량이 있습니다.");
+                        })
+                        .catch((error) => {
                           popUpInfo.toggle();
                           navigate("/reservation", {
                             state: {
@@ -185,9 +188,6 @@ const CarDetail = ({ popUpInfo, carNumber }) => {
                               store: selectedFinderInfo.store,
                             },
                           });
-                        })
-                        .catch((error) => {
-                          alert.onAndOff("이미 예약했던 차량이 있습니다.");
                         });
                     }}
                   >
