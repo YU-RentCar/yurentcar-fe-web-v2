@@ -53,7 +53,7 @@ const Point = () => {
               onClick={() => popUpPoint.toggle()}
             />
           </div>
-          <div className="w-[870px] h-[500px] rounded-2xl bg-sky-50 mt-4 pt-2 overflow-y-scroll">
+          <div className="w-[870px] h-[500px] rounded-2xl bg-sky-50 mt-4 pb-4 pt-2 overflow-y-scroll">
             {/* 포인트 적립 / 차감 내역 */}
             {pointRecord.map((v, i) => {
               return (
