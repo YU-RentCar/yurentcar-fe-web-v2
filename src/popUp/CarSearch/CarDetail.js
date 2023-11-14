@@ -13,6 +13,8 @@ import { useRecoilState } from "recoil";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 import { usePopUp } from "utils/usePopUp";
+import { getWaitingResvInfo } from "api/myPageAxios";
+import { useAlert } from "utils/useAlert";
 
 const CarDetail = ({ popUpInfo, carNumber }) => {
   // 예약 페이지로 이동
@@ -55,6 +57,8 @@ const CarDetail = ({ popUpInfo, carNumber }) => {
 
   const [selectedFinderInfo, setSelectedFinderInfo] =
     useRecoilState(selectedFinderAtom);
+
+  const alert = useAlert();
 
   useEffect(() => {
     getCarDetail({ carNumber: carNumber })
@@ -171,14 +175,20 @@ const CarDetail = ({ popUpInfo, carNumber }) => {
                   <button
                     className="w-[110px] h-[44px] bg-amber-400 rounded-xl font-semibold text-[20px] self-end mb-[10px] mr-3"
                     onClick={() => {
-                      popUpInfo.toggle();
-                      navigate("/reservation", {
-                        state: {
-                          carNumber: carNumber,
-                          province: selectedFinderInfo.province,
-                          store: selectedFinderInfo.store,
-                        },
-                      });
+                      getWaitingResvInfo()
+                        .then((response) => {
+                          popUpInfo.toggle();
+                          navigate("/reservation", {
+                            state: {
+                              carNumber: carNumber,
+                              province: selectedFinderInfo.province,
+                              store: selectedFinderInfo.store,
+                            },
+                          });
+                        })
+                        .catch((error) => {
+                          alert.onAndOff("이미 예약했던 차량이 있습니다.");
+                        });
                     }}
                   >
                     예약하기
