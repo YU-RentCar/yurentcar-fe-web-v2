@@ -9,7 +9,7 @@ const Pay = () => {
   const alert = useAlert(); // Alert 제어
   const rentInfo = useRecoilValue(rentAtom); // 예약 결제 금액 정보
   return (
-    <div className="w-[300px] h-[320px] rounded-2xl sticky top-[576px] bg-sky-50 shadow-figma flex flex-col items-center">
+    <div className="w-full h-[320px] rounded-2xl sticky top-[576px] bg-sky-50 shadow-figma flex flex-col items-center">
       <div className="flex items-center justify-center w-full mt-4 text-2xl font-bold text-blue-800">
         최종 결제
       </div>
