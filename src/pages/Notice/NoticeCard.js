@@ -3,6 +3,12 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { selectedFinderAtom } from "recoil/selectedFinderAtom";
+import { Viewer } from "@toast-ui/react-editor";
+import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
+import "tui-color-picker/dist/tui-color-picker.css";
+import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
+import "@toast-ui/editor/dist/i18n/ko-kr";
+import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 
 const NoticeCard = ({ noticeInfo, index }) => {
   const nav = useNavigate(); // nav 제어
@@ -39,9 +45,14 @@ const NoticeCard = ({ noticeInfo, index }) => {
           {noticeInfo.title}
         </span>
         {/* 공지사항 본문 */}
-        <p className="text-xl font-semibold line-clamp-3">
+        <Viewer
+          initialValue={noticeInfo.description || "내용이 없습니다"}
+          plugins={[colorSyntax]}
+          language="ko-KR"
+        ></Viewer>
+        {/*<p className="text-xl font-semibold line-clamp-3">
           {noticeInfo.description}
-        </p>
+  </p>*/}
         <div className="flex items-center justify-between w-full">
           {/* 이벤트 기간, 업데이트 날짜 */}
           <span className="text-sm font-medium text-gray-600">
