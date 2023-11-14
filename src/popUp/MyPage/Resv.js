@@ -40,7 +40,7 @@ const Resv = () => {
               onClick={() => popUpResv.toggle()}
             />
           </div>
-          <div className="w-[950px] h-[850px] rounded-2xl bg-blue-100 mx-auto mt-4 grid grid-cols-2 gap-y-2 pt-8 overflow-y-scroll">
+          <div className="w-[950px] h-[850px] rounded-2xl bg-blue-100 mx-auto mt-4 grid grid-cols-2 gap-y-4 pt-8 overflow-y-scroll">
             {resvRecord.map((v, i) => {
               return <ResvCard resvInfo={v} idx={i} type="noReview" key={i} />;
             })}
