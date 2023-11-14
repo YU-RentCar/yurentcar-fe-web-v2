@@ -227,7 +227,12 @@ const CarSearch = () => {
 
                         getCarInfoList(infos)
                           .then((response) => {
-                            alert.onAndOff("차량을 검색했습니다.");
+                            if (response.data.length === 0) {
+                              alert.onAndOff("차량 검색 결과가 없습니다.");
+                            } else {
+                              alert.onAndOff("차량을 검색했습니다.");
+                            }
+
                             console.log(
                               "CarSearch / getCarCardList",
                               response.data
