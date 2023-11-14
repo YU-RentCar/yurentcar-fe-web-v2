@@ -3,6 +3,12 @@ import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { selectedFinderAtom } from "recoil/selectedFinderAtom";
+import { Viewer } from "@toast-ui/react-editor";
+import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
+import "tui-color-picker/dist/tui-color-picker.css";
+import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
+import "@toast-ui/editor/dist/i18n/ko-kr";
+import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 
 export default function CarouselWithContent({ noticeList }) {
   const nav = useNavigate();
@@ -46,8 +52,8 @@ export default function CarouselWithContent({ noticeList }) {
                     });
                   }}
                 >
-                  <div className="absolute inset-0 grid w-full h-full bg-blue-100 place-items-center">
-                    <div className="flex flex-col items-center justify-start w-full h-full">
+                  <div className="absolute inset-0 grid w-full h-full bg-blue-100 place-items-start">
+                    <div className="flex flex-col items-center justify-start w-full h-[400px] overflow-hidden">
                       <img
                         className="w-[160px] h-[114px] object-cover mt-[23px] rounded-xl"
                         src={`http://deploytest.iptime.org:8080/api/v1/images/display/${v.photoUrl}`}
@@ -58,7 +64,10 @@ export default function CarouselWithContent({ noticeList }) {
                         {v.title}
                       </h1>
 
-                      <p className=" w-[200px] line-clamp-6">{v.description}</p>
+                      {/* 뷰어 필요 */}
+                      <Viewer
+                        initialValue={v.description || "내용 없음"}
+                      ></Viewer>
                     </div>
                   </div>
                 </div>
