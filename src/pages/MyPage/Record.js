@@ -89,7 +89,7 @@ const Record = () => {
                     beforePrice={v.beforePrice}
                     afterPrice={v.afterPrice}
                     discountRatio={v.discountRate}
-                    photoUrl={v.photoUrl}
+                    imageURI={v.photoUrl}
                     styleChange={"recent"}
                     key={i}
                   />
