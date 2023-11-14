@@ -25,10 +25,8 @@ const MyPage = () => {
   });
   return (
     <>
-      <div className="w-[1140px] mx-auto mt-36 relative">
-        {/* 사이드 메뉴 */}
-        <SideMenu withResv={resvState} />
-        <div className="w-[800px] absolute right-0 top-0">
+      <div className="w-[1140px] h-auto mx-auto mt-36 flex justify-between">
+        <div className="w-[800px]">
           {/* 예약 대기 정보 */}
           {/* 대기 중인 예약이 없을 경우 보이지 않음 */}
           {resvState ? <Reservation setResvState={setResvState} /> : null}
@@ -42,6 +40,10 @@ const MyPage = () => {
           <License />
           {/* 사용자 계정 관리 */}
           <Account />
+        </div>
+        {/* 사이드 메뉴 */}
+        <div className="flex flex-col h-auto w-[300px]">
+          <SideMenu withResv={resvState} />
         </div>
       </div>
       {popUpQuit.isClicked ? <Quit /> : null}
