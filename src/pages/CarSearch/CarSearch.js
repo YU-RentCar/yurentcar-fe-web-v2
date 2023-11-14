@@ -227,7 +227,12 @@ const CarSearch = () => {
 
                         getCarInfoList(infos)
                           .then((response) => {
-                            alert.onAndOff("차량을 검색했습니다.");
+                            if (response.data.length === 0) {
+                              alert.onAndOff("차량 검색 결과가 없습니다.");
+                            } else {
+                              alert.onAndOff("차량을 검색했습니다.");
+                            }
+
                             console.log(
                               "CarSearch / getCarCardList",
                               response.data
@@ -287,9 +292,8 @@ const CarSearch = () => {
 
           {/* 차량 리스트 */}
           <div className="w-[860px] h-[1000px] pb-5 grid grid-cols-3 overflow-y-scroll">
-            {carInfoList ? (
-              carInfoList.length !== 0 ? (
-                carInfoList.map((v, i) => {
+            {carInfoList
+              ? carInfoList.map((v, i) => {
                   return (
                     <div>
                       <div
@@ -353,12 +357,7 @@ const CarSearch = () => {
                     </div>
                   );
                 })
-              ) : (
-                <div className="p-10 mt-10 text-3xl font-bold">
-                  검색된 차량이 없습니다.
-                </div>
-              )
-            ) : null}
+              : null}
           </div>
         </div>
       </div>
