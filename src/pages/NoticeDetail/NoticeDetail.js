@@ -3,10 +3,7 @@ import { MdOutlineArrowBack } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getNotice } from "api/noticeAxios";
-import { useRecoilValue } from "recoil";
-import { selectedFinderAtom } from "recoil/selectedFinderAtom";
 import { Viewer } from "@toast-ui/react-editor";
-import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
 import "tui-color-picker/dist/tui-color-picker.css";
 import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
 import "@toast-ui/editor/dist/i18n/ko-kr";
@@ -15,7 +12,6 @@ import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 const NoticeDetail = () => {
   const location = useLocation(); // location state 제어
   const nav = useNavigate(); // nav 제어
-  const selectedFinderInfo = useRecoilValue(selectedFinderAtom); // 시/도 지점 정보
   const [noticeInfo, setNoticeInfo] = useState({}); // 공지사항 정보
   const [leftDate, setLeftDate] = useState(); // 남은 날짜
   useEffect(() => {
@@ -62,7 +58,11 @@ const NoticeDetail = () => {
           </span>
           {/* 지점 */}
           <span className="text-3xl font-bold text-blue-600">
-            {`${location.state.province}  ${location.state.store}`}
+            {`${
+              JSON.parse(window.sessionStorage.getItem("finderInfos")).province
+            }  ${
+              JSON.parse(window.sessionStorage.getItem("finderInfos")).store
+            }`}
           </span>
           {/* 이벤트 기간 & 디데이 */}
           <span className="text-3xl font-semibold text-gray-600">

@@ -47,6 +47,8 @@ function App() {
             if (location.pathname.split("/")[1] === "") nav("/");
             else if (location.pathname.split("/")[1] === "reservation")
               nav("/carsearch");
+            else if (location.pathname.split("/")[1] === "noticedetail")
+              nav("/notice");
             else nav("/" + location.pathname.split("/")[1]);
           }
         })

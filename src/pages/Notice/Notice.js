@@ -1,11 +1,10 @@
 import NoticeCard from "./NoticeCard";
 import { MdOutlineArrowBack } from "react-icons/md";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { getNoticeList } from "api/noticeAxios";
 
 const Notice = () => {
-  const location = useLocation(); // location state 제어
   const nav = useNavigate(); // nav 제어
   const [notices, setNotices] = useState([]); // 공지사항 정보
   useEffect(() => {
@@ -43,7 +42,7 @@ const Notice = () => {
         {/* 지점 */}
         <p className="text-[40px] font-extrabold mt-10">공지사항</p>
         <p className="text-[30px] font-bold text-blue-600 mt-4">
-          {location.state.store}
+          {JSON.parse(window.sessionStorage.getItem("finderInfos")).store}
         </p>
         {/* 공지사항 리스트 */}
         <div className="grid w-full grid-cols-3 mt-4 gap-y-4">

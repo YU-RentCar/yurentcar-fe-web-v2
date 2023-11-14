@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { selectedFinderAtom } from "recoil/selectedFinderAtom";
 import { Viewer } from "@toast-ui/react-editor";
-import colorSyntax from "@toast-ui/editor-plugin-color-syntax";
 import "tui-color-picker/dist/tui-color-picker.css";
 import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
 import "@toast-ui/editor/dist/i18n/ko-kr";
@@ -23,8 +22,9 @@ const NoticeCard = ({ noticeInfo, index }) => {
     card.addEventListener("click", () => {
       nav("/noticedetail", {
         state: {
-          province: selectedFinderInfo.province,
-          store: selectedFinderInfo.store,
+          province: JSON.parse(window.sessionStorage.getItem("finderInfos"))
+            .province,
+          store: JSON.parse(window.sessionStorage.getItem("finderInfos")).store,
           noticeId: noticeInfo.noticeId,
         },
       });
