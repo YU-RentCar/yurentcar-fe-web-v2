@@ -177,7 +177,7 @@ const CarDetail = ({ popUpInfo, carNumber }) => {
                     onClick={() => {
                       getWaitingResvInfo()
                         .then((response) => {
-                          if (response.data.trim() === "") {
+                          if (response.data === "") {
                             popUpInfo.toggle();
                             navigate("/reservation", {
                               state: {
