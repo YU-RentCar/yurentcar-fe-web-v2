@@ -10,8 +10,10 @@ const Notice = () => {
   const [notices, setNotices] = useState([]); // 공지사항 정보
   useEffect(() => {
     const params = {
-      province: location.state.province,
-      branchName: location.state.store,
+      province: JSON.parse(window.sessionStorage.getItem("finderInfos"))
+        .province,
+      branchName: JSON.parse(window.sessionStorage.getItem("finderInfos"))
+        .store,
       count: 0,
     };
     getNoticeList(params) // 리스트 조회
