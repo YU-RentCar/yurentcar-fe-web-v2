@@ -22,12 +22,14 @@ const Reservation = () => {
       <div className="w-[860px] h-[70px] rounded-2xl shadow-[0_4px_4px_0_rgba(0,0,0,0.25)] mt-20 mx-auto bg-white flex items-center justify-between z-10">
         <Finder storePopUp={storePopUp} dateTimePopUp={dateTimePopUp} />
       </div>
-      <div className="w-[1140px] mx-auto mt-10">
-        {/* 사이드 메뉴 */}
-        <SideMenu />
-        {/* 최종 결제 */}
-        <Pay />
-        <div className="w-[800px] fixed top-44 left-[390px]">
+      <div className="w-[1140px] h-auto mx-auto mt-10 flex justify-between">
+        <div className="flex flex-col h-auto w-[300px]">
+          {/* 사이드 메뉴 */}
+          <SideMenu />
+          {/* 최종 결제 */}
+          <Pay />
+        </div>
+        <div className="w-[800px]">
           {/* 차량 기본 정보 */}
           <DefaultInfo />
           {/* 차량 상세 정보 */}
