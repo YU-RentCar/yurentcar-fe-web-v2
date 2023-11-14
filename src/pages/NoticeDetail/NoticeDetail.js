@@ -3,13 +3,16 @@ import { MdOutlineArrowBack } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getNotice } from "api/noticeAxios";
-import { useRecoilValue } from "recoil";
-import { selectedFinderAtom } from "recoil/selectedFinderAtom";
+import { Viewer } from "@toast-ui/react-editor";
+import "tui-color-picker/dist/tui-color-picker.css";
+import "@toast-ui/editor-plugin-color-syntax/dist/toastui-editor-plugin-color-syntax.css";
+import "@toast-ui/editor/dist/i18n/ko-kr";
+import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 
 const NoticeDetail = () => {
   const location = useLocation(); // location state 제어
   const nav = useNavigate(); // nav 제어
-  const selectedFinderInfo = useRecoilValue(selectedFinderAtom); // 시/도 지점 정보
+  const [desc, setDesc] = useState(true); // Viewer 제어
   const [noticeInfo, setNoticeInfo] = useState({}); // 공지사항 정보
   const [leftDate, setLeftDate] = useState(); // 남은 날짜
   useEffect(() => {
@@ -24,10 +27,12 @@ const NoticeDetail = () => {
   useEffect(() => {
     // 남은 날짜 계산
     setLeftDate(dayjs(noticeInfo.finishDate).diff(dayjs(new Date()), "day"));
+    if (noticeInfo.description) setDesc(true);
+    else setDesc(false);
   }, [noticeInfo]);
   return (
     <>
-      <div className="w-[1140px] mx-auto mt-[120px]">
+      <div className="w-[1140px] mx-auto mt-[120px] pb-10">
         {/* 뒤로 가기 */}
         <div className="flex">
           <MdOutlineArrowBack
@@ -35,8 +40,12 @@ const NoticeDetail = () => {
             onClick={() => {
               nav("/notice", {
                 state: {
-                  province: selectedFinderInfo.province,
-                  store: selectedFinderInfo.store,
+                  province: JSON.parse(
+                    window.sessionStorage.getItem("finderInfos")
+                  ).province,
+                  store: JSON.parse(
+                    window.sessionStorage.getItem("finderInfos")
+                  ).store,
                 },
               });
             }}
@@ -52,7 +61,11 @@ const NoticeDetail = () => {
           </span>
           {/* 지점 */}
           <span className="text-3xl font-bold text-blue-600">
-            {`${location.state.province}  ${location.state.store}`}
+            {`${
+              JSON.parse(window.sessionStorage.getItem("finderInfos")).province
+            }  ${
+              JSON.parse(window.sessionStorage.getItem("finderInfos")).store
+            }`}
           </span>
           {/* 이벤트 기간 & 디데이 */}
           <span className="text-3xl font-semibold text-gray-600">
@@ -68,7 +81,9 @@ const NoticeDetail = () => {
                     : dayjs(noticeInfo.finishDate).format("YY년 MM월 DD일")
                 }`}
             <span className="ml-12 text-red-500">
-              {leftDate > 0
+              {noticeInfo.finishDate === null
+                ? ""
+                : leftDate > 0
                 ? `${leftDate}일 남았어요!`
                 : leftDate === 0
                 ? "오늘까지에요!!"
@@ -84,12 +99,16 @@ const NoticeDetail = () => {
         <img
           src={`http://deploytest.iptime.org:8080/api/v1/images/display/${noticeInfo.photoUrl}`}
           alt="공지사항 사진"
-          className="w-[1100px] h-[500px] mx-auto mt-4 rounded-2xl"
+          className="w-[1100px] mx-auto mt-4 rounded-2xl"
         ></img>
-        {/* 본문 내용 */}
-        <p className="w-[1100px] mx-auto mt-4 mb-40 text-3xl font-normal">
-          {noticeInfo.description}
-        </p>
+        {/* 공지사항 본문 */}
+        {desc && (
+          <div className="px-4 mt-4 mb-10">
+            <Viewer
+              initialValue={noticeInfo.description || "내용이 없습니다"}
+            ></Viewer>
+          </div>
+        )}
       </div>
     </>
   );
