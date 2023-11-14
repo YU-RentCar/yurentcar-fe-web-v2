@@ -45,8 +45,12 @@ const DefaultInfo = () => {
         setCarInfo(tmp);
         setRentInfo({
           carNumber: response.data.carNumber,
-          startDate: dayjs(dateInfo.startDate).format("YYYY. MM. DD. HH:mm"),
-          endDate: dayjs(dateInfo.endDate).format("YYYY. MM. DD. HH:mm"),
+          startDate: `${dayjs(dateInfo.startDate).format("YYYY. MM. DD. ")}${
+            dateInfo.startTime
+          }`,
+          endDate: `${dayjs(dateInfo.endDate).format("YYYY. MM. DD. ")}${
+            dateInfo.endTime
+          }`,
           beforePrice: response.data.beforePrice,
           afterPrice: response.data.afterPrice,
         });
@@ -68,7 +72,7 @@ const DefaultInfo = () => {
       <div className="flex items-center justify-around w-full mt-3">
         {/* 차량 사진 */}
         <img
-          src={`http://deploytest.iptime.org:8080/api/v1/images/display${carInfo.photoUrl}`}
+          src={`http://deploytest.iptime.org:8080/api/v1/images/display/${carInfo["사진"]}`}
           alt="차량 사진"
           className="object-cover h-[200px] w-[300px] rounded-2xl"
         ></img>
@@ -76,19 +80,21 @@ const DefaultInfo = () => {
         <div className="w-[450px] flex flex-col justify-around items-center bg-blue-100 rounded-2xl py-4">
           {/* 차종, 차 번호, 총 주행거리 */}
           {Object.keys(carInfo).map((v, i) => {
-            return (
-              <div
-                className="w-[420px] h-[35px] bg-sky-200 flex items-center rounded-lg mt-2"
-                key={i}
-              >
-                {iconList[i]}
-                <span className="ml-3 text-base font-semibold">
-                  {`${v} : ${carInfo[v]}${
-                    i === 2 ? "km" : i === 3 ? "원" : i === 4 ? "%" : ""
-                  }`}
-                </span>
-              </div>
-            );
+            if (v !== "사진") {
+              return (
+                <div
+                  className="w-[420px] h-[35px] bg-sky-200 flex items-center rounded-lg mt-2"
+                  key={i}
+                >
+                  {iconList[i]}
+                  <span className="ml-3 text-base font-semibold">
+                    {`${v} : ${carInfo[v]}${
+                      i === 2 ? "km" : i === 3 ? "원" : i === 4 ? "%" : ""
+                    }`}
+                  </span>
+                </div>
+              );
+            } else return null;
           })}
         </div>
       </div>

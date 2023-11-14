@@ -38,7 +38,7 @@ const SideMenu = () => {
     window.scrollTo(window.scrollY, targetTop - 176);
   }
   return (
-    <div className="w-[300px] h-[360px] rounded-2xl fixed top-44 right-[390px] bg-sky-50 shadow-figma flex flex-col items-center">
+    <div className="w-full h-[360px] rounded-2xl sticky top-[190px] bg-sky-50 shadow-figma flex flex-col items-center">
       <div className="flex items-center justify-center w-full mt-4 text-2xl font-bold text-blue-800">
         메뉴
       </div>
@@ -48,6 +48,7 @@ const SideMenu = () => {
           .map((v, i) => {
             return (
               <button
+                key={i}
                 className="w-[90px] h-[90px] bg-white border-2 border-blue-200 rounded-xl flex flex-col justify-between items-center py-3 hover:shadow-figma active:bg-blue-200"
                 onClick={() => {
                   direct(i);
