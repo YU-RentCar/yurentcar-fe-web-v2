@@ -1,4 +1,5 @@
 import { Chip } from "@material-tailwind/react";
+import { useState } from "react";
 
 const CarCard = ({
   name,
@@ -8,9 +9,20 @@ const CarCard = ({
   afterPrice,
   photoUrl,
   discountRatio,
+  styleChange,
 }) => {
+  useState(() => {
+    if (styleChange === "recent") {
+      document
+        .getElementById("carcard_container")
+        .classList.remove("hover:shadow-figma");
+    }
+  }, []);
   return (
-    <div className="w-[270px] h-[376px] rounded-2xl bg-white mt-8 hover:shadow-figma mx-auto border-2">
+    <div
+      id="carcard_container"
+      className="w-[270px] h-[376px] rounded-2xl bg-white mt-8 hover:shadow-figma mx-auto border-2"
+    >
       {/* 차량 사진 */}
       <img
         src={`http://deploytest.iptime.org:8080/api/v1/images/display/${photoUrl}.png`}
