@@ -350,7 +350,7 @@ const CarSearch = () => {
                           totalDistance={v.totalDistance}
                           beforePrice={v.beforePrice}
                           afterPrice={v.afterPrice}
-                          imageURI={v.imageUri}
+                          imageURI={v.photoUrl}
                           discountRatio={v.discountRatio}
                         ></CarCard>
                       </div>

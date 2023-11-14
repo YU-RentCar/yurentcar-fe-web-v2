@@ -7,7 +7,7 @@ const CarCard = ({
   totalDistance,
   beforePrice,
   afterPrice,
-  photoUrl,
+  imageURI,
   discountRatio,
   styleChange,
 }) => {
@@ -25,7 +25,7 @@ const CarCard = ({
     >
       {/* 차량 사진 */}
       <img
-        src={`http://deploytest.iptime.org:8080/api/v1/images/display/${photoUrl}.png`}
+        src={`http://deploytest.iptime.org:8080/api/v1/images/display/${imageURI}`}
         alt="차량 사진"
         className="object-cover h-[164px] w-full rounded-t-2xl"
       ></img>
