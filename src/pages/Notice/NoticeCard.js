@@ -61,7 +61,9 @@ const NoticeCard = ({ noticeInfo, index }) => {
           </span>
           {/* 디데이 계산 */}
           <span className="text-2xl font-bold text-red-500">
-            {leftDate > 0
+            {noticeInfo.finishDate === null
+              ? ""
+              : leftDate > 0
               ? `D-${leftDate}`
               : leftDate === 0
               ? "D-Day"
