@@ -177,17 +177,22 @@ const CarDetail = ({ popUpInfo, carNumber }) => {
                     onClick={() => {
                       getWaitingResvInfo()
                         .then((response) => {
-                          alert.onAndOff("이미 예약했던 차량이 있습니다.");
+                          if (response.data.trim() === "") {
+                            popUpInfo.toggle();
+                            navigate("/reservation", {
+                              state: {
+                                carNumber: carNumber,
+                                province: selectedFinderInfo.province,
+                                store: selectedFinderInfo.store,
+                              },
+                            });
+                          } else {
+                            alert.onAndOff("이미 예약했던 차량이 있습니다.");
+                            console.log("예약 조회 내역", response.data);
+                          }
                         })
                         .catch((error) => {
-                          popUpInfo.toggle();
-                          navigate("/reservation", {
-                            state: {
-                              carNumber: carNumber,
-                              province: selectedFinderInfo.province,
-                              store: selectedFinderInfo.store,
-                            },
-                          });
+                          console.log("axios error", error);
                         });
                     }}
                   >
