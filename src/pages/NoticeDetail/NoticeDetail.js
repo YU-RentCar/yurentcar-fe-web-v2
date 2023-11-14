@@ -35,8 +35,12 @@ const NoticeDetail = () => {
             onClick={() => {
               nav("/notice", {
                 state: {
-                  province: selectedFinderInfo.province,
-                  store: selectedFinderInfo.store,
+                  province: JSON.parse(
+                    window.sessionStorage.getItem("finderInfos")
+                  ).province,
+                  store: JSON.parse(
+                    window.sessionStorage.getItem("finderInfos")
+                  ).store,
                 },
               });
             }}
@@ -68,7 +72,9 @@ const NoticeDetail = () => {
                     : dayjs(noticeInfo.finishDate).format("YY년 MM월 DD일")
                 }`}
             <span className="ml-12 text-red-500">
-              {leftDate > 0
+              {noticeInfo.finishDate === null
+                ? ""
+                : leftDate > 0
                 ? `${leftDate}일 남았어요!`
                 : leftDate === 0
                 ? "오늘까지에요!!"
