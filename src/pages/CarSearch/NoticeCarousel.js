@@ -52,8 +52,8 @@ export default function CarouselWithContent({ noticeList }) {
                     });
                   }}
                 >
-                  <div className="absolute inset-0 grid w-full h-full bg-blue-100 place-items-center">
-                    <div className="flex flex-col items-center justify-start w-full h-full">
+                  <div className="absolute inset-0 grid w-full h-full bg-blue-100 place-items-start">
+                    <div className="flex flex-col items-center justify-start w-full h-[400px] overflow-hidden">
                       <img
                         className="w-[160px] h-[114px] object-cover mt-[23px] rounded-xl"
                         src={`http://deploytest.iptime.org:8080/api/v1/images/display/${v.photoUrl}`}
