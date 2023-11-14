@@ -98,16 +98,12 @@ const NoticeDetail = () => {
           alt="공지사항 사진"
           className="w-[1100px] mx-auto mt-4 rounded-2xl"
         ></img>
-        {/* 본문 내용 */}
-        {/*<p className="w-[1100px] mx-auto mt-4 mb-40 text-3xl font-normal">
-          {noticeInfo.description}
-              </p>*/}
         {/* 공지사항 본문 */}
-        <Viewer
-          initialValue={noticeInfo.description || "내용이 없습니다"}
-          plugins={[colorSyntax]}
-          language="ko-KR"
-        ></Viewer>
+        <div className="px-4 mt-4 mb-10">
+          <Viewer
+            initialValue={noticeInfo.description || "내용이 없습니다"}
+          ></Viewer>
+        </div>
       </div>
     </>
   );

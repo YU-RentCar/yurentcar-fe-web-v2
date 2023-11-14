@@ -45,14 +45,11 @@ const NoticeCard = ({ noticeInfo, index }) => {
           {noticeInfo.title}
         </span>
         {/* 공지사항 본문 */}
-        <Viewer
-          initialValue={noticeInfo.description || "내용이 없습니다"}
-          plugins={[colorSyntax]}
-          language="ko-KR"
-        ></Viewer>
-        {/*<p className="text-xl font-semibold line-clamp-3">
-          {noticeInfo.description}
-  </p>*/}
+        <div className="w-full h-[100px] overflow-hidden">
+          <Viewer
+            initialValue={noticeInfo.description || "내용이 없습니다"}
+          ></Viewer>
+        </div>
         <div className="flex items-center justify-between w-full">
           {/* 이벤트 기간, 업데이트 날짜 */}
           <span className="text-sm font-medium text-gray-600">
