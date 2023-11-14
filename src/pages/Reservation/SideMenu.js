@@ -48,6 +48,7 @@ const SideMenu = () => {
           .map((v, i) => {
             return (
               <button
+                key={i}
                 className="w-[90px] h-[90px] bg-white border-2 border-blue-200 rounded-xl flex flex-col justify-between items-center py-3 hover:shadow-figma active:bg-blue-200"
                 onClick={() => {
                   direct(i);

@@ -68,7 +68,7 @@ const DefaultInfo = () => {
       <div className="flex items-center justify-around w-full mt-3">
         {/* 차량 사진 */}
         <img
-          src={`http://deploytest.iptime.org:8080/api/v1/images/display${carInfo["사진"]}`}
+          src={`http://deploytest.iptime.org:8080/api/v1/images/display/${carInfo["사진"]}`}
           alt="차량 사진"
           className="object-cover h-[200px] w-[300px] rounded-2xl"
         ></img>
