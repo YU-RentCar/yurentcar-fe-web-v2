@@ -12,6 +12,7 @@ import "@toast-ui/editor/dist/toastui-editor-viewer.css";
 const NoticeDetail = () => {
   const location = useLocation(); // location state 제어
   const nav = useNavigate(); // nav 제어
+  const [desc, setDesc] = useState(true); // Viewer 제어
   const [noticeInfo, setNoticeInfo] = useState({}); // 공지사항 정보
   const [leftDate, setLeftDate] = useState(); // 남은 날짜
   useEffect(() => {
@@ -26,6 +27,8 @@ const NoticeDetail = () => {
   useEffect(() => {
     // 남은 날짜 계산
     setLeftDate(dayjs(noticeInfo.finishDate).diff(dayjs(new Date()), "day"));
+    if (noticeInfo.description) setDesc(true);
+    else setDesc(false);
   }, [noticeInfo]);
   return (
     <>
@@ -99,11 +102,13 @@ const NoticeDetail = () => {
           className="w-[1100px] mx-auto mt-4 rounded-2xl"
         ></img>
         {/* 공지사항 본문 */}
-        <div className="px-4 mt-4 mb-10">
-          <Viewer
-            initialValue={noticeInfo.description || "내용이 없습니다"}
-          ></Viewer>
-        </div>
+        {desc && (
+          <div className="px-4 mt-4 mb-10">
+            <Viewer
+              initialValue={noticeInfo.description || "내용이 없습니다"}
+            ></Viewer>
+          </div>
+        )}
       </div>
     </>
   );
