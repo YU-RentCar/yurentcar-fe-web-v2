@@ -45,7 +45,7 @@ const Notice = () => {
           {JSON.parse(window.sessionStorage.getItem("finderInfos")).store}
         </p>
         {/* 공지사항 리스트 */}
-        <div className="grid w-full grid-cols-3 mt-4 gap-y-4">
+        <div className="grid w-full grid-cols-3 mt-4 mb-10 gap-y-4">
           {notices.map((v, i) => {
             return <NoticeCard key={i} noticeInfo={v} index={i} />;
           })}

@@ -32,7 +32,7 @@ const NoticeDetail = () => {
   }, [noticeInfo]);
   return (
     <>
-      <div className="w-[1140px] mx-auto mt-[120px]">
+      <div className="w-[1140px] mx-auto mt-[120px] pb-10">
         {/* 뒤로 가기 */}
         <div className="flex">
           <MdOutlineArrowBack
