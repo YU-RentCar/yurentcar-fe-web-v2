@@ -35,10 +35,12 @@ const NoticeCard = ({ noticeInfo, index }) => {
       id={`notice${index}`}
       className="w-[360px] h-[600px] rounded-2xl bg-white border-2 hover:shadow-figma"
     >
-      {/* 공지사항 배너 -> 사진 */}
-      <div className="w-full h-[380px] rounded-t-2xl bg-sky-200 flex justify-center items-center">
-        공지사항 배너
-      </div>
+      {/* 공지사항 사진 */}
+      <img
+        src={`http://deploytest.iptime.org:8080/api/v1/images/display/${noticeInfo.photoUrl}`}
+        alt="공지사항 사진"
+        className="w-full h-[380px] rounded-t-2xl object-cover"
+      ></img>
       <div className="w-full h-[220px] flex flex-col justify-between py-2 px-4">
         {/* 공지사항 제목 */}
         <span className="text-2xl font-bold text-sky-800">
