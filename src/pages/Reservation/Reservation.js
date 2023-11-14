@@ -23,12 +23,6 @@ const Reservation = () => {
         <Finder storePopUp={storePopUp} dateTimePopUp={dateTimePopUp} />
       </div>
       <div className="w-[1140px] h-auto mx-auto mt-10 flex justify-between">
-        <div className="flex flex-col h-auto w-[300px]">
-          {/* 사이드 메뉴 */}
-          <SideMenu />
-          {/* 최종 결제 */}
-          <Pay />
-        </div>
         <div className="w-[800px]">
           {/* 차량 기본 정보 */}
           <DefaultInfo />
@@ -46,6 +40,12 @@ const Reservation = () => {
           <Drivers />
           {/* 포인트 사용 */}
           <Point />
+        </div>
+        <div className="flex flex-col h-auto w-[300px]">
+          {/* 사이드 메뉴 */}
+          <SideMenu />
+          {/* 최종 결제 */}
+          <Pay />
         </div>
       </div>
       {/* 팝업 구역 */}
