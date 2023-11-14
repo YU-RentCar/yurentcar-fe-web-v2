@@ -90,7 +90,7 @@ const NoticeDetail = () => {
         <img
           src={`http://deploytest.iptime.org:8080/api/v1/images/display/${noticeInfo.photoUrl}`}
           alt="공지사항 사진"
-          className="w-[1100px] h-[500px] mx-auto mt-4 rounded-2xl"
+          className="w-[1100px] mx-auto mt-4 rounded-2xl"
         ></img>
         {/* 본문 내용 */}
         <p className="w-[1100px] mx-auto mt-4 mb-40 text-3xl font-normal">
