@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getWaitingResvInfo, getUserInfo } from "api/myPageAxios";
+import { getWaitingResvInfo, getUserInfo, cancelResv } from "api/myPageAxios";
 import {
   MdOutlineTimer,
   MdOutlinePlace,
@@ -22,6 +22,7 @@ const Reservation = ({ setResvState }) => {
   const [userInfo, setUserName] = useState(""); // 사용자 이름
   const [resvInfo, setResvInfo] = useState({}); // 예약 정보
   const [driversInfo, setDriversInfo] = useState([]); // 등록된 운전자 정보
+  const [idInfo, setIdInfo] = useState(-1); // 예약 번호 정보
   useEffect(() => {
     const img = document.getElementById("mypageImg");
     getWaitingResvInfo()
@@ -47,6 +48,7 @@ const Reservation = ({ setResvState }) => {
           tmp["차 번호"] = ` :   ${response.data.carNumber}`;
           setResvInfo(tmp);
           setDriversInfo([...response.data.drivers]);
+          setIdInfo(Number(response.data.reservationId));
           img.src = `http://deploytest.iptime.org:8080/api/v1/images/display/${response.data.carName}.png`;
         }
       })
@@ -67,13 +69,32 @@ const Reservation = ({ setResvState }) => {
       </span>
       {/* 차량 정보 */}
       <div className="flex items-center justify-around w-full mt-3">
-        {/* 차량 사진 */}
-        <img
-          id="mypageImg"
-          src=""
-          alt="차량 사진"
-          className="object-cover h-[200px] w-[300px] rounded-2xl"
-        ></img>
+        <div className="flex flex-col w-[300px]">
+          {/* 차량 사진 */}
+          <img
+            id="mypageImg"
+            src=""
+            alt="차량 사진"
+            className="object-cover w-full rounded-2xl"
+          ></img>
+          {/* 예약 취소 버튼 */}
+          <button
+            className="w-full h-10 text-lg font-bold rounded-2xl bg-amber-400"
+            onClick={() => {
+              cancelResv(idInfo)
+                .then((response) => {
+                  console.log("예약 / 예약취소 : ", response.data);
+                  window.location.reload();
+                })
+                .catch((error) =>
+                  console.log("예약 / 예약취소에러 : ", error.response)
+                );
+            }}
+          >
+            예약 취소
+          </button>
+        </div>
+
         {/* 렌트 정보 */}
         <div className="w-[450px] flex flex-col justify-around items-center bg-blue-100 rounded-2xl py-4">
           {/* 예약 기간, 예약 지점, 차량, 차 번호 */}
