@@ -63,7 +63,7 @@ const SelectDateTime = ({ popUpInfo }) => {
               <div className="bg-sky-200 w-[400px] h-[400px] rounded-2xl flex flex-col justify-center items-center">
                 <div>
                   <div className="flex flex-col items-center justify-center">
-                    <h1 className="mb-2 text-2xl font-medium">출발일자</h1>
+                    <h1 className="mb-2 text-2xl font-medium">렌트기간</h1>
                     <DatePicker
                       className="w-[300px] border-2 border-slate-300 p-4 mb-6"
                       dateFormat={"yyyy/MM/dd"}
