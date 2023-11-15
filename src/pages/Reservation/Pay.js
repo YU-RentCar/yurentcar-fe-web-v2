@@ -1,4 +1,6 @@
+import { getUserInfo } from "api/myPageAxios";
 import { resvRent } from "api/reservationAxios";
+import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue } from "recoil";
 import { rentAtom } from "recoil/rentAtom";
@@ -53,13 +55,14 @@ const Pay = () => {
         {/* 최종 결제 버튼 */}
         <button
           className="flex items-center justify-center w-4/5 h-10 mb-2 text-lg font-bold rounded-lg bg-amber-400 hover:shadow-figma"
-          onClick={() => {
+          onClick={async () => {
             if (rentInfo.insurance < 0) alert.onAndOff("보험을 선택해주세요");
             else if (rentInfo.point < 0)
               alert.onAndOff("0 이상의 포인트를 입력해주세요");
             else if (rentInfo.drivers.length === 0)
               alert.onAndOff("1명 이상의 운전자를 등록해주세요");
             else {
+              const IMP = window.IMP;
               const data = {
                 carNumber: rentInfo.carNumber,
                 startDate: rentInfo.startDate,
@@ -70,13 +73,35 @@ const Pay = () => {
                 reason: "차량 예약 사용",
                 drivers: rentInfo.drivers,
               };
-              resvRent(data)
+              await getUserInfo()
                 .then((response) => {
-                  nav("/mypage");
+                  IMP.init("imp71037182"); // 가맹점 식별코드
+                  IMP.request_pay(
+                    {
+                      pg: "kakaopay.TC0ONETIME", // PG사 코드표에서 선택
+                      pay_method: "card", // 결제 방식
+                      merchant_uid:
+                        "IMP" + dayjs(new Date()).format("YYYYMMDDHHmmss"), // 결제 고유 번호
+                      name: data.carNumber, // 제품명
+                      amount: data.price, // 가격
+                      buyer_email: response.data.username, // 구매자 이메일
+                      buyer_name: response.data.nickname, // 구매자 닉네임
+                    },
+                    async function (rsp) {
+                      if (rsp.success) {
+                        alert.onAndOff("결제에 성공했습니다");
+                        await resvRent(data)
+                          .then(() => nav("/mypage"))
+                          .catch((error) =>
+                            console.log("예약 / 예약에러 : ", error.response)
+                          );
+                      } else if (!rsp.success) {
+                        alert.onAndOff("결제에 실패했습니다");
+                      }
+                    }
+                  );
                 })
-                .catch((error) =>
-                  console.log("예약 / 예약에러 : ", error.response)
-                );
+                .catch((error) => console.log(error.response));
             }
           }}
         >
