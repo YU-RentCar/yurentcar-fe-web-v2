@@ -82,20 +82,22 @@ const Pay = () => {
                   merchant_uid:
                     "IMP" + dayjs(new Date()).format("YYYYMMDDHHmmss"), // 결제 고유 번호
                   name: data.carNumber, // 제품명
-                  amount: 100, // 가격
+                  amount: data.price, // 가격
                   //구매자 정보 ↓
                   buyer_email: `yoha6865@naver.com`,
                   buyer_name: `최요하`,
+                  buyer_tel: "010-7173-6865",
                 },
                 async function (rsp) {
                   // callback
                   if (rsp.success) {
                     //결제 성공시
                     console.log(rsp);
+                    alert.onAndOff("결제에 성공했습니다");
                     // axios
                   } else if (!rsp.success) {
                     // 결제 실패시
-                    alert(rsp.error_msg);
+                    alert.onAndOff("결제에 실패했습니다");
                   }
                 }
               );
