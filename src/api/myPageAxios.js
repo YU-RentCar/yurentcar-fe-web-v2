@@ -8,6 +8,15 @@ let getWaitingResvInfo = () => {
   });
 };
 
+/* 렌트 대기 예약 취소 */
+let cancelResv = (reservationId) => {
+  return api({
+    url: "/reservations",
+    method: "delete",
+    params: { reservationId: reservationId },
+  });
+};
+
 /* 사용자 기본 정보 */
 let getUserInfo = () => {
   return api({
