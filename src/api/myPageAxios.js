@@ -126,6 +126,7 @@ let logout = () => {
 
 export {
   getWaitingResvInfo,
+  cancelResv,
   getUserInfo,
   checkNickname,
   changeNick,

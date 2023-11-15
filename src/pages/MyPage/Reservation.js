@@ -79,7 +79,7 @@ const Reservation = ({ setResvState }) => {
           ></img>
           {/* 예약 취소 버튼 */}
           <button
-            className="w-full h-12 text-xl font-bold rounded-2xl bg-amber-400"
+            className="w-full h-10 text-lg font-bold rounded-2xl bg-amber-400"
             onClick={() => {
               cancelResv(idInfo)
                 .then((response) => {
