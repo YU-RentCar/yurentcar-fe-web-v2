@@ -89,25 +89,21 @@ const Pay = () => {
                   buyer_tel: "010-7173-6865",
                 },
                 async function (rsp) {
-                  // callback
                   if (rsp.success) {
-                    //결제 성공시
                     console.log(rsp);
                     alert.onAndOff("결제에 성공했습니다");
-                    // axios
+                    resvRent(data)
+                      .then((response) => {
+                        nav("/mypage");
+                      })
+                      .catch((error) =>
+                        console.log("예약 / 예약에러 : ", error.response)
+                      );
                   } else if (!rsp.success) {
-                    // 결제 실패시
                     alert.onAndOff("결제에 실패했습니다");
                   }
                 }
               );
-              /*resvRent(data)
-                .then((response) => {
-                  nav("/mypage");
-                })
-                .catch((error) =>
-                  console.log("예약 / 예약에러 : ", error.response)
-                );*/
             }
           }}
         >
